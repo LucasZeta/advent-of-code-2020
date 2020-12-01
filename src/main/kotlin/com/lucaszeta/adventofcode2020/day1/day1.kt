@@ -14,7 +14,7 @@ fun findNumbers(
         }
     }
 
-    throw IllegalArgumentException("There are no elements in this input that sum to 2020")
+    throw IllegalArgumentException("There are no elements in this input that sum to %d".format(sumGoal))
 }
 
 fun main() {
