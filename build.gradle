@@ -4,13 +4,14 @@ plugins {
 }
 
 ext {
+    jvmVersion = 1.8
     junit5Version = '5.7.0'
 }
 
 group 'com.lucaszeta'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = jvmVersion
 
 repositories {
     mavenCentral()
@@ -24,10 +25,10 @@ dependencies {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = jvmVersion.toString()
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = jvmVersion.toString()
 }
 
 test {
