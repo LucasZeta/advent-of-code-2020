@@ -1,16 +1,14 @@
 package com.lucaszeta.adventofcode2020.day1
 
-private fun List<Int>.listWithRemainingNumbers(currentIndex: Int) =
-    filterIndexed { index, _ -> index > currentIndex }
-
 fun findPair(
     input: List<Int>,
     sumGoal: Int
 ): Pair<Int, Int> {
-    for ((index, operand1) in input.dropLast(1).withIndex()) {
-        val remainingNumbers = input.listWithRemainingNumbers(index)
+    for (index in 0 until input.size - 1) {
+        for (secondIndex in (index + 1) until input.size) {
+            val operand1 = input[index]
+            val operand2 = input[secondIndex]
 
-        for (operand2 in remainingNumbers) {
             if (operand1 + operand2 == sumGoal) {
                 return operand1 to operand2
             }
@@ -24,13 +22,13 @@ fun findTriple(
     input: List<Int>,
     sumGoal: Int
 ): Triple<Int, Int, Int> {
-    for ((index, operand1) in input.dropLast(1).withIndex()) {
-        val secondGroup = input.listWithRemainingNumbers(index)
+    for (index in 0 until input.size - 2) {
+        for (secondIndex in (index + 1) until input.size - 1) {
+            for (thirdIndex in (secondIndex + 1) until input.size) {
+                val operand1 = input[index]
+                val operand2 = input[secondIndex]
+                val operand3 = input[thirdIndex]
 
-        for ((secondIndex, operand2) in secondGroup.dropLast(1).withIndex()) {
-            val remainingNumbers = input.listWithRemainingNumbers(secondIndex)
-
-            for (operand3 in remainingNumbers) {
                 if (operand1 + operand2 + operand3 == sumGoal) {
                     return Triple(operand1, operand2, operand3)
                 }
