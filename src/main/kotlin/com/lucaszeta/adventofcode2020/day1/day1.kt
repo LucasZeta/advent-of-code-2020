@@ -1,6 +1,6 @@
 package com.lucaszeta.adventofcode2020.day1
 
-fun findNumbers(
+fun findPair(
     input: List<Int>,
     sumGoal: Int
 ): Pair<Int, Int> {
@@ -18,7 +18,7 @@ fun findNumbers(
 }
 
 fun main() {
-    val operands = findNumbers(input, 2020)
+    val operands = findPair(input, 2020)
 
     println(operands.first * operands.second)
 }

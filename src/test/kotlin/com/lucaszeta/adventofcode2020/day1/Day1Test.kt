@@ -6,9 +6,9 @@ import org.junit.Test
 class Day1Test {
 
     @Test
-    fun shouldFindNumbersThatSum2020() {
+    fun shouldFindPairThatSumTo2020() {
         val input = listOf(1721, 979, 366, 299, 675, 1456)
 
-        assertEquals(1721 to 299, findNumbers(input, 2020))
+        assertEquals(1721 to 299, findPair(input, 2020))
     }
 }
