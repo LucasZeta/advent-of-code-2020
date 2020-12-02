@@ -13,8 +13,8 @@ class PasswordValidationTest {
     fun `Should map input correctly`() {
         val validation = PasswordValidation("1-3 a: abcde")
 
-        assertEquals(1, validation.minLength)
-        assertEquals(3, validation.maxLength)
+        assertEquals(1, validation.firstSlot)
+        assertEquals(3, validation.secondSlot)
         assertEquals("a".single(), validation.char)
         assertEquals("abcde", validation.password)
     }

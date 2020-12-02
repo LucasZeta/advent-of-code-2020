@@ -6,8 +6,8 @@ class PasswordValidation(
     input: String
 ) {
 
-    val minLength: Int
-    val maxLength: Int
+    val firstSlot: Int
+    val secondSlot: Int
     val char: Char
     val password: String
 
@@ -17,8 +17,8 @@ class PasswordValidation(
         if (!result?.groupValues.isNullOrEmpty()) {
             val groupValues = result?.groupValues!!
 
-            minLength = groupValues[FIRST_SLOT].toInt()
-            maxLength = groupValues[SECOND_SLOT].toInt()
+            firstSlot = groupValues[FIRST_SLOT].toInt()
+            secondSlot = groupValues[SECOND_SLOT].toInt()
             char = groupValues[VERIFICATION_CHAR].single()
             password = groupValues[PASSWORD]
         } else {
@@ -29,11 +29,11 @@ class PasswordValidation(
     fun isSledRentalValid(): Boolean {
         val charCount = password.toCharArray().count { it == char }
 
-        return charCount in minLength..maxLength
+        return charCount in firstSlot..secondSlot
     }
 
     fun isTobogganValid(): Boolean {
-        val verificationString = "${password[minLength-1]}${password[maxLength-1]}"
+        val verificationString = "${password[firstSlot-1]}${password[secondSlot-1]}"
 
         return verificationString.toCharArray().count { it == char } == 1
     }
