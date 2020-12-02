@@ -53,4 +53,32 @@ class PasswordValidationTest {
 
         assertFalse(validation.isSledRentalValid())
     }
+
+    @Test
+    fun `Should validate password with char in first slot for Toboggan Corporate policy`() {
+        val validation = PasswordValidation("1-3 a: abcde")
+
+        assertTrue(validation.isTobogganValid())
+    }
+
+    @Test
+    fun `Should validate password with char in second slot for Toboggan Corporate policy`() {
+        val validation = PasswordValidation("1-3 c: abcde")
+
+        assertTrue(validation.isTobogganValid())
+    }
+
+    @Test
+    fun `Should not validate password with char in both slots for Toboggan Corporate policy`() {
+        val validation = PasswordValidation("1-3 a: abade")
+
+        assertFalse(validation.isTobogganValid())
+    }
+
+    @Test
+    fun `Should not validate password with char in neither slots for Toboggan Corporate policy`() {
+        val validation = PasswordValidation("1-3 a: bacde")
+
+        assertFalse(validation.isTobogganValid())
+    }
 }

@@ -33,4 +33,10 @@ class PasswordValidation(
 
         return charCount in minLength..maxLength
     }
+
+    fun isTobogganValid(): Boolean {
+        val verificationString = "${password[minLength-1]}${password[maxLength-1]}"
+
+        return verificationString.toCharArray().count { it == char } == 1
+    }
 }
