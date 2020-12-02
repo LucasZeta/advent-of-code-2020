@@ -1,6 +1,8 @@
 package com.lucaszeta.adventofcode2020.day2
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
@@ -13,7 +15,7 @@ class PasswordValidationTest {
 
         assertEquals(1, validation.minLength)
         assertEquals(3, validation.maxLength)
-        assertEquals("a", validation.char)
+        assertEquals("a".single(), validation.char)
         assertEquals("abcde", validation.password)
     }
 
@@ -22,5 +24,33 @@ class PasswordValidationTest {
         assertThrows<IllegalArgumentException> {
             PasswordValidation("1xxx3 a- abcde")
         }
+    }
+
+    @Test
+    fun `Should validate password`() {
+        val validation = PasswordValidation("1-3 a: abcde")
+
+        assertTrue(validation.isValid())
+    }
+
+    @Test
+    fun `Should not validate password with too little char count`() {
+        val validation = PasswordValidation("2-3 a: abcde")
+
+        assertFalse(validation.isValid())
+    }
+
+    @Test
+    fun `Should not validate password with too much char count`() {
+        val validation = PasswordValidation("2-3 a: aaaabcde")
+
+        assertFalse(validation.isValid())
+    }
+
+    @Test
+    fun `Should not validate password with no existing char`() {
+        val validation = PasswordValidation("1-3 a: bcde")
+
+        assertFalse(validation.isValid())
     }
 }

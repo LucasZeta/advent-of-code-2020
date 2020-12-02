@@ -10,7 +10,7 @@ class PasswordValidation(
 
     val minLength: Int
     val maxLength: Int
-    val char: String
+    val char: Char
     val password: String
 
     init {
@@ -21,10 +21,16 @@ class PasswordValidation(
 
             minLength = groupValues[1].toInt()
             maxLength = groupValues[2].toInt()
-            char = groupValues[3]
+            char = groupValues[3].single()
             password = groupValues[4]
         } else {
             throw IllegalArgumentException("Invalid input")
         }
+    }
+
+    fun isValid(): Boolean {
+        val charCount = password.toCharArray().count { it == char }
+
+        return charCount in minLength..maxLength
     }
 }
