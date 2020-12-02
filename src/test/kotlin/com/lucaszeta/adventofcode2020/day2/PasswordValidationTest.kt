@@ -27,30 +27,30 @@ class PasswordValidationTest {
     }
 
     @Test
-    fun `Should validate password`() {
+    fun `Should validate password for Sled Rental policy`() {
         val validation = PasswordValidation("1-3 a: abcde")
 
-        assertTrue(validation.isValid())
+        assertTrue(validation.isSledRentalValid())
     }
 
     @Test
-    fun `Should not validate password with too little char count`() {
+    fun `Should not validate password with too little char count for Sled Rental policy`() {
         val validation = PasswordValidation("2-3 a: abcde")
 
-        assertFalse(validation.isValid())
+        assertFalse(validation.isSledRentalValid())
     }
 
     @Test
-    fun `Should not validate password with too much char count`() {
+    fun `Should not validate password with too much char count for Sled Rental policy`() {
         val validation = PasswordValidation("2-3 a: aaaabcde")
 
-        assertFalse(validation.isValid())
+        assertFalse(validation.isSledRentalValid())
     }
 
     @Test
-    fun `Should not validate password with no existing char`() {
+    fun `Should not validate password with no existing char for Sled Rental policy`() {
         val validation = PasswordValidation("1-3 a: bcde")
 
-        assertFalse(validation.isValid())
+        assertFalse(validation.isSledRentalValid())
     }
 }

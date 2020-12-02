@@ -28,7 +28,7 @@ class PasswordValidation(
         }
     }
 
-    fun isValid(): Boolean {
+    fun isSledRentalValid(): Boolean {
         val charCount = password.toCharArray().count { it == char }
 
         return charCount in minLength..maxLength
