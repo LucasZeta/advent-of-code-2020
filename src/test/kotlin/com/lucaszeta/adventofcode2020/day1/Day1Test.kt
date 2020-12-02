@@ -1,7 +1,7 @@
 package com.lucaszeta.adventofcode2020.day1
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
 
@@ -25,7 +25,7 @@ class Day1Test {
     fun `Should throw exception when not finding pair that sum to 2020`() {
         val input = listOf(1721, 979, 675, 1456)
 
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             findPair(input, 2020)
         }
     }
@@ -48,7 +48,7 @@ class Day1Test {
     fun `Should throw exception when not finding triple that sum to 2020`() {
         val input = listOf(1721, 979, 299, 675, 1456)
 
-        assertThrows(IllegalArgumentException::class.java) {
+        assertThrows<IllegalArgumentException> {
             findTriple(input, 2020)
         }
     }
