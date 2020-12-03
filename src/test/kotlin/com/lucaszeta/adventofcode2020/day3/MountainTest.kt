@@ -30,7 +30,7 @@ class MountainTest {
             Slope(7, 1) to 4,
             Slope(1, 2) to 2
         ).map { (slope, expectedTreeCount) ->
-            dynamicTest("Should count trees for slope ${slope.right}, ${slope.down}") {
+            dynamicTest("Should count trees for slope (${slope.right}, ${slope.down})") {
                 val treeCount = Mountain(input).countTrees(slope)
 
                 assertEquals(expectedTreeCount, treeCount)
