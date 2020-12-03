@@ -1,8 +1,29 @@
 package com.lucaszeta.adventofcode2020.day3
 
-fun main() {
-    val trees = Mountain(input)
-        .countTrees(Slope(3, 1))
+fun findTreesForSlope(
+    mountain: Mountain,
+    slope: Slope
+) = mountain.countTrees(slope)
 
-    println(trees)
+fun multiplyTreeForAllSlopes(
+    mountain: Mountain,
+    slopes: List<Slope>
+) = slopes
+    .map { mountain.countTrees(it).toDouble() }
+    .reduce { acc, element -> acc * element }
+
+fun main() {
+    val mountain = Mountain(input)
+
+    val treeCount = findTreesForSlope(mountain, Slope(3, 1))
+    val result = multiplyTreeForAllSlopes(mountain, listOf(
+        Slope(1, 1),
+        Slope(3, 1),
+        Slope(5, 1),
+        Slope(7, 1),
+        Slope(1, 2)
+    ))
+
+    println("Number of trees for slope (3, 1): %d".format(treeCount))
+    println("Multiplication of tree for all slopes: %.1f".format(result))
 }
