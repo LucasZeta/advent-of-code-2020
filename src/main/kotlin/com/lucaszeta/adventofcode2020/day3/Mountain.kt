@@ -23,5 +23,9 @@ class Mountain(private val map: List<String>) {
         return treeCount
     }
 
-    private fun isTree(x: Int, y: Int) = map[y][x] == '#'
+    private fun isTree(x: Int, y: Int) = map[y][x] == TREE
+
+    companion object {
+        const val TREE = '#'
+    }
 }
