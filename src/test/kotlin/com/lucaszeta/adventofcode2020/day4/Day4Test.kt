@@ -32,7 +32,7 @@ class Day4Test {
     }
 
     @Test
-    fun `Should count valid passports`() {
+    fun `Should count passports with present data`() {
         val input = listOf(
             "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm",
             "iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884 hcl:#cfa07d byr:1929",
@@ -40,6 +40,6 @@ class Day4Test {
             "hcl:#cfa07d eyr:2025 pid:166559648 iyr:2011 ecl:brn hgt:59in"
         )
 
-        assertEquals(2, countValidPassports(input))
+        assertEquals(2, countPassportsWithPresentData(input))
     }
 }

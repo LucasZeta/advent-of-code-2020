@@ -18,13 +18,15 @@ class Passport(input: String) {
         fields = map
     }
 
-    fun isValid(): Boolean {
+    fun areAllFieldsPresent(): Boolean {
         val hasAllFields = fields.size == REQUIRED_NUMBER_OF_FIELDS
         val isMissingOnlyOptionalField = fields.size == REQUIRED_NUMBER_OF_FIELDS -1 &&
                 !fields.containsKey(OPTIONAL_FIELD_KEY)
 
         return hasAllFields || isMissingOnlyOptionalField
     }
+
+    fun areAllFieldsValid() = false
 
     companion object {
         val acceptableFields = listOf(

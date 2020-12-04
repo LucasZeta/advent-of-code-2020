@@ -12,11 +12,11 @@ fun parseData(input: String) = input
     .replace("\n\n", "\n")
     .split("\n")
 
-fun countValidPassports(input: List<String>) =
-    input.map(::Passport).count { it.isValid() }
+fun countPassportsWithPresentData(input: List<String>) =
+    input.map(::Passport).count { it.areAllFieldsPresent() }
 
 fun main() {
     val input = parseData(getResourceAsText("/day4/passport-batch-file.txt"))
 
-    println("Valid passports: %d".format(countValidPassports(input)))
+    println("Passports with present data: %d".format(countPassportsWithPresentData(input)))
 }
