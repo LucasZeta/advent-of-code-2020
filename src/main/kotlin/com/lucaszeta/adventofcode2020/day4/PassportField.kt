@@ -1,5 +1,7 @@
 package com.lucaszeta.adventofcode2020.day4
 
+import java.lang.IllegalArgumentException
+
 enum class PassportField(
     val key: String,
     val isValid: (String) -> Boolean
@@ -47,4 +49,13 @@ enum class PassportField(
     COUNTRY_ID("cid", {
         true
     });
+
+    companion object {
+
+        fun fromKey(key: String): PassportField {
+            return values()
+                .find { it.key == key }
+                ?: throw IllegalArgumentException("Invalid passport key")
+        }
+    }
 }

@@ -26,21 +26,22 @@ class Passport(input: String) {
         return hasAllFields || isMissingOnlyOptionalField
     }
 
-    fun areAllFieldsValid() = false
+    fun areAllFieldsValid(): Boolean {
+        if (!areAllFieldsPresent()) return false
+
+        fields.forEach { (key, value) ->
+            if (!PassportField.fromKey(key).isValid(value)) {
+                return false
+            }
+        }
+
+        return true
+    }
 
     companion object {
-        val acceptableFields = listOf(
-            "byr",
-            "iyr",
-            "eyr",
-            "hgt",
-            "hcl",
-            "ecl",
-            "pid",
-            "cid"
-        )
+        val acceptableFields = PassportField.values().map { it.key }.toList()
+        val OPTIONAL_FIELD_KEY = PassportField.COUNTRY_ID.key
 
-        const val OPTIONAL_FIELD_KEY = "cid"
         const val REQUIRED_NUMBER_OF_FIELDS = 8
     }
 }
