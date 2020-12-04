@@ -11,6 +11,7 @@ fun parseData(input: String) = input
     }
     .replace("\n\n", "\n")
     .split("\n")
+    .filter { it.isNotEmpty() }
 
 fun countPassportsWithPresentData(input: List<String>) =
     input.map(::Passport).count { it.areAllFieldsPresent() }
