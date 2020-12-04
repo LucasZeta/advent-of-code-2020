@@ -69,4 +69,52 @@ class PassportFieldTest {
             assertFalse(PassportField.EXPIRATION_YEAR.isValid("2031"))
         }
     }
+
+    @Nested
+    inner class HairColorTest {
+
+        @Test
+        fun `Should validate hair color that are valid hexadecimal values`() {
+            assertTrue(PassportField.HAIR_COLOR.isValid("#abcdef"))
+            assertTrue(PassportField.HAIR_COLOR.isValid("#1a2b3c"))
+            assertTrue(PassportField.HAIR_COLOR.isValid("#123456"))
+        }
+
+        @Test
+        fun `Should not validate hair color that doesn't have # preceding it`() {
+            assertFalse(PassportField.HAIR_COLOR.isValid("abcdef"))
+        }
+
+        @Test
+        fun `Should not validate hair color that doesn't have 6 digits`() {
+            assertFalse(PassportField.HAIR_COLOR.isValid("#12345"))
+        }
+
+        @Test
+        fun `Should not validate hair color that are invalid hexadecimal values`() {
+            assertFalse(PassportField.HAIR_COLOR.isValid("#bcdefg"))
+            assertFalse(PassportField.HAIR_COLOR.isValid("1a2b3j"))
+        }
+    }
+
+    @Nested
+    inner class EyeColorTest {
+
+        @Test
+        fun `Should validate eye color that are in the valid group`() {
+            assertTrue(PassportField.EYE_COLOR.isValid("amb"))
+            assertTrue(PassportField.EYE_COLOR.isValid("blu"))
+            assertTrue(PassportField.EYE_COLOR.isValid("brn"))
+            assertTrue(PassportField.EYE_COLOR.isValid("gry"))
+            assertTrue(PassportField.EYE_COLOR.isValid("grn"))
+            assertTrue(PassportField.EYE_COLOR.isValid("hzl"))
+            assertTrue(PassportField.EYE_COLOR.isValid("oth"))
+        }
+
+        @Test
+        fun `Should not validate eye color that are not in the valid group`() {
+            assertFalse(PassportField.EYE_COLOR.isValid("abc"))
+            assertFalse(PassportField.EYE_COLOR.isValid("def"))
+        }
+    }
 }
