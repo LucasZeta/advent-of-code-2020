@@ -1,5 +1,7 @@
 package com.lucaszeta.adventofcode2020.day3
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
 fun findTreesForSlope(
     mountain: Mountain,
     slope: Slope
@@ -13,6 +15,10 @@ fun multiplyTreeForAllSlopes(
     .reduce { acc, element -> acc * element }
 
 fun main() {
+    val input = getResourceAsText("/day3/map.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+
     val mountain = Mountain(input)
 
     val treeCount = findTreesForSlope(mountain, Slope(3, 1))
