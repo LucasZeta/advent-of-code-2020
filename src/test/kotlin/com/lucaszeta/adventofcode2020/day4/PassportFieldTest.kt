@@ -88,6 +88,7 @@ class PassportFieldTest {
         @Test
         fun `Should not validate hair color that doesn't have 6 digits`() {
             assertFalse(PassportField.HAIR_COLOR.isValid("#12345"))
+            assertFalse(PassportField.HAIR_COLOR.isValid("#1234567"))
         }
 
         @Test
@@ -115,6 +116,12 @@ class PassportFieldTest {
         fun `Should not validate eye color that are not in the valid group`() {
             assertFalse(PassportField.EYE_COLOR.isValid("abc"))
             assertFalse(PassportField.EYE_COLOR.isValid("def"))
+        }
+
+        @Test
+        fun `Should not validate eye color that matches the valid group partially`() {
+            assertFalse(PassportField.EYE_COLOR.isValid("other"))
+            assertFalse(PassportField.EYE_COLOR.isValid("gryish"))
         }
     }
 
@@ -154,6 +161,7 @@ class PassportFieldTest {
             assertFalse(PassportField.HEIGHT.isValid("70inz"))
             assertFalse(PassportField.HEIGHT.isValid("70iz"))
             assertFalse(PassportField.HEIGHT.isValid("70"))
+            assertFalse(PassportField.HEIGHT.isValid("in"))
         }
     }
 

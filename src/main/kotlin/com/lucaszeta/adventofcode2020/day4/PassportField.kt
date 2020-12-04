@@ -19,7 +19,7 @@ enum class PassportField(
     }),
 
     HEIGHT("hgt", {
-        val result = "^(\\d+)(cm|in)\$".toRegex().matchEntire(it)
+        val result = "(\\d+)(cm|in)".toRegex().matchEntire(it)
 
         if (!result?.groupValues.isNullOrEmpty()) {
             val groupValues = result?.groupValues!!
@@ -35,7 +35,7 @@ enum class PassportField(
     }),
 
     HAIR_COLOR("hcl", {
-        "^#[0-9a-f]{6}\$".toRegex().matches(it)
+        "#[0-9a-f]{6}".toRegex().matches(it)
     }),
 
     EYE_COLOR("ecl", {
@@ -43,7 +43,7 @@ enum class PassportField(
     }),
 
     PASSPORT_ID("pid", {
-        "^[0-9]{9}\$".toRegex().matches(it)
+        "[0-9]{9}".toRegex().matches(it)
     }),
 
     COUNTRY_ID("cid", {
