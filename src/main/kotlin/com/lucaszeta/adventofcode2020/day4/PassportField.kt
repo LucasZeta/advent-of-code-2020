@@ -35,7 +35,7 @@ enum class PassportField(
     }),
 
     HAIR_COLOR("hcl", {
-        "^\\#[0-9a-f]{6}\$".toRegex().matches(it)
+        "^#[0-9a-f]{6}\$".toRegex().matches(it)
     }),
 
     EYE_COLOR("ecl", {
