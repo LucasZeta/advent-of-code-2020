@@ -55,7 +55,7 @@ enum class PassportField(
         fun fromKey(key: String): PassportField {
             return values()
                 .find { it.key == key }
-                ?: throw IllegalArgumentException("Invalid passport key")
+                ?: throw IllegalArgumentException("Invalid passport field key")
         }
     }
 }
