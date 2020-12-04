@@ -16,6 +16,22 @@ enum class PassportField(
         it.toInt() in 2020..2030
     }),
 
+    HEIGHT("hgt", {
+        val result = "^(\\d+)(cm|in)\$".toRegex().matchEntire(it)
+
+        if (!result?.groupValues.isNullOrEmpty()) {
+            val groupValues = result?.groupValues!!
+            val number = groupValues[1].toInt()
+
+            when (groupValues[2]) {
+                "cm" -> number in 150..193
+                else -> number in 59..76
+            }
+        } else {
+            false
+        }
+    }),
+
     HAIR_COLOR("hcl", {
         "^\\#[0-9a-f]{6}\$".toRegex().matches(it)
     }),

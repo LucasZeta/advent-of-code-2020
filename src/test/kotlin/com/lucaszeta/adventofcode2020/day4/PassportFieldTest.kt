@@ -119,6 +119,45 @@ class PassportFieldTest {
     }
 
     @Nested
+    inner class HeightTest {
+
+        @Test
+        fun `Should validate height in inches that are between 59 and 76`() {
+            assertTrue(PassportField.HEIGHT.isValid("59in"))
+            assertTrue(PassportField.HEIGHT.isValid("68in"))
+            assertTrue(PassportField.HEIGHT.isValid("76in"))
+        }
+
+        @Test
+        fun `Should validate height in centimeters that are between 150 and 193`() {
+            assertTrue(PassportField.HEIGHT.isValid("150cm"))
+            assertTrue(PassportField.HEIGHT.isValid("172cm"))
+            assertTrue(PassportField.HEIGHT.isValid("193cm"))
+        }
+
+        @Test
+        fun `Should not validate height in inches that are outside 59 and 76`() {
+            assertFalse(PassportField.HEIGHT.isValid("58in"))
+            assertFalse(PassportField.HEIGHT.isValid("77in"))
+        }
+
+        @Test
+        fun `Should not validate height in centimeters that are outside 150 and 193`() {
+            assertFalse(PassportField.HEIGHT.isValid("149cm"))
+            assertFalse(PassportField.HEIGHT.isValid("194cm"))
+        }
+
+        @Test
+        fun `Should not validate height that are neither in inches or centimeters`() {
+            assertFalse(PassportField.HEIGHT.isValid("170cmx"))
+            assertFalse(PassportField.HEIGHT.isValid("170cx"))
+            assertFalse(PassportField.HEIGHT.isValid("70inz"))
+            assertFalse(PassportField.HEIGHT.isValid("70iz"))
+            assertFalse(PassportField.HEIGHT.isValid("70"))
+        }
+    }
+
+    @Nested
     inner class PassportIdTest {
 
         @Test
