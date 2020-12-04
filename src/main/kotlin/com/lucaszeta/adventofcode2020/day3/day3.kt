@@ -9,7 +9,7 @@ fun multiplyTreeForAllSlopes(
     mountain: Mountain,
     slopes: List<Slope>
 ) = slopes
-    .map { mountain.countTrees(it).toDouble() }
+    .map { mountain.countTrees(it).toLong() }
     .reduce { acc, element -> acc * element }
 
 fun main() {
@@ -25,5 +25,5 @@ fun main() {
     ))
 
     println("Number of trees for slope (3, 1): %d".format(treeCount))
-    println("Multiplication of tree for all slopes: %.1f".format(result))
+    println("Multiplication of tree for all slopes: %d".format(result))
 }

@@ -32,7 +32,7 @@ class Day3Test {
 
     @Test
     fun `Should multiply tree count for slopes`() {
-        assertEquals(336.0, multiplyTreeForAllSlopes(mountain, listOf(
+        assertEquals(336, multiplyTreeForAllSlopes(mountain, listOf(
             Slope(1, 1),
             Slope(3, 1),
             Slope(5, 1),
