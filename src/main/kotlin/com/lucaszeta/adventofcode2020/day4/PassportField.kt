@@ -22,5 +22,13 @@ enum class PassportField(
 
     EYE_COLOR("ecl", {
         "(amb|blu|brn|gry|grn|hzl|oth)".toRegex().matches(it)
+    }),
+
+    PASSPORT_ID("pid", {
+        "^[0-9]{9}\$".toRegex().matches(it)
+    }),
+
+    COUNTRY_ID("cid", {
+        true
     });
 }

@@ -117,4 +117,43 @@ class PassportFieldTest {
             assertFalse(PassportField.EYE_COLOR.isValid("def"))
         }
     }
+
+    @Nested
+    inner class PassportIdTest {
+
+        @Test
+        fun `Should validate passport ID with exactly 9 digits`() {
+            assertTrue(PassportField.PASSPORT_ID.isValid("123456789"))
+            assertTrue(PassportField.PASSPORT_ID.isValid("012345678"))
+            assertTrue(PassportField.PASSPORT_ID.isValid("001234567"))
+        }
+
+        @Test
+        fun `Should not validate passport with letters`() {
+            assertFalse(PassportField.PASSPORT_ID.isValid("12345678a"))
+        }
+
+        @Test
+        fun `Should not validate passport with more than 9 digits`() {
+            assertFalse(PassportField.PASSPORT_ID.isValid("1234567890"))
+        }
+
+        @Test
+        fun `Should not validate passport with less than 9 digits`() {
+            assertFalse(PassportField.PASSPORT_ID.isValid("12345678"))
+        }
+    }
+
+    @Nested
+    inner class CountryIdTest {
+
+        @Test
+        fun `Should always validate, regardless of value`() {
+            assertTrue(PassportField.COUNTRY_ID.isValid("123"))
+            assertTrue(PassportField.COUNTRY_ID.isValid("abc"))
+            assertTrue(PassportField.COUNTRY_ID.isValid("###"))
+            assertTrue(PassportField.COUNTRY_ID.isValid("false"))
+            assertTrue(PassportField.COUNTRY_ID.isValid(""))
+        }
+    }
 }
