@@ -1,5 +1,7 @@
 package com.lucaszeta.adventofcode2020.day1
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
 fun findPair(
     input: List<Int>,
     sumGoal: Int
@@ -40,6 +42,11 @@ fun findTriple(
 }
 
 fun main() {
+    val input = getResourceAsText("/day1/expense-report.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+        .map { it.toInt() }
+
     val pair = findPair(input, 2020)
     val triple = findTriple(input, 2020)
 
