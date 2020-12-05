@@ -11,7 +11,7 @@ class Day1Test {
     fun `Should find pair that sum to 2020`() {
         val input = listOf(1721, 979, 366, 299, 675, 1456)
 
-        assertEquals(1721 to 299, findPair(input, 2020))
+        assertEquals(299 to 1721, findPair(input, 2020))
     }
 
     @Test
@@ -34,14 +34,14 @@ class Day1Test {
     fun `Should find triple that sum to 2020`() {
         val input = listOf(1721, 979, 366, 299, 675, 1456)
 
-        assertEquals(Triple(979, 366, 675), findTriple(input, 2020))
+        assertEquals(Triple(366, 675, 979), findTriple(input, 2020))
     }
 
     @Test
     fun `Should find triple that sum to 2020, regardless of the list sorting`() {
         val input = listOf(366, 979, 675, 1456, 1721, 299)
 
-        assertEquals(Triple(366, 979, 675), findTriple(input, 2020))
+        assertEquals(Triple(366, 675, 979), findTriple(input, 2020))
     }
 
     @Test

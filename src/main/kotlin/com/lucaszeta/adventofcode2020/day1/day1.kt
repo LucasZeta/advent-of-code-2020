@@ -6,10 +6,12 @@ fun findPair(
     input: List<Int>,
     sumGoal: Int
 ): Pair<Int, Int> {
-    for (index in 0 until input.size - 1) {
-        search@ for (secondIndex in (index + 1) until input.size) {
-            val operand1 = input[index]
-            val operand2 = input[secondIndex]
+    val numbers = input.sorted()
+
+    for (index in 0 until numbers.size - 1) {
+        search@ for (secondIndex in (index + 1) until numbers.size) {
+            val operand1 = numbers[index]
+            val operand2 = numbers[secondIndex]
             val sum = operand1 + operand2
 
             when {
@@ -26,12 +28,14 @@ fun findTriple(
     input: List<Int>,
     sumGoal: Int
 ): Triple<Int, Int, Int> {
-    for (index in 0 until input.size - 2) {
-        for (secondIndex in (index + 1) until input.size - 1) {
-            search@ for (thirdIndex in (secondIndex + 1) until input.size) {
-                val operand1 = input[index]
-                val operand2 = input[secondIndex]
-                val operand3 = input[thirdIndex]
+    val numbers = input.sorted()
+
+    for (index in 0 until numbers.size - 2) {
+        for (secondIndex in (index + 1) until numbers.size - 1) {
+            search@ for (thirdIndex in (secondIndex + 1) until numbers.size) {
+                val operand1 = numbers[index]
+                val operand2 = numbers[secondIndex]
+                val operand3 = numbers[thirdIndex]
                 val sum = operand1 + operand2 + operand3
 
                 when {
@@ -50,7 +54,6 @@ fun main() {
         .split("\n")
         .filter { it.isNotEmpty() }
         .map { it.toInt() }
-        .sorted()
 
     val pair = findPair(input, 2020)
     val triple = findTriple(input, 2020)
