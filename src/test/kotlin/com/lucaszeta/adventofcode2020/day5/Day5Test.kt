@@ -27,4 +27,9 @@ class Day5Test {
 
         assertEquals(5, searchNumber(seats, coordinates, "L", "R"))
     }
+
+    @Test
+    fun `Should find correct seat`() {
+        assertEquals(44 to 5, findSeat("FBFBBFFRLR"))
+    }
 }
