@@ -7,12 +7,14 @@ fun findPair(
     sumGoal: Int
 ): Pair<Int, Int> {
     for (index in 0 until input.size - 1) {
-        for (secondIndex in (index + 1) until input.size) {
+        search@ for (secondIndex in (index + 1) until input.size) {
             val operand1 = input[index]
             val operand2 = input[secondIndex]
+            val sum = operand1 + operand2
 
-            if (operand1 + operand2 == sumGoal) {
-                return operand1 to operand2
+            when {
+                sum == sumGoal -> return operand1 to operand2
+                sum > sumGoal -> break@search
             }
         }
     }
@@ -26,13 +28,15 @@ fun findTriple(
 ): Triple<Int, Int, Int> {
     for (index in 0 until input.size - 2) {
         for (secondIndex in (index + 1) until input.size - 1) {
-            for (thirdIndex in (secondIndex + 1) until input.size) {
+            search@ for (thirdIndex in (secondIndex + 1) until input.size) {
                 val operand1 = input[index]
                 val operand2 = input[secondIndex]
                 val operand3 = input[thirdIndex]
+                val sum = operand1 + operand2 + operand3
 
-                if (operand1 + operand2 + operand3 == sumGoal) {
-                    return Triple(operand1, operand2, operand3)
+                when {
+                    sum == sumGoal -> return Triple(operand1, operand2, operand3)
+                    sum > sumGoal -> break@search
                 }
             }
         }
@@ -46,6 +50,7 @@ fun main() {
         .split("\n")
         .filter { it.isNotEmpty() }
         .map { it.toInt() }
+        .sorted()
 
     val pair = findPair(input, 2020)
     val triple = findTriple(input, 2020)
