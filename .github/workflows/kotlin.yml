@@ -30,8 +30,11 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Compile
+        run: ./gradlew assemble
+
+      - name: Lint
+        run: ./gradlew ktlint
 
   test:
     name: Run Unit Tests
