@@ -1,5 +1,21 @@
 package com.lucaszeta.adventofcode2020.day5
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+import kotlin.math.pow
+
+fun main() {
+    val input = getResourceAsText("/day5/boarding-passes.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+
+    val highestSeatId = input
+        .map(::findSeat)
+        .map(::calculateSeatId)
+        .max()!!
+
+    println("Highest seat ID: %d".format(highestSeatId))
+}
+
 fun calculateSeatId(seatCoordinates: Pair<Int, Int>) =
     seatCoordinates.first * 8 + seatCoordinates.second
 
