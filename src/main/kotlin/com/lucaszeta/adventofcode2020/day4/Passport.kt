@@ -10,8 +10,8 @@ class Passport(input: String) {
         input.split(" ").map {
             val keyValue = it.split(":")
 
-            if (acceptableFields.contains(keyValue[0])) {
-                map[keyValue[0]] = keyValue[1]
+            if (acceptableFields.contains(keyValue.first())) {
+                map[keyValue.first()] = keyValue.last()
             }
         }
 
