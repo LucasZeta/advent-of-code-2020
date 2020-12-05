@@ -2,6 +2,8 @@ package com.lucaszeta.adventofcode2020.day5
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.IllegalArgumentException
 
 class Day5Test {
 
@@ -26,6 +28,16 @@ class Day5Test {
         val coordinates = listOf("R", "L", "R")
 
         assertEquals(5, searchNumber(seats, coordinates, "L", "R"))
+    }
+
+    @Test
+    fun `Should throw exception when finding a coordinate not previously mapped`() {
+        val seats = (0 until 8).toList()
+        val coordinates = listOf("R", "L", "D")
+
+        assertThrows<IllegalArgumentException> {
+            searchNumber(seats, coordinates, "L", "R")
+        }
     }
 
     @Test

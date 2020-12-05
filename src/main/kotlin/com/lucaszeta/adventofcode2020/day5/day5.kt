@@ -47,14 +47,19 @@ fun findSeat(coordinates: String): Pair<Int, Int> {
 fun searchNumber(
     seats: List<Int>,
     coordinates: List<String>,
-    lowerHalf: String
+    lowerHalf: String,
+    upperHalf: String
 ): Int {
     var remainingSeats = seats
 
     coordinates.forEach { coordinate ->
         val twoHalves = remainingSeats.chunked(remainingSeats.count() / 2)
 
-        remainingSeats = if (coordinate == lowerHalf) twoHalves.first() else twoHalves.last()
+        remainingSeats = when (coordinate) {
+            lowerHalf -> twoHalves.first()
+            upperHalf -> twoHalves.last()
+            else -> throw IllegalArgumentException("Invalid coordinate")
+        }
     }
 
     return remainingSeats.first()
