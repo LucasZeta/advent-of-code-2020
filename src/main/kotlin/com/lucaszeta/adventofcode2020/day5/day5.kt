@@ -8,12 +8,12 @@ fun main() {
         .split("\n")
         .filter { it.isNotEmpty() }
 
-    val highestSeatId = input
+    val seatIds = input
         .map(::findSeat)
         .map(::calculateSeatId)
-        .max()!!
 
-    println("Highest seat ID: %d".format(highestSeatId))
+    println("Highest seat ID: %d".format(seatIds.max()!!))
+    println("Missing seat ID: %d".format(findMissingSeat(seatIds)))
 }
 
 fun findMissingSeat(seatIds: List<Int>): Int {
