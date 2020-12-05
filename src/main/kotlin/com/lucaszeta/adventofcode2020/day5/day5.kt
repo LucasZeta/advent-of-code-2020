@@ -47,8 +47,7 @@ fun findSeat(coordinates: String): Pair<Int, Int> {
 fun searchNumber(
     seats: List<Int>,
     coordinates: List<String>,
-    lowerHalf: String,
-    upperHalf: String
+    lowerHalf: String
 ): Int {
     var remainingSeats = seats
 
