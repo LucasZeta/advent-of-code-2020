@@ -16,6 +16,17 @@ fun main() {
     println("Highest seat ID: %d".format(highestSeatId))
 }
 
+fun findMissingSeat(seatIds: List<Int>): Int {
+    val existingSeats = seatIds.sorted()
+
+    return existingSeats
+        .filterIndexed { index, seatId ->
+            index != 0 && seatId - existingSeats[index - 1] > 1
+        }
+        .map { it - 1 }
+        .first()
+}
+
 fun calculateSeatId(seatCoordinates: Pair<Int, Int>) =
     seatCoordinates.first * 8 + seatCoordinates.second
 

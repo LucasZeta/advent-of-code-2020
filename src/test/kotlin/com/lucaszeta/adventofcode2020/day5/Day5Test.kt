@@ -32,4 +32,12 @@ class Day5Test {
     fun `Should find correct seat`() {
         assertEquals(44 to 5, findSeat("FBFBBFFRLR"))
     }
+
+    @Test
+    fun `Should find missing gap between seats`() {
+        val missingSeatId = 34
+        val seatIds = (4 until 280).toList().filter { it != missingSeatId }
+
+        assertEquals(missingSeatId, findMissingSeat(seatIds))
+    }
 }
