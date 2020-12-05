@@ -6,7 +6,10 @@ plugins {
 ext {
     jvmVersion = 1.8
     junit5Version = '5.7.0'
+    ktlintVersion = '0.40.0'
 }
+
+apply from: "$rootDir/ktlint.gradle"
 
 group 'com.lucaszeta'
 version '1.0-SNAPSHOT'
