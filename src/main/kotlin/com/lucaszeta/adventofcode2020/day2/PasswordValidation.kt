@@ -33,7 +33,7 @@ class PasswordValidation(
     }
 
     fun isTobogganValid(): Boolean {
-        val verificationString = "${password[firstSlot-1]}${password[secondSlot-1]}"
+        val verificationString = "${password[firstSlot - 1]}${password[secondSlot - 1]}"
 
         return verificationString.toCharArray().count { it == char } == 1
     }

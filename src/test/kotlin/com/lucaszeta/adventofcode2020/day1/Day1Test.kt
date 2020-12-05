@@ -1,8 +1,8 @@
 package com.lucaszeta.adventofcode2020.day1
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 
 class Day1Test {

@@ -10,19 +10,21 @@ class Day3Test {
 
     @BeforeEach
     fun setup() {
-        mountain = Mountain(listOf(
-            "..##.......",
-            "#...#...#..",
-            ".#....#..#.",
-            "..#.#...#.#",
-            ".#...##..#.",
-            "..#.##.....",
-            ".#.#.#....#",
-            ".#........#",
-            "#.##...#...",
-            "#...##....#",
-            ".#..#...#.#"
-        ))
+        mountain = Mountain(
+            listOf(
+                "..##.......",
+                "#...#...#..",
+                ".#....#..#.",
+                "..#.#...#.#",
+                ".#...##..#.",
+                "..#.##.....",
+                ".#.#.#....#",
+                ".#........#",
+                "#.##...#...",
+                "#...##....#",
+                ".#..#...#.#"
+            )
+        )
     }
 
     @Test
@@ -32,12 +34,18 @@ class Day3Test {
 
     @Test
     fun `Should multiply tree count for slopes`() {
-        assertEquals(336, multiplyTreeForAllSlopes(mountain, listOf(
-            Slope(1, 1),
-            Slope(3, 1),
-            Slope(5, 1),
-            Slope(7, 1),
-            Slope(1, 2)
-        )))
+        assertEquals(
+            336,
+            multiplyTreeForAllSlopes(
+                mountain,
+                listOf(
+                    Slope(1, 1),
+                    Slope(3, 1),
+                    Slope(5, 1),
+                    Slope(7, 1),
+                    Slope(1, 2)
+                )
+            )
+        )
     }
 }

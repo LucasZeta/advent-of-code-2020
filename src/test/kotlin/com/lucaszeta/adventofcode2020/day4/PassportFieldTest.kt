@@ -45,7 +45,7 @@ class PassportFieldTest {
 
         @Test
         fun `Should not validate issue year after 2020`() {
-            assertFalse(PassportField.ISSUE_YEAR .isValid("2021"))
+            assertFalse(PassportField.ISSUE_YEAR.isValid("2021"))
         }
     }
 
