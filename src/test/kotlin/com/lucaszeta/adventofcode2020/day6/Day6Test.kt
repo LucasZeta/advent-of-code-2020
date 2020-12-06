@@ -32,4 +32,12 @@ class Day6Test {
 
         assertEquals(expectedOutput, parseData(input))
     }
+
+    @Test
+    fun `Should count unique questions answered`() {
+        assertEquals(3, countQuestions("abc"))
+        assertEquals(3, countQuestions("abac"))
+        assertEquals(1, countQuestions("aaaa"))
+        assertEquals(1, countQuestions("a"))
+    }
 }
