@@ -21,7 +21,7 @@ class Day6Test {
             "a\n" +
             "a\n" +
             "\n" +
-            "b"
+            "b\n"
         val expectedOutput = listOf(
             listOf("abc"),
             listOf("a", "b", "c"),

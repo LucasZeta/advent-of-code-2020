@@ -17,7 +17,6 @@ fun countQuestionsAnyoneAnswered(questions: List<String>) =
 
 fun parseData(input: String) = input
     .split("\n\n")
-    .filter { it.isNotEmpty() }
-    .map {
-        it.split("\n")
+    .map { group ->
+        group.split("\n").filter { it.isNotEmpty() }
     }
