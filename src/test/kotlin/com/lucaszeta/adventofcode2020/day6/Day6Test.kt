@@ -41,4 +41,13 @@ class Day6Test {
         assertEquals(1, countQuestionsAnyoneAnswered(listOf("a", "a", "a", "a")))
         assertEquals(1, countQuestionsAnyoneAnswered(listOf("b")))
     }
+
+    @Test
+    fun `Should count unique questions everyone answered`() {
+        assertEquals(3, countQuestionsEveryoneAnswered(listOf("abc")))
+        assertEquals(0, countQuestionsEveryoneAnswered(listOf("a", "b", "c")))
+        assertEquals(1, countQuestionsEveryoneAnswered(listOf("ab", "ac")))
+        assertEquals(1, countQuestionsEveryoneAnswered(listOf("a", "a", "a", "a")))
+        assertEquals(1, countQuestionsEveryoneAnswered(listOf("b")))
+    }
 }

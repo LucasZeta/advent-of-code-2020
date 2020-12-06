@@ -15,6 +15,17 @@ fun main() {
 fun countQuestionsAnyoneAnswered(questions: List<String>) =
     questions.joinToString("").toSet().size
 
+fun countQuestionsEveryoneAnswered(questions: List<String>): Int {
+    val allQuestions = questions.joinToString("").toCharArray()
+    val uniqueQuestions = questions.joinToString("").toSet()
+
+    return uniqueQuestions.map { question ->
+        allQuestions.count { it == question }
+    }.filter { count ->
+        count == questions.size
+    }.size
+}
+
 fun parseData(input: String) = input
     .split("\n\n")
     .map { group ->
