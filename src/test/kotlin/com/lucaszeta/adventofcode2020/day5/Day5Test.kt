@@ -2,8 +2,6 @@ package com.lucaszeta.adventofcode2020.day5
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import java.lang.IllegalArgumentException
 
 class Day5Test {
 
@@ -15,29 +13,15 @@ class Day5Test {
     }
 
     @Test
-    fun `Should read coordinates and find row`() {
-        val seats = (0 until 128).toList()
-        val coordinates = listOf("F", "B", "F", "B", "B", "F", "F")
-
-        assertEquals(44, searchNumber(seats, coordinates, "F", "B"))
+    fun `Should convert row coordinates to binary`() {
+        val actualValue = listOf("F", "B", "F", "B", "B", "F", "F").toBinaryString("F")
+        assertEquals("1010011", actualValue)
     }
 
     @Test
-    fun `Should read coordinates and find column`() {
-        val seats = (0 until 8).toList()
-        val coordinates = listOf("R", "L", "R")
-
-        assertEquals(5, searchNumber(seats, coordinates, "L", "R"))
-    }
-
-    @Test
-    fun `Should throw exception when finding a coordinate not previously mapped`() {
-        val seats = (0 until 8).toList()
-        val coordinates = listOf("R", "L", "D")
-
-        assertThrows<IllegalArgumentException> {
-            searchNumber(seats, coordinates, "L", "R")
-        }
+    fun `Should convert column coordinates to binary`() {
+        val actualValue = listOf("R", "L", "R").toBinaryString("R")
+        assertEquals("101", actualValue)
     }
 
     @Test
