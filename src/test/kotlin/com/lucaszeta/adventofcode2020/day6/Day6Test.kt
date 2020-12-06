@@ -23,11 +23,11 @@ class Day6Test {
             "\n" +
             "b"
         val expectedOutput = listOf(
-            "abc",
-            "abc",
-            "abac",
-            "aaaa",
-            "b"
+            listOf("abc"),
+            listOf("a", "b", "c"),
+            listOf("ab", "ac"),
+            listOf("a", "a", "a", "a"),
+            listOf("b")
         )
 
         assertEquals(expectedOutput, parseData(input))

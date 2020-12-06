@@ -16,8 +16,8 @@ fun countQuestionsAnyoneAnswered(questions: String) =
     questions.toSet().size
 
 fun parseData(input: String) = input
-    .replace("([a-z])\\n".toRegex()) {
-        it.groupValues[1]
-    }
-    .split("\n")
+    .split("\n\n")
     .filter { it.isNotEmpty() }
+    .map {
+        it.split("\n")
+    }
