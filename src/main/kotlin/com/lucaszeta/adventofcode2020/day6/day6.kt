@@ -7,11 +7,11 @@ fun main() {
 
     val sumQuestionsAnyoneAnswered = input
         .map(::countQuestionsAnyoneAnswered)
-        .reduce { acc, questionCount -> acc + questionCount }
+        .reduce(Int::plus)
 
     val sumQuestionsEveryoneAnswered = input
         .map(::countQuestionsEveryoneAnswered)
-        .reduce { acc, questionCount -> acc + questionCount }
+        .reduce(Int::plus)
 
     println("Sum of questions anyone answered: $sumQuestionsAnyoneAnswered")
     println("Sum of questions everyone answered: $sumQuestionsEveryoneAnswered")

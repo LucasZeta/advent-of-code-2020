@@ -12,7 +12,7 @@ fun multiplyTreeForAllSlopes(
     slopes: List<Slope>
 ) = slopes
     .map { mountain.countTrees(it).toLong() }
-    .reduce { acc, element -> acc * element }
+    .reduce(Long::times)
 
 fun main() {
     val input = getResourceAsText("/day3/map.txt")
