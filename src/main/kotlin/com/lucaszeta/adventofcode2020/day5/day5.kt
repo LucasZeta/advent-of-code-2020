@@ -1,7 +1,6 @@
 package com.lucaszeta.adventofcode2020.day5
 
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
-import kotlin.math.pow
 
 fun main() {
     val input = getResourceAsText("/day5/boarding-passes.txt")
@@ -32,14 +31,16 @@ fun calculateSeatId(seatCoordinates: Pair<Int, Int>) =
 
 fun findSeat(coordinates: String): Pair<Int, Int> {
     val allCoordinates = coordinates.chunked(1)
-    val rowCoordinates = allCoordinates.filter { it == "F" || it == "B" }
-    val columnCoordinates = allCoordinates.filter { it == "L" || it == "R" }
 
-    val rows = 0 until (2.0.pow(rowCoordinates.size).toInt())
-    val columns = 0 until (2.0.pow(columnCoordinates.size).toInt())
+    val rowCoordinates = allCoordinates
+        .filter { it == "F" || it == "B" }
+        .toBinaryString("B")
+    val columnCoordinates = allCoordinates
+        .filter { it == "L" || it == "R" }
+        .toBinaryString("R")
 
-    val row = searchNumber(rows.toList(), rowCoordinates, "F", "B")
-    val column = searchNumber(columns.toList(), columnCoordinates, "L", "R")
+    val row = Integer.parseInt(rowCoordinates, 2)
+    val column = Integer.parseInt(columnCoordinates, 2)
 
     return row to column
 }
