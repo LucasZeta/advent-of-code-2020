@@ -74,7 +74,7 @@ class PassportFieldTest {
     inner class HairColorTest {
 
         @Test
-        fun `Should validate hair color that are valid hexadecimal values`() {
+        fun `Should validate hair colors that are valid hexadecimal values`() {
             assertTrue(PassportField.HAIR_COLOR.isValid("#abcdef"))
             assertTrue(PassportField.HAIR_COLOR.isValid("#1a2b3c"))
             assertTrue(PassportField.HAIR_COLOR.isValid("#123456"))
@@ -86,13 +86,13 @@ class PassportFieldTest {
         }
 
         @Test
-        fun `Should not validate hair color that doesn't have 6 digits`() {
+        fun `Should not validate hair colors that don't have 6 digits`() {
             assertFalse(PassportField.HAIR_COLOR.isValid("#12345"))
             assertFalse(PassportField.HAIR_COLOR.isValid("#1234567"))
         }
 
         @Test
-        fun `Should not validate hair color that are invalid hexadecimal values`() {
+        fun `Should not validate hair colors that are invalid hexadecimal values`() {
             assertFalse(PassportField.HAIR_COLOR.isValid("#bcdefg"))
             assertFalse(PassportField.HAIR_COLOR.isValid("1a2b3j"))
         }
@@ -102,7 +102,7 @@ class PassportFieldTest {
     inner class EyeColorTest {
 
         @Test
-        fun `Should validate eye color that are in the valid group`() {
+        fun `Should validate eye colors that are in the valid group`() {
             assertTrue(PassportField.EYE_COLOR.isValid("amb"))
             assertTrue(PassportField.EYE_COLOR.isValid("blu"))
             assertTrue(PassportField.EYE_COLOR.isValid("brn"))
@@ -113,13 +113,13 @@ class PassportFieldTest {
         }
 
         @Test
-        fun `Should not validate eye color that are not in the valid group`() {
+        fun `Should not validate eye colors that are not in the valid group`() {
             assertFalse(PassportField.EYE_COLOR.isValid("abc"))
             assertFalse(PassportField.EYE_COLOR.isValid("def"))
         }
 
         @Test
-        fun `Should not validate eye color that matches the valid group partially`() {
+        fun `Should not validate eye colors that match the valid group partially`() {
             assertFalse(PassportField.EYE_COLOR.isValid("other"))
             assertFalse(PassportField.EYE_COLOR.isValid("gryish"))
         }
