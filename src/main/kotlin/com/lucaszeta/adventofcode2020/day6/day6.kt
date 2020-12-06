@@ -12,8 +12,8 @@ fun main() {
     println("Sum of questions anyone answered: $sumQuestionsAnyoneAnswered")
 }
 
-fun countQuestionsAnyoneAnswered(questions: String) =
-    questions.toSet().size
+fun countQuestionsAnyoneAnswered(questions: List<String>) =
+    questions.joinToString("").toSet().size
 
 fun parseData(input: String) = input
     .split("\n\n")

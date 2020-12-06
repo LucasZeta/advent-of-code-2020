@@ -35,9 +35,10 @@ class Day6Test {
 
     @Test
     fun `Should count unique questions anyone answered`() {
-        assertEquals(3, countQuestionsAnyoneAnswered("abc"))
-        assertEquals(3, countQuestionsAnyoneAnswered("abac"))
-        assertEquals(1, countQuestionsAnyoneAnswered("aaaa"))
-        assertEquals(1, countQuestionsAnyoneAnswered("a"))
+        assertEquals(3, countQuestionsAnyoneAnswered(listOf("abc")))
+        assertEquals(3, countQuestionsAnyoneAnswered(listOf("a", "b", "c")))
+        assertEquals(3, countQuestionsAnyoneAnswered(listOf("ab", "ac")))
+        assertEquals(1, countQuestionsAnyoneAnswered(listOf("a", "a", "a", "a")))
+        assertEquals(1, countQuestionsAnyoneAnswered(listOf("b")))
     }
 }
