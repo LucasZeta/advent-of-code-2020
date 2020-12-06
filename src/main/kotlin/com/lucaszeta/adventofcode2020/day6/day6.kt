@@ -9,7 +9,12 @@ fun main() {
         .map(::countQuestionsAnyoneAnswered)
         .reduce { acc, questionCount -> acc + questionCount }
 
+    val sumQuestionsEveryoneAnswered = input
+        .map(::countQuestionsEveryoneAnswered)
+        .reduce { acc, questionCount -> acc + questionCount }
+
     println("Sum of questions anyone answered: $sumQuestionsAnyoneAnswered")
+    println("Sum of questions everyone answered: $sumQuestionsEveryoneAnswered")
 }
 
 fun countQuestionsAnyoneAnswered(questions: List<String>) =
