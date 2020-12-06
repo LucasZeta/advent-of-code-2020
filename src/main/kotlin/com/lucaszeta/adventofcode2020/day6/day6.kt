@@ -5,14 +5,14 @@ import com.lucaszeta.adventofcode2020.ext.getResourceAsText
 fun main() {
     val input = parseData(getResourceAsText("/day6/customs-form-answers.txt"))
 
-    val sumQuestionsAnswered = input
-        .map(::countQuestions)
+    val sumQuestionsAnyoneAnswered = input
+        .map(::countQuestionsAnyoneAnswered)
         .reduce { acc, questionCount -> acc + questionCount }
 
-    println("Sum of questions answered: $sumQuestionsAnswered")
+    println("Sum of questions anyone answered: $sumQuestionsAnyoneAnswered")
 }
 
-fun countQuestions(questions: String) =
+fun countQuestionsAnyoneAnswered(questions: String) =
     questions.toSet().size
 
 fun parseData(input: String) = input
