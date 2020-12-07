@@ -72,7 +72,7 @@ fun parseData(input: String): List<Bag> {
     return input.split("\n")
         .filter { it.isNotEmpty() }
         .map { line ->
-            val allowedInnerBags = mutableListOf<Pair<Int, String>>()
+            val allowedInnerBags = mutableMapOf<String, Int>()
             val (color, allowedInnerBagsText) = line.split(colorInnerBagsDelimiter)
 
             val result = "(\\d+) ([a-z ]*) bag(s)?([,.])"
@@ -80,9 +80,9 @@ fun parseData(input: String): List<Bag> {
                 .findAll(allowedInnerBagsText)
 
             result.forEach {
-                allowedInnerBags.add(it.groupValues[1].toInt() to it.groupValues[2])
+                allowedInnerBags[it.groupValues[2]] = it.groupValues[1].toInt()
             }
 
-            Bag(color, allowedInnerBags.toList())
+            Bag(color, allowedInnerBags.toMap())
         }
 }
