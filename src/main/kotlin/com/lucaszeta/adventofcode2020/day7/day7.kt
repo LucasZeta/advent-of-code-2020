@@ -31,9 +31,9 @@ fun countIndividualBagsInside(
 ): Int {
     val foundBag = bags.find { it.color == color }
     if (foundBag != null) {
-        if (foundBag.canContain.isEmpty()) return if (!firstLevel) 1 else 0
+        if (foundBag.canContain.isEmpty()) return if (firstLevel) 0 else 1
 
-        var count = if (!firstLevel) 1 else 0
+        var count = if (firstLevel) 0 else 1
 
         foundBag.canContain.forEach { (quantity, color) ->
             count += quantity * countIndividualBagsInside(bags, color, false)
