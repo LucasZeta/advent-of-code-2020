@@ -99,15 +99,15 @@ class Day7Test {
     @Test
     fun `Should count bags inside a shiny gold bag`() {
         val input = listOf(
-            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
-            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
-            Bag("bright white", listOf(1 to "shiny gold")),
-            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
-            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
-            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
-            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
-            Bag("faded blue", listOf()),
-            Bag("dotted black", listOf())
+            Bag("light red", mapOf("bright white" to 1, "muted yellow" to 2)),
+            Bag("dark orange", mapOf("bright white" to 3, "muted yellow" to 4)),
+            Bag("bright white", mapOf("shiny gold" to 1)),
+            Bag("muted yellow", mapOf("shiny gold" to 2, "faded blue" to 9)),
+            Bag("shiny gold", mapOf("dark olive" to 1, "vibrant plum" to 2)),
+            Bag("dark olive", mapOf("faded blue" to 3, "dotted black" to 4)),
+            Bag("vibrant plum", mapOf("faded blue" to 5, "dotted black" to 6)),
+            Bag("faded blue", mapOf()),
+            Bag("dotted black", mapOf())
         )
 
         assertEquals(32, countIndividualBagsInside(input, "shiny gold"))
@@ -116,13 +116,13 @@ class Day7Test {
     @Test
     fun `Should count bags inside a shiny gold bag deep inside multiple levels`() {
         val input = listOf(
-            Bag("shiny gold", listOf(2 to "dark red")),
-            Bag("dark red", listOf(2 to "dark orange")),
-            Bag("dark orange", listOf(2 to "dark yellow")),
-            Bag("dark yellow", listOf(2 to "dark green")),
-            Bag("dark green", listOf(2 to "dark blue")),
-            Bag("dark blue", listOf(2 to "dark violet")),
-            Bag("dark violet", listOf())
+            Bag("shiny gold", mapOf("dark red" to 2)),
+            Bag("dark red", mapOf("dark orange" to 2)),
+            Bag("dark orange", mapOf("dark yellow" to 2)),
+            Bag("dark yellow", mapOf("dark green" to 2)),
+            Bag("dark green", mapOf("dark blue" to 2)),
+            Bag("dark blue", mapOf("dark violet" to 2)),
+            Bag("dark violet", mapOf())
         )
 
         assertEquals(126, countIndividualBagsInside(input, "shiny gold"))

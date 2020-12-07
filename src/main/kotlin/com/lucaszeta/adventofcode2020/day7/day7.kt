@@ -35,7 +35,7 @@ fun countIndividualBagsInside(
 
         var count = if (firstLevel) 0 else 1
 
-        foundBag.canContain.forEach { (quantity, color) ->
+        foundBag.canContain.forEach { (color, quantity) ->
             count += quantity * countIndividualBagsInside(bags, color, false)
         }
 
