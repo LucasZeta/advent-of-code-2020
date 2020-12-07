@@ -29,20 +29,17 @@ fun countIndividualBagsInside(
     color: String,
     firstLevel: Boolean = true
 ): Int {
-    val foundBag = bags.find { it.color == color }
-    if (foundBag != null) {
-        if (foundBag.canContain.isEmpty()) return if (firstLevel) 0 else 1
+    bags.find { it.color == color }?.let { bag ->
+        if (bag.canContain.isEmpty()) return if (firstLevel) 0 else 1
 
         var count = if (firstLevel) 0 else 1
 
-        foundBag.canContain.forEach { (color, quantity) ->
+        bag.canContain.forEach { (color, quantity) ->
             count += quantity * countIndividualBagsInside(bags, color, false)
         }
 
         return count
-    } else {
-        return 0
-    }
+    } ?: return 0
 }
 
 fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
@@ -52,9 +49,8 @@ fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
         return true
     } else {
         for (color in bag.canContain.keys) {
-            val foundBag = bags.find { it.color == color }
-            if (foundBag != null) {
-                if (canContain(foundBag, targetColor, bags)) {
+            bags.find { it.color == color }?.let {
+                if (canContain(it, targetColor, bags)) {
                     return true
                 }
             }
