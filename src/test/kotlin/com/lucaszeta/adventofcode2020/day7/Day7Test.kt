@@ -37,17 +37,17 @@ class Day7Test {
     @Test
     fun `Should contain shiny gold bag`() {
         val input = listOf(
-            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
-            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
-            Bag("bright white", listOf(1 to "shiny gold")),
-            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
-            Bag("custom color", listOf(2 to "dark olive", 9 to "light red")),
-            Bag("custom color 2", listOf(2 to "faded blue", 5 to "custom color")),
-            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
-            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
-            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
-            Bag("faded blue", listOf()),
-            Bag("dotted black", listOf())
+            Bag("light red", mapOf("bright white" to 1, "muted yellow" to 2)),
+            Bag("dark orange", mapOf("bright white" to 3, "muted yellow" to 4)),
+            Bag("bright white", mapOf("shiny gold" to 1)),
+            Bag("muted yellow", mapOf("shiny gold" to 2, "faded blue" to 9)),
+            Bag("custom color", mapOf("dark olive" to 2, "light red" to 9)),
+            Bag("custom color 2", mapOf("faded blue" to 2, "custom color" to 5)),
+            Bag("shiny gold", mapOf("dark olive" to 1, "vibrant plum" to 2)),
+            Bag("dark olive", mapOf("faded blue" to 3, "dotted black" to 4)),
+            Bag("vibrant plum", mapOf("faded blue" to 5, "dotted black" to 6)),
+            Bag("faded blue", mapOf()),
+            Bag("dotted black", mapOf())
         )
 
         assertTrue(canContain(input[0], "shiny gold", input))
@@ -61,15 +61,15 @@ class Day7Test {
     @Test
     fun `Should not contain shiny gold bag`() {
         val input = listOf(
-            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
-            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
-            Bag("bright white", listOf(1 to "shiny gold")),
-            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
-            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
-            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
-            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
-            Bag("faded blue", listOf()),
-            Bag("dotted black", listOf())
+            Bag("light red", mapOf("bright white" to 1, "muted yellow" to 2)),
+            Bag("dark orange", mapOf("bright white" to 3, "muted yellow" to 4)),
+            Bag("bright white", mapOf("shiny gold" to 1)),
+            Bag("muted yellow", mapOf("shiny gold" to 2, "faded blue" to 9)),
+            Bag("shiny gold", mapOf("dark olive" to 1, "vibrant plum" to 2)),
+            Bag("dark olive", mapOf("faded blue" to 3, "dotted black" to 4)),
+            Bag("vibrant plum", mapOf("faded blue" to 5, "dotted black" to 6)),
+            Bag("faded blue", mapOf()),
+            Bag("dotted black", mapOf())
         )
 
         assertFalse(canContain(input[4], "shiny gold", input))
@@ -82,15 +82,15 @@ class Day7Test {
     @Test
     fun `Should count bags that contain shiny gold bag`() {
         val input = listOf(
-            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
-            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
-            Bag("bright white", listOf(1 to "shiny gold")),
-            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
-            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
-            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
-            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
-            Bag("faded blue", listOf()),
-            Bag("dotted black", listOf())
+            Bag("light red", mapOf("bright white" to 1,"muted yellow" to 2)),
+            Bag("dark orange", mapOf("bright white" to 3, "muted yellow" to 4)),
+            Bag("bright white", mapOf("shiny gold" to 1)),
+            Bag("muted yellow", mapOf("shiny gold" to 2, "faded blue" to 9)),
+            Bag("shiny gold", mapOf("dark olive" to 1, "vibrant plum" to 2)),
+            Bag("dark olive", mapOf("faded blue" to 3, "dotted black" to 4)),
+            Bag("vibrant plum", mapOf("faded blue" to 5, "dotted black" to 6)),
+            Bag("faded blue", mapOf()),
+            Bag("dotted black", mapOf())
         )
 
         assertEquals(4, countBagsThatCanContain(input, "shiny gold"))

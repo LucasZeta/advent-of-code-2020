@@ -48,12 +48,10 @@ fun countIndividualBagsInside(
 fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
     if (bag.canContain.isEmpty()) return false
 
-    val containsBagWithTargetColor = bag.canContain.find { it.second == targetColor }
-
-    if (containsBagWithTargetColor != null) {
+    if (bag.canContain.containsKey(targetColor)) {
         return true
     } else {
-        for ((_, color) in bag.canContain) {
+        for (color in bag.canContain.keys) {
             val foundBag = bags.find { it.color == color }
             if (foundBag != null) {
                 if (canContain(foundBag, targetColor, bags)) {
