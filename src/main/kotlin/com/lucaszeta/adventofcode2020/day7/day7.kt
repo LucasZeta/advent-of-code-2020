@@ -6,7 +6,10 @@ fun main() {
     val bags = parseData(getResourceAsText("/day7/rules-list.txt"))
 
     val bagsThatContainShinyGold = countBagsThatCanContain(bags, "shiny gold")
+    val bagsInsideShinyGold = countIndividualBagsInside(bags, "shiny gold")
+
     println("Bags that can contain shiny gold bag: %d".format(bagsThatContainShinyGold))
+    println("Bags inside shiny gold bag: %d".format(bagsInsideShinyGold))
 }
 
 fun countBagsThatCanContain(bags: List<Bag>, color: String): Int {
