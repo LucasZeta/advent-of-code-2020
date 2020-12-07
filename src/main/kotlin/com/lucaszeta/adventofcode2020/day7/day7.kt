@@ -1,5 +1,17 @@
 package com.lucaszeta.adventofcode2020.day7
 
+fun countBagsThatCanContain(bags: List<Bag>, color: String): Int {
+    var bagsThatCanContainColor = 0
+
+    bags.forEach { bag ->
+        if (canContain(bag, color, bags)) {
+            bagsThatCanContainColor++
+        }
+    }
+
+    return bagsThatCanContainColor
+}
+
 fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
     if (bag.canContain.isEmpty()) return false
 
