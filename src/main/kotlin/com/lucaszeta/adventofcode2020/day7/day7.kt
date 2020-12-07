@@ -1,5 +1,14 @@
 package com.lucaszeta.adventofcode2020.day7
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
+fun main() {
+    val bags = parseData(getResourceAsText("/day7/rules-list.txt"))
+
+    val bagsThatContainShinyGold = countBagsThatCanContain(bags, "shiny gold")
+    println("Bags that can contain shiny gold bag: %d".format(bagsThatContainShinyGold))
+}
+
 fun countBagsThatCanContain(bags: List<Bag>, color: String): Int {
     var bagsThatCanContainColor = 0
 
