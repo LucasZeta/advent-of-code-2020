@@ -30,11 +30,11 @@ fun countIndividualBagsInside(
     firstLevel: Boolean = true
 ): Int {
     bags.find { it.color == color }?.let { bag ->
-        if (bag.canContain.isEmpty()) return if (firstLevel) 0 else 1
+        if (bag.contents.isEmpty()) return if (firstLevel) 0 else 1
 
         var count = if (firstLevel) 0 else 1
 
-        bag.canContain.forEach { (color, quantity) ->
+        bag.contents.forEach { (color, quantity) ->
             count += quantity * countIndividualBagsInside(bags, color, false)
         }
 
@@ -43,12 +43,12 @@ fun countIndividualBagsInside(
 }
 
 fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
-    if (bag.canContain.isEmpty()) return false
+    if (bag.contents.isEmpty()) return false
 
-    if (bag.canContain.containsKey(targetColor)) {
+    if (bag.contents.containsKey(targetColor)) {
         return true
     } else {
-        for (color in bag.canContain.keys) {
+        for (color in bag.contents.keys) {
             bags.find { it.color == color }?.let {
                 if (canContain(it, targetColor, bags)) {
                     return true
