@@ -1,6 +1,8 @@
 package com.lucaszeta.adventofcode2020.day7
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class Day7Test {
@@ -30,5 +32,46 @@ class Day7Test {
         )
 
         assertEquals(expectedOutput, parseData(input))
+    }
+
+    @Test
+    fun `Should contain shiny gold bag`() {
+        val input = listOf(
+            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
+            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
+            Bag("bright white", listOf(1 to "shiny gold")),
+            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
+            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
+            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
+            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
+            Bag("faded blue", listOf()),
+            Bag("dotted black", listOf())
+        )
+
+        assertTrue(canContain(input[0], "shiny gold", input))
+        assertTrue(canContain(input[1], "shiny gold", input))
+        assertTrue(canContain(input[2], "shiny gold", input))
+        assertTrue(canContain(input[3], "shiny gold", input))
+    }
+
+    @Test
+    fun `Should not contain shiny gold bag`() {
+        val input = listOf(
+            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
+            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
+            Bag("bright white", listOf(1 to "shiny gold")),
+            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
+            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
+            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
+            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
+            Bag("faded blue", listOf()),
+            Bag("dotted black", listOf())
+        )
+
+        assertFalse(canContain(input[4], "shiny gold", input))
+        assertFalse(canContain(input[5], "shiny gold", input))
+        assertFalse(canContain(input[6], "shiny gold", input))
+        assertFalse(canContain(input[7], "shiny gold", input))
+        assertFalse(canContain(input[8], "shiny gold", input))
     }
 }

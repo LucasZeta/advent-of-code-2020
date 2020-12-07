@@ -1,5 +1,24 @@
 package com.lucaszeta.adventofcode2020.day7
 
+fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
+    if (bag.canContain.isEmpty()) return false
+
+    val containsBagWithTargetColor = bag.canContain.find { it.second == targetColor }
+
+    if (containsBagWithTargetColor != null) {
+        return true
+    } else {
+        for ((_, color) in bag.canContain) {
+            val foundBag = bags.find { it.color == color }
+            if (foundBag != null) {
+                return canContain(foundBag, targetColor, bags)
+            }
+        }
+
+        return false
+    }
+}
+
 fun parseData(input: String): List<Bag> {
     val colorInnerBagsDelimiter = " bags contain "
     val emptyInnerBagText = "no other bags."
