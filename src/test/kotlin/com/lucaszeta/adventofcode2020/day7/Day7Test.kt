@@ -95,4 +95,36 @@ class Day7Test {
 
         assertEquals(4, countBagsThatCanContain(input, "shiny gold"))
     }
+
+    @Test
+    fun `Should count bags inside a shiny gold bag`() {
+        val input = listOf(
+            Bag("light red", listOf(1 to "bright white", 2 to "muted yellow")),
+            Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
+            Bag("bright white", listOf(1 to "shiny gold")),
+            Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
+            Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
+            Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
+            Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
+            Bag("faded blue", listOf()),
+            Bag("dotted black", listOf())
+        )
+
+        assertEquals(32, countIndividualBagsInside(input, "shiny gold"))
+    }
+
+    @Test
+    fun `Should count bags inside a shiny gold bag deep inside multiple levels`() {
+        val input = listOf(
+            Bag("shiny gold", listOf(2 to "dark red")),
+            Bag("dark red", listOf(2 to "dark orange")),
+            Bag("dark orange", listOf(2 to "dark yellow")),
+            Bag("dark yellow", listOf(2 to "dark green")),
+            Bag("dark green", listOf(2 to "dark blue")),
+            Bag("dark blue", listOf(2 to "dark violet")),
+            Bag("dark violet", listOf())
+        )
+
+        assertEquals(126, countIndividualBagsInside(input, "shiny gold"))
+    }
 }
