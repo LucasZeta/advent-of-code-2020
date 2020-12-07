@@ -82,7 +82,7 @@ class Day7Test {
     @Test
     fun `Should count bags that contain shiny gold bag`() {
         val input = listOf(
-            Bag("light red", mapOf("bright white" to 1,"muted yellow" to 2)),
+            Bag("light red", mapOf("bright white" to 1, "muted yellow" to 2)),
             Bag("dark orange", mapOf("bright white" to 3, "muted yellow" to 4)),
             Bag("bright white", mapOf("shiny gold" to 1)),
             Bag("muted yellow", mapOf("shiny gold" to 2, "faded blue" to 9)),
