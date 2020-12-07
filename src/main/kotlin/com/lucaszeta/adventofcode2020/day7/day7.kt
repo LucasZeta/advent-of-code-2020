@@ -11,7 +11,9 @@ fun canContain(bag: Bag, targetColor: String, bags: List<Bag>): Boolean {
         for ((_, color) in bag.canContain) {
             val foundBag = bags.find { it.color == color }
             if (foundBag != null) {
-                return canContain(foundBag, targetColor, bags)
+                if (canContain(foundBag, targetColor, bags)) {
+                    return true
+                }
             }
         }
 

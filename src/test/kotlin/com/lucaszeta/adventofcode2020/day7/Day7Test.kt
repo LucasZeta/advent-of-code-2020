@@ -41,6 +41,8 @@ class Day7Test {
             Bag("dark orange", listOf(3 to "bright white", 4 to "muted yellow")),
             Bag("bright white", listOf(1 to "shiny gold")),
             Bag("muted yellow", listOf(2 to "shiny gold", 9 to "faded blue")),
+            Bag("custom color", listOf(2 to "dark olive", 9 to "light red")),
+            Bag("custom color 2", listOf(2 to "faded blue", 5 to "custom color")),
             Bag("shiny gold", listOf(1 to "dark olive", 2 to "vibrant plum")),
             Bag("dark olive", listOf(3 to "faded blue", 4 to "dotted black")),
             Bag("vibrant plum", listOf(5 to "faded blue", 6 to "dotted black")),
@@ -52,6 +54,8 @@ class Day7Test {
         assertTrue(canContain(input[1], "shiny gold", input))
         assertTrue(canContain(input[2], "shiny gold", input))
         assertTrue(canContain(input[3], "shiny gold", input))
+        assertTrue(canContain(input[4], "shiny gold", input))
+        assertTrue(canContain(input[5], "shiny gold", input))
     }
 
     @Test
