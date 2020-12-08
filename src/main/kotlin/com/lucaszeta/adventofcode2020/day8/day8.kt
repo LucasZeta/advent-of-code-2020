@@ -12,11 +12,12 @@ fun main() {
         .filter { it.isNotEmpty() }
         .map(::Instruction)
 
-    val bootCode = BootCode(instructions).apply {
-        runProgram()
-    }
+    val bootCode = BootCode(instructions).apply { runProgram() }
+    println("Last value before infinite loop: ${bootCode.accumulator}")
 
-    println("Last value before repeated instruction: ${bootCode.accumulator}")
+    val newInstructions = fixInstructions(instructions)
+    val secondBootCode = BootCode(newInstructions).apply { runProgram() }
+    println("True last value: ${secondBootCode.accumulator}")
 }
 
 fun fixInstructions(instructions: List<Instruction>) = runBlocking(Dispatchers.Default) {
