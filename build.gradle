@@ -7,6 +7,7 @@ ext {
     jvmVersion = 1.8
     junit5Version = '5.7.0'
     ktlintVersion = '0.40.0'
+    coroutinesVersion = '1.4.2'
 }
 
 apply from: "$rootDir/ktlint.gradle"
@@ -22,6 +23,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit5Version"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit5Version"

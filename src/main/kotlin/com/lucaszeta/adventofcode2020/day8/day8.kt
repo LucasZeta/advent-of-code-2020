@@ -1,6 +1,10 @@
 package com.lucaszeta.adventofcode2020.day8
 
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 
 fun main() {
     val instructions = getResourceAsText("/day8/boot-code.txt")
@@ -15,26 +19,27 @@ fun main() {
     println("Last value before repeated instruction: ${bootCode.accumulator}")
 }
 
-fun fixInstructions(instructions: List<Instruction>): List<Instruction> {
-    var newInstructions = mutableListOf<Instruction>()
+fun fixInstructions(instructions: List<Instruction>) = runBlocking(Dispatchers.Default) {
 
-    do {
-        var exitedSuccessfully = false
-
-        instructions.forEachIndexed { index, instruction ->
+    val result = instructions.mapIndexed { index, instruction ->
+        async {
             if (instruction.operator == Operator.NOP || instruction.operator == Operator.JMP) {
                 val newInstruction = instruction.copy(
                     operator = if (instruction.operator == Operator.NOP) Operator.JMP else Operator.NOP
                 )
 
-                newInstructions = instructions.toMutableList().apply {
+                val newInstructions = instructions.toMutableList().apply {
                     set(index, newInstruction)
+                }.toList()
+
+                if (BootCode(newInstructions).runProgram()) {
+                    return@async newInstructions
                 }
-
-                exitedSuccessfully = BootCode(newInstructions.toList()).runProgram()
             }
-        }
-    } while (!exitedSuccessfully)
 
-    return newInstructions.toList()
+            listOf<Instruction>()
+        }
+    }.awaitAll()
+
+    result.flatten()
 }
