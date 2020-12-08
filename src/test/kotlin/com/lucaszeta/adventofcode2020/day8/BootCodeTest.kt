@@ -1,6 +1,8 @@
 package com.lucaszeta.adventofcode2020.day8
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class BootCodeTest {
@@ -33,7 +35,7 @@ class BootCodeTest {
     }
 
     @Test
-    fun `Should stop at a repeated instruction`() {
+    fun `Should finish execution early when there is an infinite loop`() {
         val input = listOf(
             Instruction(Operator.NOP, 0),
             Instruction(Operator.ACC, 1),
@@ -47,8 +49,28 @@ class BootCodeTest {
         )
 
         val bootCode = BootCode(input)
-        bootCode.runProgram()
 
+        assertFalse(bootCode.runProgram())
         assertEquals(5, bootCode.accumulator)
+    }
+
+    @Test
+    fun `Should finish execution successfully when there is no infinite loop`() {
+        val input = listOf(
+            Instruction(Operator.NOP, 0),
+            Instruction(Operator.ACC, 1),
+            Instruction(Operator.JMP, 4),
+            Instruction(Operator.ACC, 3),
+            Instruction(Operator.JMP, -3),
+            Instruction(Operator.ACC, -99),
+            Instruction(Operator.ACC, 1),
+            Instruction(Operator.NOP, -4),
+            Instruction(Operator.ACC, 6)
+        )
+
+        val bootCode = BootCode(input)
+
+        assertTrue(bootCode.runProgram())
+        assertEquals(8, bootCode.accumulator)
     }
 }

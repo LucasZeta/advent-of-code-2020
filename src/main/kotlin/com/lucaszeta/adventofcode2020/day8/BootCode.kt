@@ -25,15 +25,20 @@ class BootCode(
         }
     }
 
-    fun runProgram() {
-        for (instruction in instructions) {
+    fun runProgram(): Boolean {
+        var exitedSuccessfully = true
+
+        do {
             if (executedInstructions.contains(currentIndex)) {
+                exitedSuccessfully = false
                 break
             } else {
                 executedInstructions.add(currentIndex)
             }
 
             executeInstruction()
-        }
+        } while (currentIndex < instructions.size)
+
+        return exitedSuccessfully
     }
 }
