@@ -11,7 +11,7 @@ fun main() {
         .map(::findSeat)
         .map(::calculateSeatId)
 
-    println("Highest seat ID: %d".format(seatIds.max()!!))
+    println("Highest seat ID: %d".format(seatIds.maxOrNull() ?: 0))
     println("Missing seat ID: %d".format(findMissingSeat(seatIds)))
 }
 
