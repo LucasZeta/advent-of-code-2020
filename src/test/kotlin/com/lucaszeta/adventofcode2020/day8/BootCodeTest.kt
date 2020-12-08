@@ -31,4 +31,24 @@ class BootCodeTest {
         assertEquals(0, bootCode.accumulator)
         assertEquals(3, bootCode.currentIndex)
     }
+
+    @Test
+    fun `Should stop at a repeated instruction`() {
+        val input = listOf(
+            Instruction(Operator.NOP, 0),
+            Instruction(Operator.ACC, 1),
+            Instruction(Operator.JMP, 4),
+            Instruction(Operator.ACC, 3),
+            Instruction(Operator.JMP, -3),
+            Instruction(Operator.ACC, -99),
+            Instruction(Operator.ACC, 1),
+            Instruction(Operator.JMP, -4),
+            Instruction(Operator.ACC, 6)
+        )
+
+        val bootCode = BootCode(input)
+        bootCode.runProgram()
+
+        assertEquals(5, bootCode.accumulator)
+    }
 }
