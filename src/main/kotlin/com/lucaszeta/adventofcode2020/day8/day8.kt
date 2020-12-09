@@ -22,7 +22,7 @@ fun main() {
 
 fun fixInstructions(instructions: List<Instruction>) = runBlocking(Dispatchers.Default) {
 
-    val result = instructions.mapIndexed { index, instruction ->
+    val successfulInstructions = instructions.mapIndexed { index, instruction ->
         async {
             if (instruction.operator == Operator.NOP || instruction.operator == Operator.JMP) {
                 val newInstruction = instruction.copy(
@@ -38,9 +38,9 @@ fun fixInstructions(instructions: List<Instruction>) = runBlocking(Dispatchers.D
                 }
             }
 
-            listOf<Instruction>()
+            listOf()
         }
     }.awaitAll()
 
-    result.flatten()
+    successfulInstructions.first { it.isNotEmpty() }
 }
