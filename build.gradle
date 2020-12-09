@@ -12,7 +12,7 @@ ext {
 
 apply from: "$rootDir/ktlint.gradle"
 
-group 'com.lucaszeta'
+group 'com.lucaszeta.adventofcode2020'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = jvmVersion
