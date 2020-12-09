@@ -1,6 +1,16 @@
 package com.lucaszeta.adventofcode2020.day9
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
 import java.lang.IllegalArgumentException
+
+fun main() {
+    val input = getResourceAsText("/day9/xmas-number-series.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+        .map { it.toLong() }
+
+    println(findNumberNotSumOfPrevious(input, 25))
+}
 
 fun findNumberNotSumOfPrevious(numbers: List<Long>, preamble: Int): Long {
     for (index in preamble until numbers.size) {
