@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day6
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class Day6Test {
+class Day6KtTest {
 
     @Test
     fun `Should parse data`() {

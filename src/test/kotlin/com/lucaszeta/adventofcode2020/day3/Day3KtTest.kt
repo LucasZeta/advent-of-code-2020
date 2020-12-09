@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class Day3Test {
+class Day3KtTest {
 
     private lateinit var mountain: Mountain
 

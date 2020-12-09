@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day5
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class Day5Test {
+class Day5KtTest {
 
     @Test
     fun `Should calculate seat ID`() {

@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class Day2Test {
+class Day2KtTest {
 
     @Test
     fun `Should count Sled Rental valid passwords`() {

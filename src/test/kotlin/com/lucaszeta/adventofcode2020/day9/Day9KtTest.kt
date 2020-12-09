@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 
-class Day9Test {
+class Day9KtTest {
 
     @Test
     fun `Should find number not product of sum of previous numbers`() {

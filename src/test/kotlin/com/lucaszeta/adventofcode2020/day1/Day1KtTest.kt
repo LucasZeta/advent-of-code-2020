@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 
-class Day1Test {
+class Day1KtTest {
 
     @Test
     fun `Should find pair that sum to 2020`() {

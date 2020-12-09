@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day8
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class Day8Test {
+class Day8KtTest {
 
     @Test
     fun `Should change one instruction so the program exits successfully`() {
