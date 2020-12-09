@@ -9,7 +9,13 @@ fun main() {
         .filter { it.isNotEmpty() }
         .map { it.toLong() }
 
-    println(findNumberNotSumOfPrevious(input, 25))
+    val invalidNumber = findNumberNotSumOfPrevious(input, 25)
+    println("First number not result of sum of the previous ones: $invalidNumber")
+
+    val encryptionWeakness = calculateXmasEncryptionWeakness(
+        findNumbersThatSumToTarget(input, invalidNumber)
+    )
+    println("Encryption weakness: $encryptionWeakness")
 }
 
 fun findNumbersThatSumToTarget(numbers: List<Long>, targetNumber: Long): List<Long> {
@@ -28,7 +34,7 @@ fun findNumbersThatSumToTarget(numbers: List<Long>, targetNumber: Long): List<Lo
 
 fun calculateXmasEncryptionWeakness(numberList: List<Long>) =
     (numberList.minOrNull() ?: 0) +
-    (numberList.maxOrNull() ?: 0)
+        (numberList.maxOrNull() ?: 0)
 
 fun findNumberNotSumOfPrevious(numbers: List<Long>, preamble: Int): Long {
     for (index in preamble until numbers.size) {
