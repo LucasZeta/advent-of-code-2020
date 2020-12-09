@@ -12,6 +12,20 @@ fun main() {
     println(findNumberNotSumOfPrevious(input, 25))
 }
 
+fun findNumbersThatSumToTarget(numbers: List<Long>, targetNumber: Long): List<Long> {
+    for (i in 0 until numbers.size - 1) {
+        for (j in (i + 1) until numbers.size) {
+            val numbersInRange = numbers.slice(i..j)
+
+            if (numbersInRange.reduce(Long::plus) == targetNumber) {
+                return numbersInRange
+            }
+        }
+    }
+
+    throw IllegalArgumentException("No numbers in list sum to $targetNumber")
+}
+
 fun calculateXmasEncryptionWeakness(numberList: List<Long>) =
     (numberList.minOrNull() ?: 0) +
     (numberList.maxOrNull() ?: 0)
