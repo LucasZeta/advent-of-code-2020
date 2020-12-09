@@ -35,30 +35,16 @@ class Day9Test {
 
     @Test
     fun `Should find adjacent set of numbers that sum to target`() {
-        val input = listOf(
-            35,
-            20,
-            15,
-            25,
-            47,
-            40,
-            62,
-            55,
-            65,
-            95,
-            102,
-            117,
-            150,
-            182,
-            127,
-            219,
-            299,
-            277,
-            309,
-            576
-        ).map { it.toLong() }
-
-        assertEquals(listOf(15L, 25L, 47L, 40L), findNumbersThatSumToTarget(input, 127))
+        listOf(
+            listOf(35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576),
+            listOf(15, 25, 47, 40, 35, 20, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576),
+            listOf(35, 20, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576, 15, 25, 47, 40)
+        ).forEach { numbers ->
+            assertEquals(
+                listOf(15L, 25L, 47L, 40L),
+                findNumbersThatSumToTarget(numbers.map { it.toLong() }, 127)
+            )
+        }
     }
 
     @Test
