@@ -32,4 +32,11 @@ class Day9Test {
 
         assertEquals(127, findNumberNotSumOfPrevious(input, 5))
     }
+
+    @Test
+    fun `Should find encryption weakness`() {
+        val input = listOf(15, 25, 47, 40).map { it.toLong() }
+
+        assertEquals(62, calculateXmasEncryptionWeakness(input))
+    }
 }

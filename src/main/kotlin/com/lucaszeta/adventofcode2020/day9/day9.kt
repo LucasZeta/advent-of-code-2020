@@ -12,6 +12,10 @@ fun main() {
     println(findNumberNotSumOfPrevious(input, 25))
 }
 
+fun calculateXmasEncryptionWeakness(numberList: List<Long>) =
+    (numberList.minOrNull() ?: 0) +
+    (numberList.maxOrNull() ?: 0)
+
 fun findNumberNotSumOfPrevious(numbers: List<Long>, preamble: Int): Long {
     for (index in preamble until numbers.size) {
         val previousNumbersGroup = numbers.slice((index - preamble) until index)
