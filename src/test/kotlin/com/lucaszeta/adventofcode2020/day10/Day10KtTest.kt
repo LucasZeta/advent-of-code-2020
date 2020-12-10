@@ -50,9 +50,9 @@ class Day10KtTest {
 
     @Test
     fun `Should calculate arrangements for groups of one`() {
-        assertEquals(1, calculateArrangementsForSize(1))
-        assertEquals(2, calculateArrangementsForSize(2))
-        assertEquals(4, calculateArrangementsForSize(3))
-        assertEquals(7, calculateArrangementsForSize(4))
+        assertEquals(1, calculatePossibleArrangementsForSize(1))
+        assertEquals(2, calculatePossibleArrangementsForSize(2))
+        assertEquals(4, calculatePossibleArrangementsForSize(3))
+        assertEquals(7, calculatePossibleArrangementsForSize(4))
     }
 }

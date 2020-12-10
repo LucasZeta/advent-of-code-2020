@@ -21,7 +21,7 @@ fun main() {
         .toList()
 
     val differencesMap = connections.findJoltageGroupDifferences()
-    val possibleArrangements = connections.findArrangements()
+    val possibleArrangements = connections.calculateTotalArrangements()
 
     println(
         "Product of 1-jolt difference by 3-jolt difference: %d".format(
@@ -39,16 +39,16 @@ fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
         }
 }
 
-fun List<Int>.findArrangements(): Long {
+fun List<Int>.calculateTotalArrangements(): Long {
     val differences = findDifferences(this).joinToString("")
     val sequencesOfOne = "(1+)".toRegex().findAll(differences)
 
     return sequencesOfOne.map {
-        calculateArrangementsForSize(it.groupValues[1].length).toLong()
+        calculatePossibleArrangementsForSize(it.groupValues[1].length).toLong()
     }.reduce(Long::times)
 }
 
-fun calculateArrangementsForSize(size: Int): Int {
+fun calculatePossibleArrangementsForSize(size: Int): Int {
     var result = 2.0.pow(size - 1)
 
     if (size > 3) {
