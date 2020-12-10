@@ -12,20 +12,23 @@ fun main() {
     val chargingOutletJoltage = 0
     val deviceJoltage = findDeviceAdapterJoltage(bagAdapterJoltages)
 
-    val differencesMap = bagAdapterJoltages
+    val connections = bagAdapterJoltages
         .toMutableList()
         .apply {
             add(chargingOutletJoltage)
             add(deviceJoltage)
         }
         .toList()
-        .findJoltageGroupDifferences()
+
+    val differencesMap = connections.findJoltageGroupDifferences()
+    val possibleArrangements = connections.findArrangements()
 
     println(
         "Product of 1-jolt difference by 3-jolt difference: %d".format(
             differencesMap.getValue(1) * differencesMap.getValue(3)
         )
     )
+    println("Possible adapter arrangements: $possibleArrangements")
 }
 
 fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
