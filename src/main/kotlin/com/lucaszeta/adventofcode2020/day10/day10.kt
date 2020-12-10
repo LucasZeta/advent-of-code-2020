@@ -72,4 +72,3 @@ fun findDifferences(joltageList: List<Int>): List<Int> {
 
 fun findDeviceAdapterJoltage(bagAdapterJoltages: List<Int>) =
     (bagAdapterJoltages.maxOrNull() ?: 0) + 3
-
