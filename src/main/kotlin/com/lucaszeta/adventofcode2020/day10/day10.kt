@@ -34,9 +34,7 @@ fun main() {
 fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
     return findDifferences(this)
         .groupBy { it }
-        .mapValues {
-            it.value.size
-        }
+        .mapValues { it.value.size }
 }
 
 fun List<Int>.calculateTotalArrangements(): Long {
@@ -49,10 +47,11 @@ fun List<Int>.calculateTotalArrangements(): Long {
 }
 
 fun calculatePossibleArrangementsForSize(size: Int): Int {
+    val numberOfJoltages = 3
     var result = 2.0.pow(size - 1)
 
-    if (size > 3) {
-        result -= 2.0.pow(size - 4)
+    if (size > numberOfJoltages) {
+        result -= 2.0.pow(size - (numberOfJoltages + 1))
     }
 
     return result.toInt()
