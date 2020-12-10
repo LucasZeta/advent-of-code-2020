@@ -28,7 +28,15 @@ fun main() {
 }
 
 fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
-    val sortedValues = sorted()
+    return findDifferences(this)
+        .groupBy { it }
+        .mapValues {
+            it.value.size
+        }
+}
+
+fun findDifferences(joltageList: List<Int>): List<Int> {
+    val sortedValues = joltageList.sorted()
 
     return sortedValues
         .mapIndexed { index, joltage ->
@@ -37,10 +45,6 @@ fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
             } else 0
         }
         .filter { it != 0 }
-        .groupBy { it }
-        .mapValues {
-            it.value.size
-        }
 }
 
 fun findDeviceAdapterJoltage(bagAdapterJoltages: List<Int>) =
