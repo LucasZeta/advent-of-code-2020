@@ -35,11 +35,11 @@ fun List<Int>.calculateTotalArrangements(): Long {
     val sequencesOfOne = "(1+)".toRegex().findAll(differences)
 
     return sequencesOfOne.map {
-        calculatePossibleArrangementsForSize(it.groupValues[1].length).toLong()
+        calculatePossibleArrangementsForSize(it.groupValues[1].length)
     }.reduce(Long::times)
 }
 
-fun calculatePossibleArrangementsForSize(size: Int): Int {
+fun calculatePossibleArrangementsForSize(size: Int): Long {
     val numberOfJoltages = 3
     var result = 2.0.pow(size - 1)
 
@@ -47,7 +47,7 @@ fun calculatePossibleArrangementsForSize(size: Int): Int {
         result -= 2.0.pow(size - (numberOfJoltages + 1))
     }
 
-    return result.toInt()
+    return result.toLong()
 }
 
 fun findDifferences(joltageList: List<Int>): List<Int> {
