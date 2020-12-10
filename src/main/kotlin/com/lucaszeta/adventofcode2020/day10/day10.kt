@@ -36,6 +36,15 @@ fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
         }
 }
 
+fun List<Int>.findArrangements(): Long {
+    val differences = findDifferences(this).joinToString("")
+    val sequencesOfOne = "(1+)".toRegex().findAll(differences)
+
+    return sequencesOfOne.map {
+        calculateArrangementsForSize(it.groupValues[1].length).toLong()
+    }.reduce(Long::times)
+}
+
 fun calculateArrangementsForSize(size: Int): Int {
     var result = 2.0.pow(size - 1)
 

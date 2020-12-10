@@ -35,6 +35,20 @@ class Day10KtTest {
     }
 
     @Test
+    fun `Should count possible arrangements`() {
+        val input = listOf(0, 16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4, 22)
+
+        assertEquals(8, input.findArrangements())
+
+        val input2 = listOf(
+            0, 28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, 19,
+            38, 39, 11, 1, 32, 25, 35, 8, 17, 7, 9, 4, 2, 34, 10, 3, 52
+        )
+
+        assertEquals(19208, input2.findArrangements())
+    }
+
+    @Test
     fun `Should calculate arrangements for groups of one`() {
         assertEquals(1, calculateArrangementsForSize(1))
         assertEquals(2, calculateArrangementsForSize(2))
