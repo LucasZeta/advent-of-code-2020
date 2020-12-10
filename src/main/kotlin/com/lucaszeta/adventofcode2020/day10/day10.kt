@@ -1,6 +1,7 @@
 package com.lucaszeta.adventofcode2020.day10
 
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+import kotlin.math.pow
 
 fun main() {
     val bagAdapterJoltages = getResourceAsText("/day10/adapters-output-joltage.txt")
@@ -33,6 +34,16 @@ fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
         .mapValues {
             it.value.size
         }
+}
+
+fun calculateArrangementsForSize(size: Int): Int {
+    var result = 2.0.pow(size - 1)
+
+    if (size > 3) {
+        result -= 2.0.pow(size - 4)
+    }
+
+    return result.toInt()
 }
 
 fun findDifferences(joltageList: List<Int>): List<Int> {
