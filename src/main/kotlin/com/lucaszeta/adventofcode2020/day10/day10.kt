@@ -3,22 +3,15 @@ package com.lucaszeta.adventofcode2020.day10
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
 import kotlin.math.pow
 
+const val CHARGING_OUTLET_JOLTAGE = 0
+
 fun main() {
     val bagAdapterJoltages = getResourceAsText("/day10/adapters-output-joltage.txt")
         .split("\n")
         .filter { it.isNotEmpty() }
         .map { it.toInt() }
 
-    val chargingOutletJoltage = 0
-    val deviceJoltage = findDeviceAdapterJoltage(bagAdapterJoltages)
-
-    val connections = bagAdapterJoltages
-        .toMutableList()
-        .apply {
-            add(chargingOutletJoltage)
-            add(deviceJoltage)
-        }
-        .toList()
+    val connections = addFirstAndLastJoltages(bagAdapterJoltages)
 
     val differencesMap = connections.findJoltageGroupDifferences()
     val possibleArrangements = connections.calculateTotalArrangements()
@@ -71,3 +64,11 @@ fun findDifferences(joltageList: List<Int>): List<Int> {
 
 fun findDeviceAdapterJoltage(bagAdapterJoltages: List<Int>) =
     (bagAdapterJoltages.maxOrNull() ?: 0) + 3
+
+fun addFirstAndLastJoltages(bagAdapterJoltages: List<Int>) = bagAdapterJoltages
+    .toMutableList()
+    .apply {
+        add(CHARGING_OUTLET_JOLTAGE)
+        add(findDeviceAdapterJoltage(bagAdapterJoltages))
+    }
+    .toList()
