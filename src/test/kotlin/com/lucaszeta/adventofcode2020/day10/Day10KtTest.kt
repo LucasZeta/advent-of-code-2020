@@ -15,6 +15,14 @@ class Day10KtTest {
     @Test
     fun `Should map joltage differences`() {
         val input = listOf(0, 16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4, 22)
+        val expectedOutput = listOf(1, 3, 1, 1, 1, 3, 1, 1, 3, 1, 3, 3)
+
+        assertEquals(expectedOutput, findDifferences(input))
+    }
+
+    @Test
+    fun `Should map joltage grouped differences`() {
+        val input = listOf(0, 16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4, 22)
         val expectedOutput = mapOf(
             1 to 7,
             3 to 5
