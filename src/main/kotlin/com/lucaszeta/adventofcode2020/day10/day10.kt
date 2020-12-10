@@ -1,5 +1,32 @@
 package com.lucaszeta.adventofcode2020.day10
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
+fun main() {
+    val bagAdapterJoltages = getResourceAsText("/day10/adapters-output-joltage.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+        .map { it.toInt() }
+
+    val chargingOutletJoltage = 0
+    val deviceJoltage = findDeviceAdapterJoltage(bagAdapterJoltages)
+
+    val differencesMap = bagAdapterJoltages
+        .toMutableList()
+        .apply {
+            add(chargingOutletJoltage)
+            add(deviceJoltage)
+        }
+        .toList()
+        .findJoltageGroupDifferences()
+
+    println(
+        "Product of 1-jolt difference by 3-jolt difference: %d".format(
+            differencesMap.getValue(1) * differencesMap.getValue(3)
+        )
+    )
+}
+
 fun List<Int>.findJoltageGroupDifferences(): Map<Int, Int> {
     val sortedValues = sorted()
 
