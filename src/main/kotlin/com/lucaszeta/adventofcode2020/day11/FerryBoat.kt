@@ -60,8 +60,7 @@ class FerryBoat(
 
         for (adjacentY in (y - 1)..(y + 1)) {
             for (adjacentX in (x - 1)..(x + 1)) {
-                if (adjacentY < 0 || adjacentX < 0) continue
-                if (adjacentY >= seatLayout.size || adjacentX >= seatLayout.first().size) continue
+                if (isOutOfBounds(adjacentY, adjacentX)) continue
                 if (adjacentY == y && adjacentX == x) continue
 
                 adjacentSeats.add(seatLayout[adjacentY][adjacentX])
@@ -73,6 +72,11 @@ class FerryBoat(
 
     fun countOccupiedSeats() =
         seatLayout.flatten().count { it == OCCUPIED_SEAT }
+
+    private fun isOutOfBounds(y: Int, x: Int): Boolean {
+        return y < 0 || x < 0 ||
+                y >= seatLayout.size || x >= seatLayout.first().size
+    }
 
     companion object {
         const val EMPTY_SEAT = 'L'
