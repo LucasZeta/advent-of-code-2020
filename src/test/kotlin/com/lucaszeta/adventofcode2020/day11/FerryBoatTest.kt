@@ -101,4 +101,24 @@ class FerryBoatTest {
 
         assertEquals(expectedOutput, ferryBoat.seatLayout)
     }
+
+    @Test
+    fun `Should count occupied seats`() {
+        val input = listOf(
+            "#.#L.L#.##",
+            "#LLL#LL.L#",
+            "L.#.L..#..",
+            "#L##.##.L#",
+            "#.#L.LL.LL",
+            "#.#L#L#.##",
+            "..L.L.....",
+            "#L#L##L#L#",
+            "#.LLLLLL.L",
+            "#.#L#L#.##"
+        )
+
+        val ferryBoat = FerryBoat(input)
+
+        assertEquals(37, ferryBoat.countOccupiedSeats())
+    }
 }

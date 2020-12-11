@@ -57,6 +57,9 @@ class FerryBoat(
         return adjacentSeats.toList()
     }
 
+    fun countOccupiedSeats() =
+        seatLayout.flatten().count { it == OCCUPIED_SEAT }
+
     companion object {
         const val EMPTY_SEAT = 'L'
         const val OCCUPIED_SEAT = '#'
