@@ -103,6 +103,40 @@ class FerryBoatTest {
     }
 
     @Test
+    fun `Should abandon seats with five or more occupied visible seats`() {
+        val input = listOf(
+            "#.##.##.##",
+            "#######.##",
+            "#.#.#..#..",
+            "####.##.##",
+            "#.##.##.##",
+            "#.#####.##",
+            "..#.#.....",
+            "##########",
+            "#.######.#",
+            "#.#####.##"
+        )
+        val expectedOutput = listOf(
+            listOf('#', '.', 'L', 'L', '.', 'L', 'L', '.', 'L', '#'),
+            listOf('#', 'L', 'L', 'L', 'L', 'L', 'L', '.', 'L', 'L'),
+            listOf('L', '.', 'L', '.', 'L', '.', '.', 'L', '.', '.'),
+            listOf('L', 'L', 'L', 'L', '.', 'L', 'L', '.', 'L', 'L'),
+            listOf('L', '.', 'L', 'L', '.', 'L', 'L', '.', 'L', 'L'),
+            listOf('L', '.', 'L', 'L', 'L', 'L', 'L', '.', 'L', 'L'),
+            listOf('.', '.', 'L', '.', 'L', '.', '.', '.', '.', '.'),
+            listOf('L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', 'L', '#'),
+            listOf('#', '.', 'L', 'L', 'L', 'L', 'L', 'L', '.', 'L'),
+            listOf('#', '.', 'L', 'L', 'L', 'L', 'L', '.', 'L', '#')
+        )
+
+        val ferryBoat = FerryBoat(input)
+            .apply { setNewOccupationRules() }
+        ferryBoat.simulateSeatOccupation()
+
+        assertEquals(expectedOutput, ferryBoat.seatLayout)
+    }
+
+    @Test
     fun `Should count occupied seats`() {
         val input = listOf(
             "#.#L.L#.##",

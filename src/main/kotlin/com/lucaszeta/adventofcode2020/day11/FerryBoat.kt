@@ -31,6 +31,16 @@ class FerryBoat(
         }
     }
 
+    fun setNewOccupationRules() {
+        shouldOccupyEmptySeat = { y, x ->
+            findVisibleSeats(y, x).count { it == OCCUPIED_SEAT } == 0
+        }
+
+        shouldAbandonOccupiedSeat = { y, x ->
+            findVisibleSeats(y, x).count { it == OCCUPIED_SEAT } >= 5
+        }
+    }
+
     fun simulateSeatOccupation() {
         val newSeatLayout = mutableListOf<MutableList<Char>>()
 
