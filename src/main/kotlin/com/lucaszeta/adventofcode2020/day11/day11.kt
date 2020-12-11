@@ -7,7 +7,19 @@ fun main() {
         .split("\n")
         .filter { it.isNotEmpty() }
 
+    println("Seats occupied by old rules: ${countSeats(seatLayout)}")
+    println("Seats occupied by new rules: ${countSeats(seatLayout, newOccupationRules = true)}")
+}
+
+fun countSeats(
+    seatLayout: List<String>,
+    newOccupationRules: Boolean = false
+): Int {
     val ferry = FerryBoat(seatLayout)
+
+    if (newOccupationRules) {
+        ferry.setNewOccupationRules()
+    }
 
     var previousSeatLayout = listOf<List<Char>>()
 
@@ -17,5 +29,5 @@ fun main() {
         ferry.simulateSeatOccupation()
     } while (ferry.seatLayout != previousSeatLayout)
 
-    println("Seats occupied: ${ferry.countOccupiedSeats()}")
+    return ferry.countOccupiedSeats()
 }
