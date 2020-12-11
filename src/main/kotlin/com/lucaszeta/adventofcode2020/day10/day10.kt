@@ -1,7 +1,6 @@
 package com.lucaszeta.adventofcode2020.day10
 
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
-import kotlin.math.pow
 
 const val CHARGING_OUTLET_JOLTAGE = 0
 
@@ -35,19 +34,26 @@ fun List<Int>.calculateTotalArrangements(): Long {
     val sequencesOfOne = "(1+)".toRegex().findAll(differences)
 
     return sequencesOfOne.map {
-        calculatePossibleArrangementsForSize(it.groupValues[1].length)
+        calculatePossibleArrangementsForSize(it.groupValues[1].length).toLong()
     }.reduce(Long::times)
 }
 
-fun calculatePossibleArrangementsForSize(size: Int): Long {
-    val numberOfJoltages = 3
-    var result = 2.0.pow(size - 1)
+fun calculatePossibleArrangementsForSize(size: Int): Int {
+    val arrangementSequence = mutableListOf(1, 1, 2)
 
-    if (size > numberOfJoltages) {
-        result -= 2.0.pow(size - (numberOfJoltages + 1))
+    return if (size < arrangementSequence.size) {
+        arrangementSequence[size]
+    } else {
+        repeat(size - arrangementSequence.size + 1) {
+            val lastThreeValues = (arrangementSequence.size - 3) until arrangementSequence.size
+
+            arrangementSequence.add(
+                arrangementSequence.slice(lastThreeValues).reduce(Int::plus)
+            )
+        }
+
+        arrangementSequence.last()
     }
-
-    return result.toLong()
 }
 
 fun findDifferences(joltageList: List<Int>): List<Int> {
