@@ -110,7 +110,7 @@ class FerryBoat(
 
     private fun isOutOfBounds(y: Int, x: Int): Boolean {
         return y < 0 || x < 0 ||
-                y >= seatLayout.size || x >= seatLayout.first().size
+            y >= seatLayout.size || x >= seatLayout.first().size
     }
 
     companion object {
