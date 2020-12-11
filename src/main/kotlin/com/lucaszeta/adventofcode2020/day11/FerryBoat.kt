@@ -4,6 +4,9 @@ class FerryBoat(
     input: List<String>
 ) {
 
+    private var shouldOccupyEmptySeat: (Int, Int) -> Boolean = { _, _ -> false }
+    private var shouldAbandonOccupiedSeat: (Int, Int) -> Boolean = { _, _ -> false }
+
     var seatLayout: List<List<Char>>
         private set
 
@@ -15,6 +18,17 @@ class FerryBoat(
         }
 
         seatLayout = mutableSeatList.toList()
+        setOldOccupationRules()
+    }
+
+    private fun setOldOccupationRules() {
+        shouldOccupyEmptySeat = { y, x ->
+            findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } == 0
+        }
+
+        shouldAbandonOccupiedSeat = { y, x ->
+            findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } >= 4
+        }
     }
 
     fun simulateSeatOccupation() {
@@ -26,9 +40,9 @@ class FerryBoat(
             for (x in seatLayout[y].indices) {
                 val seat = seatLayout[y][x]
 
-                val newSeat = if (seat == EMPTY_SEAT && findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } == 0) {
+                val newSeat = if (seat == EMPTY_SEAT && shouldOccupyEmptySeat(y, x)) {
                     OCCUPIED_SEAT
-                } else if (seat == OCCUPIED_SEAT && findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } >= 4) {
+                } else if (seat == OCCUPIED_SEAT && shouldAbandonOccupiedSeat(y, x)) {
                     EMPTY_SEAT
                 } else {
                     seat
