@@ -35,4 +35,37 @@ class FerryBoatTest {
         val ferryBoat = FerryBoat(input)
         assertEquals(expectedOutput, ferryBoat.seatLayout)
     }
+
+    @Test
+    fun `Should occupy all seats when they are empty`() {
+        val input = listOf(
+            "L.LL.LL.LL",
+            "LLLLLLL.LL",
+            "L.L.L..L..",
+            "LLLL.LL.LL",
+            "L.LL.LL.LL",
+            "L.LLLLL.LL",
+            "..L.L.....",
+            "LLLLLLLLLL",
+            "L.LLLLLL.L",
+            "L.LLLLL.LL"
+        )
+        val expectedOutput = listOf(
+            listOf('#', '.', '#', '#', '.', '#', '#', '.', '#', '#'),
+            listOf('#', '#', '#', '#', '#', '#', '#', '.', '#', '#'),
+            listOf('#', '.', '#', '.', '#', '.', '.', '#', '.', '.'),
+            listOf('#', '#', '#', '#', '.', '#', '#', '.', '#', '#'),
+            listOf('#', '.', '#', '#', '.', '#', '#', '.', '#', '#'),
+            listOf('#', '.', '#', '#', '#', '#', '#', '.', '#', '#'),
+            listOf('.', '.', '#', '.', '#', '.', '.', '.', '.', '.'),
+            listOf('#', '#', '#', '#', '#', '#', '#', '#', '#', '#'),
+            listOf('#', '.', '#', '#', '#', '#', '#', '#', '.', '#'),
+            listOf('#', '.', '#', '#', '#', '#', '#', '.', '#', '#')
+        )
+
+        val ferryBoat = FerryBoat(input)
+        ferryBoat.simulateSeatOccupation()
+
+        assertEquals(expectedOutput, ferryBoat.seatLayout)
+    }
 }
