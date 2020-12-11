@@ -1,8 +1,6 @@
 package com.lucaszeta.adventofcode2020.day11
 
-class FerryBoat(
-    input: List<String>
-) {
+class FerryBoat(input: List<String>) {
 
     private var shouldOccupyEmptySeat: (Int, Int) -> Boolean = { _, _ -> false }
     private var shouldAbandonOccupiedSeat: (Int, Int) -> Boolean = { _, _ -> false }
@@ -19,26 +17,6 @@ class FerryBoat(
 
         seatLayout = mutableSeatList.toList()
         setOldOccupationRules()
-    }
-
-    private fun setOldOccupationRules() {
-        shouldOccupyEmptySeat = { y, x ->
-            findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } == 0
-        }
-
-        shouldAbandonOccupiedSeat = { y, x ->
-            findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } >= 4
-        }
-    }
-
-    fun setNewOccupationRules() {
-        shouldOccupyEmptySeat = { y, x ->
-            findVisibleSeats(y, x).count { it == OCCUPIED_SEAT } == 0
-        }
-
-        shouldAbandonOccupiedSeat = { y, x ->
-            findVisibleSeats(y, x).count { it == OCCUPIED_SEAT } >= 5
-        }
     }
 
     fun simulateSeatOccupation() {
@@ -63,6 +41,29 @@ class FerryBoat(
         }
 
         seatLayout = newSeatLayout.toList()
+    }
+
+    fun countOccupiedSeats() =
+        seatLayout.flatten().count { it == OCCUPIED_SEAT }
+
+    fun setNewOccupationRules() {
+        shouldOccupyEmptySeat = { y, x ->
+            findVisibleSeats(y, x).count { it == OCCUPIED_SEAT } == 0
+        }
+
+        shouldAbandonOccupiedSeat = { y, x ->
+            findVisibleSeats(y, x).count { it == OCCUPIED_SEAT } >= 5
+        }
+    }
+
+    private fun setOldOccupationRules() {
+        shouldOccupyEmptySeat = { y, x ->
+            findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } == 0
+        }
+
+        shouldAbandonOccupiedSeat = { y, x ->
+            findAdjacentSeats(y, x).count { it == OCCUPIED_SEAT } >= 4
+        }
     }
 
     private fun findAdjacentSeats(y: Int, x: Int): List<Char> {
@@ -104,9 +105,6 @@ class FerryBoat(
 
         return visibleSeats.toList()
     }
-
-    fun countOccupiedSeats() =
-        seatLayout.flatten().count { it == OCCUPIED_SEAT }
 
     private fun isOutOfBounds(y: Int, x: Int): Boolean {
         return y < 0 || x < 0 ||
