@@ -70,6 +70,31 @@ class FerryBoat(
         return adjacentSeats.toList()
     }
 
+    private fun findVisibleSeats(y: Int, x: Int): List<Char> {
+        val visibleSeats = mutableListOf<Char>()
+
+        for (directionY in -1..1) {
+            for (directionX in -1..1) {
+                if (directionY == 0 && directionX == 0) continue
+
+                var positionY = y + directionY
+                var positionX = x + directionX
+                var seat = FLOOR
+
+                while (!isOutOfBounds(positionY, positionX) && seat == FLOOR) {
+                    seat = seatLayout[positionY][positionX]
+
+                    positionY += directionY
+                    positionX += directionX
+                }
+
+                visibleSeats.add(seat)
+            }
+        }
+
+        return visibleSeats.toList()
+    }
+
     fun countOccupiedSeats() =
         seatLayout.flatten().count { it == OCCUPIED_SEAT }
 
