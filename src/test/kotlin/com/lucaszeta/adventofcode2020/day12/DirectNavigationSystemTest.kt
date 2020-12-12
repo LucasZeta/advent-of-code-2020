@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day12
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class FerryBoatNavigationalSystemTest {
+class DirectNavigationSystemTest {
 
     @Test
     fun `Should move according to N, E, W, S coordinates`() {
@@ -14,7 +14,7 @@ class FerryBoatNavigationalSystemTest {
             "W1"
         ).map(::NavigationalInstruction)
 
-        val navigationalSystem = FerryBoatNavigationalSystem(input)
+        val navigationalSystem = DirectNavigationSystem(input)
         navigationalSystem.navigate()
 
         assertEquals(-4, navigationalSystem.currentPositionY)
@@ -29,7 +29,7 @@ class FerryBoatNavigationalSystemTest {
             listOf("L180", "L180") to Direction.EAST,
             listOf("R270", "L90") to Direction.WEST,
         ).forEach { (instructionsString, expectedDirection) ->
-            val navigationalSystem = FerryBoatNavigationalSystem(
+            val navigationalSystem = DirectNavigationSystem(
                 instructionsString.map(::NavigationalInstruction)
             )
             navigationalSystem.navigate()
@@ -46,7 +46,7 @@ class FerryBoatNavigationalSystemTest {
             listOf("R180", "F4") to (-4 to 0),
             listOf("R360", "F50") to (50 to 0),
         ).forEach { (instructionsString, expectedPosition) ->
-            val navigationalSystem = FerryBoatNavigationalSystem(
+            val navigationalSystem = DirectNavigationSystem(
                 instructionsString.map(::NavigationalInstruction)
             )
             navigationalSystem.navigate()
@@ -61,7 +61,7 @@ class FerryBoatNavigationalSystemTest {
         val input = listOf("F10", "N3", "F7", "R90", "F11")
             .map(::NavigationalInstruction)
 
-        val navigationalSystem = FerryBoatNavigationalSystem(input)
+        val navigationalSystem = DirectNavigationSystem(input)
         navigationalSystem.navigate()
 
         assertEquals(17, navigationalSystem.currentPositionX)

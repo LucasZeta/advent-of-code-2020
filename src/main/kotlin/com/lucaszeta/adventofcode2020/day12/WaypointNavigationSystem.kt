@@ -1,6 +1,6 @@
 package com.lucaszeta.adventofcode2020.day12
 
-class FerryBoatWaypointNavigationalSystem(
+class WaypointNavigationSystem(
     private val instructions: List<NavigationalInstruction>,
     var waypointX: Int,
     var waypointY: Int

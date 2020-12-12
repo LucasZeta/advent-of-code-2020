@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day12
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class FerryBoatWaypointNavigationalSystemTest {
+class WaypointNavigationSystemTest {
 
     @Test
     fun `Should move waypoint according to N, E, W, S coordinates`() {
@@ -14,7 +14,7 @@ class FerryBoatWaypointNavigationalSystemTest {
             "W1"
         ).map(::NavigationalInstruction)
 
-        val navigationalSystem = FerryBoatWaypointNavigationalSystem(input, 10, 1)
+        val navigationalSystem = WaypointNavigationSystem(input, 10, 1)
         navigationalSystem.navigate()
 
         assertEquals(13, navigationalSystem.waypointX)
@@ -29,7 +29,7 @@ class FerryBoatWaypointNavigationalSystemTest {
             listOf("L180", "L180") to (10 to 4),
             listOf("R270", "L90") to (-10 to -4)
         ).forEach { (instructionsString, expectedWaypoint) ->
-            val navigationalSystem = FerryBoatWaypointNavigationalSystem(
+            val navigationalSystem = WaypointNavigationSystem(
                 instructionsString.map(::NavigationalInstruction),
                 10,
                 4
@@ -49,7 +49,7 @@ class FerryBoatWaypointNavigationalSystemTest {
             listOf("R180", "F4") to (-8 to -4),
             listOf("R360", "F50") to (100 to 50),
         ).forEach { (instructionsString, expectedPosition) ->
-            val navigationalSystem = FerryBoatWaypointNavigationalSystem(
+            val navigationalSystem = WaypointNavigationSystem(
                 instructionsString.map(::NavigationalInstruction),
                 2,
                 1
@@ -66,7 +66,7 @@ class FerryBoatWaypointNavigationalSystemTest {
         val input = listOf("F10", "N3", "F7", "R90", "F11")
             .map(::NavigationalInstruction)
 
-        val navigationalSystem = FerryBoatWaypointNavigationalSystem(input, 10, 1)
+        val navigationalSystem = WaypointNavigationSystem(input, 10, 1)
         navigationalSystem.navigate()
 
         assertEquals(214, navigationalSystem.currentPositionX)

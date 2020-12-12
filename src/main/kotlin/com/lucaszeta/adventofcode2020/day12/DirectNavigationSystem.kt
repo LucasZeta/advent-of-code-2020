@@ -1,6 +1,6 @@
 package com.lucaszeta.adventofcode2020.day12
 
-class FerryBoatNavigationalSystem(
+class DirectNavigationSystem(
     private val instructions: List<NavigationalInstruction>
 ) {
 
