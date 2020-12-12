@@ -12,13 +12,6 @@ class DirectNavigationSystem(
 
     var currentDirection = Direction.EAST
 
-    private val directionDegrees = listOf(
-        Direction.EAST to 0,
-        Direction.NORTH to 90,
-        Direction.WEST to 180,
-        Direction.SOUTH to 270,
-    )
-
     fun navigate() {
         instructions.forEach(::executeInstruction)
     }
@@ -30,25 +23,20 @@ class DirectNavigationSystem(
             Direction.EAST -> currentPositionX += instruction.units
             Direction.WEST -> currentPositionX -= instruction.units
             Direction.LEFT -> {
-                directionDegrees.find { it.first == currentDirection }?.let { (_, degrees) ->
-                    val newDegrees = (degrees + instruction.units).rem(360)
+                var directionIndex = directions.indexOf(currentDirection)
+                directionIndex = (directionIndex + instruction.units / 90).rem(directions.size)
 
-                    directionDegrees.find { it.second == newDegrees }?.let { newDirection ->
-                        currentDirection = newDirection.first
-                    }
-                }
+                currentDirection = directions[directionIndex]
             }
             Direction.RIGHT -> {
-                directionDegrees.find { it.first == currentDirection }?.let { (_, degrees) ->
-                    var newDegrees = degrees - instruction.units
-                    if (newDegrees < 0) {
-                        newDegrees += 360
-                    }
+                var directionIndex = directions.indexOf(currentDirection)
 
-                    directionDegrees.find { it.second == newDegrees }?.let { newDirection ->
-                        currentDirection = newDirection.first
-                    }
+                directionIndex -= instruction.units / 90
+                if (directionIndex < 0) {
+                    directionIndex += directions.size
                 }
+
+                currentDirection = directions[directionIndex]
             }
             Direction.FORWARD -> {
                 currentDirection.coordinates?.let { (x, y) ->
@@ -59,5 +47,14 @@ class DirectNavigationSystem(
                 }
             }
         }
+    }
+
+    companion object {
+        val directions = listOf(
+            Direction.EAST,
+            Direction.NORTH,
+            Direction.WEST,
+            Direction.SOUTH
+        )
     }
 }
