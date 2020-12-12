@@ -1,22 +1,12 @@
 package com.lucaszeta.adventofcode2020.day12
 
 class WaypointNavigationSystem(
-    private val instructions: List<NavigationalInstruction>,
+    instructions: List<NavigationalInstruction>,
     var waypointX: Int,
     var waypointY: Int
-) {
+) : NavigationSystem(instructions) {
 
-    var currentPositionX = 0
-        private set
-
-    var currentPositionY = 0
-        private set
-
-    fun navigate() {
-        instructions.forEach(::executeInstruction)
-    }
-
-    private fun executeInstruction(instruction: NavigationalInstruction) {
+    override fun executeInstruction(instruction: NavigationalInstruction) {
         when (instruction.direction) {
             Direction.NORTH -> waypointY += instruction.units
             Direction.SOUTH -> waypointY -= instruction.units

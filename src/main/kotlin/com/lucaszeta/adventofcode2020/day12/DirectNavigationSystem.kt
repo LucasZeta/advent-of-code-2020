@@ -1,22 +1,12 @@
 package com.lucaszeta.adventofcode2020.day12
 
 class DirectNavigationSystem(
-    private val instructions: List<NavigationalInstruction>
-) {
-
-    var currentPositionX = 0
-        private set
-
-    var currentPositionY = 0
-        private set
+    instructions: List<NavigationalInstruction>
+) : NavigationSystem(instructions) {
 
     var currentDirection = Direction.EAST
 
-    fun navigate() {
-        instructions.forEach(::executeInstruction)
-    }
-
-    private fun executeInstruction(instruction: NavigationalInstruction) {
+    override fun executeInstruction(instruction: NavigationalInstruction) {
         when (instruction.direction) {
             Direction.NORTH -> currentPositionY += instruction.units
             Direction.SOUTH -> currentPositionY -= instruction.units
