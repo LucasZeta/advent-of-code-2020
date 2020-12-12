@@ -12,7 +12,7 @@ class FerryBoatNavigationalSystem(
 
     var currentDirection = Direction.EAST
 
-    val directionDegrees = listOf(
+    private val directionDegrees = listOf(
         Direction.EAST to 0,
         Direction.NORTH to 90,
         Direction.WEST to 180,
@@ -23,7 +23,7 @@ class FerryBoatNavigationalSystem(
         instructions.forEach(::executeInstruction)
     }
 
-    fun executeInstruction(instruction: NavigationalInstruction) {
+    private fun executeInstruction(instruction: NavigationalInstruction) {
         when (instruction.direction) {
             Direction.NORTH -> currentPositionY += instruction.units
             Direction.SOUTH -> currentPositionY -= instruction.units
