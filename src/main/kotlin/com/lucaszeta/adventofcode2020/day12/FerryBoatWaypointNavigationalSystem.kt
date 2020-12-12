@@ -16,6 +16,20 @@ class FerryBoatWaypointNavigationalSystem(
             Direction.SOUTH -> waypointY -= instruction.units
             Direction.EAST -> waypointX += instruction.units
             Direction.WEST -> waypointX -= instruction.units
+            Direction.LEFT -> {
+                repeat(instruction.units / 90) {
+                    val temporary = waypointX
+                    waypointX = -waypointY
+                    waypointY = temporary
+                }
+            }
+            Direction.RIGHT -> {
+                repeat(instruction.units / 90) {
+                    val temporary = waypointX
+                    waypointX = waypointY
+                    waypointY = -temporary
+                }
+            }
         }
     }
 }
