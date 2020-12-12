@@ -55,4 +55,16 @@ class FerryBoatNavigationalSystemTest {
             assertEquals(expectedPosition.second, navigationalSystem.currentPositionY)
         }
     }
+
+    @Test
+    fun `Should navigate to destination`() {
+        val input = listOf("F10", "N3", "F7", "R90", "F11")
+            .map(::NavigationalInstruction)
+
+        val navigationalSystem = FerryBoatNavigationalSystem(input)
+        navigationalSystem.navigate()
+
+        assertEquals(17, navigationalSystem.currentPositionX)
+        assertEquals(-8, navigationalSystem.currentPositionY)
+    }
 }
