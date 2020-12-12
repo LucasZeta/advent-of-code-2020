@@ -2,6 +2,8 @@ package com.lucaszeta.adventofcode2020.day12
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.IllegalArgumentException
 
 class NavigationalInstructionTest {
 
@@ -17,6 +19,19 @@ class NavigationalInstructionTest {
             "E12" to NavigationalInstruction(Direction.EAST, 12),
         ).forEach { (input, expectedOutput) ->
             assertEquals(expectedOutput, NavigationalInstruction(input))
+        }
+    }
+
+    @Test
+    fun `Should thrown exception when mapping invalid data`() {
+        listOf(
+            "X9",
+            "Nxx",
+            "L"
+        ).forEach {
+            assertThrows<IllegalArgumentException> {
+                NavigationalInstruction(it)
+            }
         }
     }
 }
