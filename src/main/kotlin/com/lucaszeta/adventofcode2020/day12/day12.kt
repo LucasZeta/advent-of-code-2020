@@ -9,8 +9,15 @@ fun main() {
         .filter { it.isNotEmpty() }
         .map(::NavigationalInstruction)
 
-    val navigationalSystem = FerryBoatNavigationalSystem(instructions)
-    val waypointNavigationalSystem = FerryBoatWaypointNavigationalSystem(instructions, 10, 1)
+    val boatInitialPosition = 0 to 0
+    val waypoint = 10 to 1
+
+    val navigationalSystem = DirectNavigationSystem(instructions)
+    val waypointNavigationalSystem = WaypointNavigationSystem(
+        instructions,
+        waypoint.first,
+        waypoint.second
+    )
 
     navigationalSystem.navigate()
     waypointNavigationalSystem.navigate()
@@ -18,18 +25,18 @@ fun main() {
     val distance = calculateManhattanDistance(
         navigationalSystem.currentPositionX,
         navigationalSystem.currentPositionY,
-        0,
-        0
+        boatInitialPosition.first,
+        boatInitialPosition.second
     )
 
     val distanceWithWaypoint = calculateManhattanDistance(
         waypointNavigationalSystem.currentPositionX,
         waypointNavigationalSystem.currentPositionY,
-        0,
-        0
+        boatInitialPosition.first,
+        boatInitialPosition.second
     )
 
-    println("Distance from origin: $distance")
+    println("Distance from origin based on direct navigation: $distance")
     println("Real distance from origin: $distanceWithWaypoint")
 }
 
