@@ -39,12 +39,15 @@ class DirectNavigationSystem(
                 currentDirection = directions[directionIndex]
             }
             Direction.FORWARD -> {
-                currentDirection.coordinates?.let { (x, y) ->
-                    repeat(instruction.units) {
-                        currentPositionX += x
-                        currentPositionY += y
-                    }
+                val coordinates = when (currentDirection) {
+                    Direction.EAST -> 1 to 0
+                    Direction.NORTH -> 0 to 1
+                    Direction.WEST -> -1 to 0
+                    else -> 0 to -1
                 }
+
+                currentPositionX += coordinates.first * instruction.units
+                currentPositionY += coordinates.second * instruction.units
             }
         }
     }
