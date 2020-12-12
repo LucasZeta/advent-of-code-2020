@@ -12,32 +12,24 @@ fun main() {
     val boatInitialPosition = 0 to 0
     val waypoint = 10 to 1
 
-    val navigationalSystem = DirectNavigationSystem(instructions)
+    val directNavigationSystem = DirectNavigationSystem(instructions)
     val waypointNavigationalSystem = WaypointNavigationSystem(
         instructions,
         waypoint.first,
         waypoint.second
     )
 
-    navigationalSystem.navigate()
-    waypointNavigationalSystem.navigate()
-
-    val distance = calculateManhattanDistance(
-        navigationalSystem.currentPositionX,
-        navigationalSystem.currentPositionY,
-        boatInitialPosition.first,
-        boatInitialPosition.second
+    displayDistance(
+        directNavigationSystem,
+        boatInitialPosition,
+        "Distance from origin based on direct navigation"
     )
 
-    val distanceWithWaypoint = calculateManhattanDistance(
-        waypointNavigationalSystem.currentPositionX,
-        waypointNavigationalSystem.currentPositionY,
-        boatInitialPosition.first,
-        boatInitialPosition.second
+    displayDistance(
+        waypointNavigationalSystem,
+        boatInitialPosition,
+        "Real distance from origin"
     )
-
-    println("Distance from origin based on direct navigation: $distance")
-    println("Real distance from origin: $distanceWithWaypoint")
 }
 
 fun calculateManhattanDistance(
@@ -46,3 +38,20 @@ fun calculateManhattanDistance(
     originX: Int,
     originY: Int
 ) = abs(currentX - originX) + abs(currentY - originY)
+
+private fun displayDistance(
+    navigationSystem: NavigationSystem,
+    boatInitialPosition: Pair<Int, Int>,
+    messageLabel: String
+) {
+    navigationSystem.navigate(boatInitialPosition)
+
+    val distance = calculateManhattanDistance(
+        navigationSystem.currentPositionX,
+        navigationSystem.currentPositionY,
+        boatInitialPosition.first,
+        boatInitialPosition.second
+    )
+
+    println("$messageLabel: $distance")
+}

@@ -67,4 +67,16 @@ class DirectNavigationSystemTest {
         assertEquals(17, navigationalSystem.currentPositionX)
         assertEquals(-8, navigationalSystem.currentPositionY)
     }
+
+    @Test
+    fun `Should offset by (x to y) when receiving initial position`() {
+        val input = listOf("F10", "N3", "F7", "R90", "F11")
+            .map(::NavigationalInstruction)
+
+        val navigationalSystem = DirectNavigationSystem(input)
+        navigationalSystem.navigate(2 to 2)
+
+        assertEquals(19, navigationalSystem.currentPositionX)
+        assertEquals(-6, navigationalSystem.currentPositionY)
+    }
 }

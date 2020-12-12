@@ -72,4 +72,16 @@ class WaypointNavigationSystemTest {
         assertEquals(214, navigationalSystem.currentPositionX)
         assertEquals(-72, navigationalSystem.currentPositionY)
     }
+
+    @Test
+    fun `Should offset by (x to y) when receiving initial position`() {
+        val input = listOf("F10", "N3", "F7", "R90", "F11")
+            .map(::NavigationalInstruction)
+
+        val navigationalSystem = WaypointNavigationSystem(input, 10, 1)
+        navigationalSystem.navigate(3 to 4)
+
+        assertEquals(217, navigationalSystem.currentPositionX)
+        assertEquals(-68, navigationalSystem.currentPositionY)
+    }
 }

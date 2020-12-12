@@ -10,7 +10,10 @@ abstract class NavigationSystem(
     var currentPositionY = 0
         protected set
 
-    fun navigate() {
+    fun navigate(boatPosition: Pair<Int, Int> = 0 to 0) {
+        currentPositionX = boatPosition.first
+        currentPositionY = boatPosition.second
+
         instructions.forEach(::executeInstruction)
     }
 
