@@ -40,4 +40,24 @@ class FerryBoatWaypointNavigationalSystemTest {
             assertEquals(expectedWaypoint.second, navigationalSystem.waypointY)
         }
     }
+
+    @Test
+    fun `Should move forward x units towards waypoint`() {
+        listOf(
+            listOf("L90", "F32") to (-32 to 64),
+            listOf("L270", "F9") to (9 to -18),
+            listOf("R180", "F4") to (-8 to -4),
+            listOf("R360", "F50") to (100 to 50),
+        ).forEach { (instructionsString, expectedPosition) ->
+            val navigationalSystem = FerryBoatWaypointNavigationalSystem(
+                instructionsString.map(::NavigationalInstruction),
+                2,
+                1
+            )
+            navigationalSystem.navigate()
+
+            assertEquals(expectedPosition.first, navigationalSystem.currentPositionX)
+            assertEquals(expectedPosition.second, navigationalSystem.currentPositionY)
+        }
+    }
 }

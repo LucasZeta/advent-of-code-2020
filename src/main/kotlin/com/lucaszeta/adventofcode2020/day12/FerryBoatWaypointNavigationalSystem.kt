@@ -6,6 +6,12 @@ class FerryBoatWaypointNavigationalSystem(
     var waypointY: Int
 ) {
 
+    var currentPositionX = 0
+        private set
+
+    var currentPositionY = 0
+        private set
+
     fun navigate() {
         instructions.forEach(::executeInstruction)
     }
@@ -28,6 +34,12 @@ class FerryBoatWaypointNavigationalSystem(
                     val temporary = waypointX
                     waypointX = waypointY
                     waypointY = -temporary
+                }
+            }
+            Direction.FORWARD -> {
+                repeat(instruction.units) {
+                    currentPositionX += waypointX
+                    currentPositionY += waypointY
                 }
             }
         }
