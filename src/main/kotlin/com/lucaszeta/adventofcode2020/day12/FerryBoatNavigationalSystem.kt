@@ -10,10 +10,17 @@ class FerryBoatNavigationalSystem(
     var currentPositionY = 0
         private set
 
+    var currentDirection = Direction.EAST
+
+    val directionDegrees = listOf(
+        Direction.EAST to 0,
+        Direction.NORTH to 90,
+        Direction.WEST to 180,
+        Direction.SOUTH to 270,
+    )
+
     fun navigate() {
-        for (instruction in instructions) {
-            executeInstruction(instruction)
-        }
+        instructions.forEach(::executeInstruction)
     }
 
     fun executeInstruction(instruction: NavigationalInstruction) {
@@ -22,6 +29,27 @@ class FerryBoatNavigationalSystem(
             Direction.SOUTH -> currentPositionY -= instruction.units
             Direction.EAST -> currentPositionX += instruction.units
             Direction.WEST -> currentPositionX -= instruction.units
+            Direction.LEFT -> {
+                directionDegrees.find { it.first == currentDirection }?.let { (_, degrees) ->
+                    val newDegrees = (degrees + instruction.units).rem(360)
+
+                    directionDegrees.find { it.second == newDegrees }?.let { newDirection ->
+                        currentDirection = newDirection.first
+                    }
+                }
+            }
+            Direction.RIGHT -> {
+                directionDegrees.find { it.first == currentDirection }?.let { (_, degrees) ->
+                    var newDegrees = degrees - instruction.units
+                    if (newDegrees < 0) {
+                        newDegrees += 360
+                    }
+
+                    directionDegrees.find { it.second == newDegrees }?.let { newDirection ->
+                        currentDirection = newDirection.first
+                    }
+                }
+            }
         }
     }
 }

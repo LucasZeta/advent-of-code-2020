@@ -20,4 +20,21 @@ class FerryBoatNavigationalSystemTest {
         assertEquals(-4, navigationalSystem.currentPositionY)
         assertEquals(3, navigationalSystem.currentPositionX)
     }
+
+    @Test
+    fun `Should change direction of the boat`() {
+        listOf(
+            listOf("L90", "L180") to Direction.SOUTH,
+            listOf("R270") to Direction.NORTH,
+            listOf("L180", "L180") to Direction.EAST,
+            listOf("R270", "L90") to Direction.WEST,
+        ).forEach { (instructionsString, expectedDirection) ->
+            val navigationalSystem = FerryBoatNavigationalSystem(
+                instructionsString.map(::NavigationalInstruction)
+            )
+            navigationalSystem.navigate()
+
+            assertEquals(expectedDirection, navigationalSystem.currentDirection)
+        }
+    }
 }
