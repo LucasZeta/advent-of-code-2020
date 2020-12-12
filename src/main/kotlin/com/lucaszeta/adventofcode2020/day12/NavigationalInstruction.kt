@@ -12,11 +12,14 @@ data class NavigationalInstruction(
     )
 }
 
-enum class Direction(val key: String) {
-    NORTH("N"),
-    SOUTH("S"),
-    EAST("E"),
-    WEST("W"),
+enum class Direction(
+    val key: String,
+    val coordinates: Pair<Int, Int>? = null
+) {
+    NORTH("N", 0 to 1),
+    SOUTH("S", 0 to -1),
+    EAST("E", 1 to 0),
+    WEST("W", -1 to 0),
     LEFT("L"),
     RIGHT("R"),
     FORWARD("F");

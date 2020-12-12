@@ -50,6 +50,14 @@ class FerryBoatNavigationalSystem(
                     }
                 }
             }
+            Direction.FORWARD -> {
+                currentDirection.coordinates?.let { (x, y) ->
+                    repeat(instruction.units) {
+                        currentPositionX += x
+                        currentPositionY += y
+                    }
+                }
+            }
         }
     }
 }
