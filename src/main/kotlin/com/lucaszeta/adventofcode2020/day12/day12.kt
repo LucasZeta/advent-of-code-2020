@@ -10,7 +10,10 @@ fun main() {
         .map(::NavigationalInstruction)
 
     val navigationalSystem = FerryBoatNavigationalSystem(instructions)
+    val waypointNavigationalSystem = FerryBoatWaypointNavigationalSystem(instructions, 10, 1)
+
     navigationalSystem.navigate()
+    waypointNavigationalSystem.navigate()
 
     val distance = calculateManhattanDistance(
         navigationalSystem.currentPositionX,
@@ -19,7 +22,15 @@ fun main() {
         0
     )
 
+    val distanceWithWaypoint = calculateManhattanDistance(
+        waypointNavigationalSystem.currentPositionX,
+        waypointNavigationalSystem.currentPositionY,
+        0,
+        0
+    )
+
     println("Distance from origin: $distance")
+    println("Real distance from origin: $distanceWithWaypoint")
 }
 
 fun calculateManhattanDistance(
