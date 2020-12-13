@@ -16,28 +16,37 @@ fun main() {
 }
 
 fun calculateSequentialBusDepartures(buses: List<Bus>): Long {
-    val biggestBus = buses.maxByOrNull { it.id } ?: throw IllegalArgumentException("Invalid input")
-    var multiplier = 1
+    var earliestTimestamp = 0L
+    var accumulator = 0L
 
-    while (true) {
-        val timestamp = biggestBus.id * multiplier
-        var found = true
+    for ((index, bus) in buses.dropLast(1).withIndex()) {
+        var multiplier = 1
+        val nextBus = buses[index + 1]
 
-        for (otherBus in buses) {
-            if (otherBus == biggestBus) continue
+        while (true) {
+            val timestamp = if (index == 0) {
+                bus.id * multiplier
+            } else {
+                earliestTimestamp + accumulator * multiplier
+            }
 
-            if ((timestamp + otherBus.offset - biggestBus.offset).rem(otherBus.id) != 0L) {
-                found = false
+            if ((timestamp + nextBus.offset).rem(nextBus.id) == 0L) {
+                earliestTimestamp = timestamp
+
+                if (index < buses.size - 2) {
+                    accumulator = buses
+                        .slice(0..(index + 1))
+                        .map { it.id }
+                        .reduce(::leastCommonMultiplier)
+                }
                 break
             }
-        }
 
-        if (found) {
-            return timestamp - biggestBus.offset
+            multiplier++
         }
-
-        multiplier++
     }
+
+    return earliestTimestamp
 }
 
 fun calculateNearestBusArrival(busIds: List<Int>, earliestTimestamp: Int) = busIds
@@ -66,3 +75,18 @@ fun parseAllBusIdData(input: List<String>) = input.last()
         }
     }
     .filterNotNull()
+
+private fun leastCommonMultiplier(number1: Long, number2: Long): Long {
+    var a = number1
+    var b = number2
+
+    while (a != b) {
+        if (a > b) {
+            a -= b
+        } else {
+            b -= a
+        }
+    }
+
+    return number1 * number2 / a
+}
