@@ -44,16 +44,18 @@ class Day13KtTest {
     @Test
     fun `Should find sequential departure time`() {
         listOf(
-            listOf(7, 13, 1, 1, 59, 1, 31, 19) to 1068781L,
-            listOf(17, 1, 13, 19) to 3417L,
-            listOf(67, 7, 59, 61) to 754018L,
-            listOf(67, 1, 7, 59, 61) to 779210L,
-            listOf(67, 7, 1, 59, 61) to 1261476L,
-            listOf(1789, 37, 47, 1889) to 1202161486L
+            "939\n7,13,x,x,59,x,31,19" to 1068781L,
+            "0\n17,x,13,19" to 3417L,
+            "0\n67,7,59,61" to 754018L,
+            "0\n67,x,7,59,61" to 779210L,
+            "0\n67,7,x,59,61" to 1261476L,
+            "0\n1789,37,47,1889" to 1202161486L,
         ).forEach { (input, expectedOutput) ->
             assertEquals(
                 expectedOutput,
-                calculateSequentialBusDepartures(input.map { it.toLong() })
+                calculateSequentialBusDepartures(
+                    parseAllBusIdData(input.split("\n"))
+                )
             )
         }
     }

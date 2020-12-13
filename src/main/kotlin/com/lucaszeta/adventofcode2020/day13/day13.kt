@@ -15,27 +15,25 @@ fun main() {
     println("Multiplication: ${nearestBus.first * nearestBus.second}")
 }
 
-fun calculateSequentialBusDepartures(allBusIds: List<Long>): Long {
-    val biggestBusId = allBusIds.maxOrNull() ?: throw IllegalArgumentException("Invalid input")
-    val biggestBusIdIndex = allBusIds.indexOf(biggestBusId)
+fun calculateSequentialBusDepartures(buses: List<Bus>): Long {
+    val biggestBus = buses.maxByOrNull { it.id } ?: throw IllegalArgumentException("Invalid input")
     var multiplier = 1
 
     while (true) {
-        val timestamp = biggestBusId * multiplier
+        val timestamp = biggestBus.id * multiplier
         var found = true
 
-        for ((index, otherBusId) in allBusIds.withIndex()) {
-            if (otherBusId == 1L) continue
-            if (index == biggestBusIdIndex) continue
+        for (otherBus in buses) {
+            if (otherBus == biggestBus) continue
 
-            if ((timestamp + index - biggestBusIdIndex).rem(otherBusId) != 0L) {
+            if ((timestamp + otherBus.offset - biggestBus.offset).rem(otherBus.id) != 0L) {
                 found = false
                 break
             }
         }
 
         if (found) {
-            return timestamp - biggestBusIdIndex
+            return timestamp - biggestBus.offset
         }
 
         multiplier++
