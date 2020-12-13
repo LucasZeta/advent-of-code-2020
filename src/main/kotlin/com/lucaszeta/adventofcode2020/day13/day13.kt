@@ -20,18 +20,14 @@ fun main() {
 
 fun calculateSequentialBusDepartures(buses: List<Bus>): Long {
     var earliestTimestamp = 0L
-    var accumulator = 0L
+    var accumulator = buses.first().id
 
     for ((index, bus) in buses.dropLast(1).withIndex()) {
         var multiplier = 1
         val nextBus = buses[index + 1]
 
         while (true) {
-            val timestamp = if (index == 0) {
-                bus.id * multiplier
-            } else {
-                earliestTimestamp + accumulator * multiplier
-            }
+            val timestamp = earliestTimestamp + accumulator * multiplier
 
             if ((timestamp + nextBus.offset).rem(nextBus.id) == 0L) {
                 earliestTimestamp = timestamp
