@@ -16,24 +16,26 @@ fun main() {
 }
 
 fun calculateSequentialBusDepartures(allBusIds: List<Long>): Long {
-    val firstBusId = allBusIds.first()
+    val biggestBusId = allBusIds.maxOrNull() ?: throw IllegalArgumentException("Invalid input")
+    val biggestBusIdIndex = allBusIds.indexOf(biggestBusId)
     var multiplier = 1
 
     while (true) {
-        val timestamp = firstBusId * multiplier
+        val timestamp = biggestBusId * multiplier
         var found = true
 
-        for ((index, otherBusId) in allBusIds.drop(1).withIndex()) {
+        for ((index, otherBusId) in allBusIds.withIndex()) {
             if (otherBusId == 1L) continue
+            if (index == biggestBusIdIndex) continue
 
-            if ((timestamp + index + 1).rem(otherBusId) != 0L) {
+            if ((timestamp + index - biggestBusIdIndex).rem(otherBusId) != 0L) {
                 found = false
                 break
             }
         }
 
         if (found) {
-            return timestamp
+            return timestamp - biggestBusIdIndex
         }
 
         multiplier++
