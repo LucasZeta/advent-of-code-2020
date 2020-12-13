@@ -52,11 +52,10 @@ fun calculateSequentialBusDepartures(buses: List<Bus>): Long {
     return earliestTimestamp
 }
 
-fun calculateNearestBusArrival(busIds: List<Int>, earliestTimestamp: Int) = busIds
-    .map { busId ->
-        busId to busId - earliestTimestamp.rem(busId)
-    }
-    .minByOrNull { it.second } ?: throw IllegalArgumentException("Invalid input")
+fun calculateNearestBusArrival(buses: List<Bus>, earliestTimestamp: Int) = buses
+    .map { bus -> bus.id to bus.id - earliestTimestamp.rem(bus.id) }
+    .minByOrNull { it.second }
+    ?: throw IllegalArgumentException("Invalid input")
 
 fun parseBusData(input: List<String>) = input.run {
     val timestamp = first().toInt()
