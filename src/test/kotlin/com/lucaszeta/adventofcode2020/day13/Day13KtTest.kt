@@ -25,6 +25,23 @@ class Day13KtTest {
     }
 
     @Test
+    fun `Should parse all Bus data`() {
+        val input = listOf(
+            "939",
+            "7,13,x,x,59,x,31,19"
+        )
+        val expectedOutput = listOf(
+            Bus(7, 0),
+            Bus(13, 1),
+            Bus(59, 4),
+            Bus(31, 6),
+            Bus(19, 7)
+        )
+
+        assertEquals(expectedOutput, parseAllBusIdData(input))
+    }
+
+    @Test
     fun `Should find sequential departure time`() {
         listOf(
             listOf(7, 13, 1, 1, 59, 1, 31, 19) to 1068781L,

@@ -57,3 +57,14 @@ fun parseValidBusIdData(input: List<String>) = input.run {
 
     Pair(timestamp, busIds)
 }
+
+fun parseAllBusIdData(input: List<String>) = input.last()
+    .split(",")
+    .mapIndexed { index, stringValue ->
+        if (stringValue != "x") {
+            Bus(stringValue.toLong(), index)
+        } else {
+            null
+        }
+    }
+    .filterNotNull()
