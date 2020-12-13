@@ -6,31 +6,12 @@ import org.junit.jupiter.api.Test
 class Day13KtTest {
 
     @Test
-    fun `Should parse valid busIds data`() {
-        val input = listOf(
-            "939",
-            "7,13,x,x,59,x,31,19"
-        )
-        val expectedOutput = 939 to listOf(7, 13, 59, 31, 19)
-
-        assertEquals(expectedOutput, parseValidBusIdData(input))
-    }
-
-    @Test
-    fun `Should find nearest bus arrival`() {
-        val timestamp = 939
-        val busIds = listOf(7, 13, 59, 31, 19)
-
-        assertEquals(59 to 5, calculateNearestBusArrival(busIds, timestamp))
-    }
-
-    @Test
     fun `Should parse all Bus data`() {
         val input = listOf(
             "939",
             "7,13,x,x,59,x,31,19"
         )
-        val expectedOutput = listOf(
+        val expectedOutput = 939 to listOf(
             Bus(7, 0),
             Bus(13, 1),
             Bus(59, 4),
@@ -38,7 +19,7 @@ class Day13KtTest {
             Bus(19, 7)
         )
 
-        assertEquals(expectedOutput, parseAllBusIdData(input))
+        assertEquals(expectedOutput, parseBusData(input))
     }
 
     @Test

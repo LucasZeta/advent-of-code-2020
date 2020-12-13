@@ -58,26 +58,21 @@ fun calculateNearestBusArrival(busIds: List<Int>, earliestTimestamp: Int) = busI
     }
     .minByOrNull { it.second } ?: throw IllegalArgumentException("Invalid input")
 
-fun parseValidBusIdData(input: List<String>) = input.run {
+fun parseBusData(input: List<String>) = input.run {
     val timestamp = first().toInt()
-    val busIds = "(\\d+)".toRegex()
-        .findAll(last())
-        .map { it.groupValues[1].toInt() }
-        .toList()
-
-    Pair(timestamp, busIds)
-}
-
-fun parseAllBusIdData(input: List<String>) = input.last()
-    .split(",")
-    .mapIndexed { index, stringValue ->
-        if (stringValue != "x") {
-            Bus(stringValue.toLong(), index)
-        } else {
-            null
+    val buses = last()
+        .split(",")
+        .mapIndexed { index, stringValue ->
+            if (stringValue != "x") {
+                Bus(stringValue.toLong(), index)
+            } else {
+                null
+            }
         }
-    }
-    .filterNotNull()
+        .filterNotNull()
+
+    Pair(timestamp, buses)
+}
 
 private fun leastCommonMultiplier(number1: Long, number2: Long): Long {
     var a = number1
