@@ -23,4 +23,21 @@ class Day13KtTest {
 
         assertEquals(59 to 5, calculateNearestBusArrival(busIds, timestamp))
     }
+
+    @Test
+    fun `Should find sequential departure time`() {
+        listOf(
+            listOf(7, 13, 1, 1, 59, 1, 31, 19) to 1068781L,
+            listOf(17, 1, 13, 19) to 3417L,
+            listOf(67, 7, 59, 61) to 754018L,
+            listOf(67, 1, 7, 59, 61) to 779210L,
+            listOf(67, 7, 1, 59, 61) to 1261476L,
+            listOf(1789, 37, 47, 1889) to 1202161486L
+        ).forEach { (input, expectedOutput) ->
+            assertEquals(
+                expectedOutput,
+                calculateSequentialBusDepartures(input.map { it.toLong() })
+            )
+        }
+    }
 }

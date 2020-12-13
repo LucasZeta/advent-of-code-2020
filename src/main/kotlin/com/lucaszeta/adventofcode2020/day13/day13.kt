@@ -15,6 +15,31 @@ fun main() {
     println("Multiplication: ${nearestBus.first * nearestBus.second}")
 }
 
+fun calculateSequentialBusDepartures(allBusIds: List<Long>): Long {
+    val firstBusId = allBusIds.first()
+    var multiplier = 1
+
+    while (true) {
+        val timestamp = firstBusId * multiplier
+        var found = true
+
+        for ((index, otherBusId) in allBusIds.drop(1).withIndex()) {
+            if (otherBusId == 1L) continue
+
+            if ((timestamp + index + 1).rem(otherBusId) != 0L) {
+                found = false
+                break
+            }
+        }
+
+        if (found) {
+            return timestamp
+        }
+
+        multiplier++
+    }
+}
+
 fun calculateNearestBusArrival(busIds: List<Int>, earliestTimestamp: Int) = busIds
     .map { busId ->
         busId to busId - earliestTimestamp.rem(busId)
