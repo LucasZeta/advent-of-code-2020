@@ -21,7 +21,7 @@ fun countSeats(
         ferry.setNewOccupationRules()
     }
 
-    var previousSeatLayout = listOf<List<Char>>()
+    var previousSeatLayout: List<List<Char>>
 
     do {
         previousSeatLayout = ferry.seatLayout
