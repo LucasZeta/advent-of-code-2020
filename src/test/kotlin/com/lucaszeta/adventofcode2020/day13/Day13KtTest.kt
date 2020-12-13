@@ -6,13 +6,14 @@ import org.junit.jupiter.api.Test
 class Day13KtTest {
 
     @Test
-    fun `Should parse input data`() {
-        val input = "939\n" +
-            "7,13,x,x,59,x,31,19\n" +
-            ""
+    fun `Should parse valid busIds data`() {
+        val input = listOf(
+            "939",
+            "7,13,x,x,59,x,31,19"
+        )
         val expectedOutput = 939 to listOf(7, 13, 59, 31, 19)
 
-        assertEquals(expectedOutput, parseData(input))
+        assertEquals(expectedOutput, parseValidBusIdData(input))
     }
 
     @Test
