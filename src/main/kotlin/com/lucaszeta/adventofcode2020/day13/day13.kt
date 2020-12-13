@@ -22,7 +22,7 @@ fun calculateSequentialBusDepartures(buses: List<Bus>): Long {
     var earliestTimestamp = 0L
     var accumulator = buses.first().id
 
-    for ((index, bus) in buses.dropLast(1).withIndex()) {
+    for (index in 0 until buses.size - 1) {
         var multiplier = 1
         val nextBus = buses[index + 1]
 
