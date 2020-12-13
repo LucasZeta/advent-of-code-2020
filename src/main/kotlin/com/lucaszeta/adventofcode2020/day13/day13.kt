@@ -13,6 +13,9 @@ fun main() {
 
     println("Bus #${nearestBus.first} is going to arrive in ${nearestBus.second} minutes")
     println("Multiplication: ${nearestBus.first * nearestBus.second}")
+
+    val sequentialBusDeparture = calculateSequentialBusDepartures(parseAllBusIdData(input))
+    println("Earliest sequential bus departure: $sequentialBusDeparture")
 }
 
 fun calculateSequentialBusDepartures(buses: List<Bus>): Long {
