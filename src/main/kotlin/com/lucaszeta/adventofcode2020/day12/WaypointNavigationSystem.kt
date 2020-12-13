@@ -27,10 +27,8 @@ class WaypointNavigationSystem(
                 }
             }
             Direction.FORWARD -> {
-                repeat(instruction.units) {
-                    currentPositionX += waypointX
-                    currentPositionY += waypointY
-                }
+                currentPositionX += waypointX * instruction.units
+                currentPositionY += waypointY * instruction.units
             }
         }
     }
