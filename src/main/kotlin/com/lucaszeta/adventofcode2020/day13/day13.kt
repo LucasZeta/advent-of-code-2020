@@ -7,14 +7,14 @@ fun main() {
     val input = getResourceAsText("/day13/notes.txt")
         .split("\n")
         .filter { it.isNotEmpty() }
-    val (earliestTimestamp, busIds) = parseValidBusIdData(input)
+    val (earliestTimestamp, buses) = parseBusData(input)
 
-    val nearestBus = calculateNearestBusArrival(busIds, earliestTimestamp)
+    val nearestBus = calculateNearestBusArrival(buses, earliestTimestamp)
 
     println("Bus #${nearestBus.first} is going to arrive in ${nearestBus.second} minutes")
     println("Multiplication: ${nearestBus.first * nearestBus.second}")
 
-    val sequentialBusDeparture = calculateSequentialBusDepartures(parseAllBusIdData(input))
+    val sequentialBusDeparture = calculateSequentialBusDepartures(buses)
     println("Earliest sequential bus departure: $sequentialBusDeparture")
 }
 
