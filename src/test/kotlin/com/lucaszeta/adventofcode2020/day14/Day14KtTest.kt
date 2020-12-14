@@ -43,4 +43,18 @@ class Day14KtTest {
             assertNull(extractMask(it))
         }
     }
+
+    @Test
+    fun `Should apply mask to memory`() {
+        val bitmask = listOf(
+            "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X",
+            "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X",
+            "X", "X", "X", "1", "X", "X", "X", "X", "0", "X"
+        )
+        val memory1 = listOf("1", "0", "1", "1")
+        val memory2 = listOf("0")
+
+        assertEquals(73L, applyMask(bitmask, memory1))
+        assertEquals(64L, applyMask(bitmask, memory2))
+    }
 }
