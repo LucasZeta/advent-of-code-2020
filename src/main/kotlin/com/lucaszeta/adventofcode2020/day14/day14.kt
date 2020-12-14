@@ -1,6 +1,18 @@
 package com.lucaszeta.adventofcode2020.day14
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
 import kotlin.math.pow
+
+fun main() {
+    val input = getResourceAsText("/day14/initialization-program.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+
+    val resultMap = processInstructions(input)
+    val sumOfValuesInMemory = resultMap.map { it.value }.reduce(Long::plus)
+
+    println("Sum of all values left in memory: $sumOfValuesInMemory")
+}
 
 fun processInstructions(input: List<String>): MutableMap<Int, Long> {
     var bitmask = listOf<String>()
