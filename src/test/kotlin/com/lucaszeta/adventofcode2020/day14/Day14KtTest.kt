@@ -73,4 +73,18 @@ class Day14KtTest {
 
         assertEquals(expectedOutput, processInstructions(input))
     }
+
+    @Test
+    fun `Should fetch addresses`() {
+        val bitmask = listOf(
+            "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+            "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+            "0", "0", "X", "1", "0", "0", "1", "X"
+        )
+        val address = 42
+
+        val expectedOutput = listOf(26L, 27L, 58L, 59L)
+
+        assertEquals(expectedOutput, fetchAddressList(bitmask, address))
+    }
 }

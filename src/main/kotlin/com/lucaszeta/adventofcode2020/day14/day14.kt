@@ -67,6 +67,45 @@ fun extractMask(instruction: String): List<String>? {
     }
 }
 
+fun fetchAddressList(bitmask: List<String>, originAddress: Int): List<Long> {
+    val addresses = mutableListOf<Long>()
+    val binaryAddress = Integer.toBinaryString(originAddress)
+        .chunked(1)
+        .addLeadingZeros(bitmask.size)
+
+    val indicesToReplace = mutableListOf<Int>()
+
+    val maskApplied = mutableListOf<String>()
+        .apply {
+            bitmask.zip(binaryAddress).forEachIndexed { index, (mask, address) ->
+                add(when (mask) {
+                    "0" -> address
+                    "1" -> mask
+                    else -> {
+                        indicesToReplace.add(index)
+                        mask
+                    }
+                })
+            }
+        }
+
+    val possibilities = 2.0.pow(indicesToReplace.size).toInt()
+
+    for (number in 0 until possibilities) {
+        val bits = Integer.toBinaryString(number).chunked(1).addLeadingZeros(indicesToReplace.size)
+        val temp = maskApplied
+
+        bits.forEachIndexed { index, char ->
+            temp[indicesToReplace[index]] = char
+        }
+
+        addresses.add(temp.toList().fromBinaryToLong())
+
+    }
+
+    return addresses
+}
+
 private fun List<String>.addLeadingZeros(maximumSize: Int): List<String> {
     return toMutableList()
         .apply {
