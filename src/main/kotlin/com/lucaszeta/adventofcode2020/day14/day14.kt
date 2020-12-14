@@ -2,6 +2,25 @@ package com.lucaszeta.adventofcode2020.day14
 
 import kotlin.math.pow
 
+fun processInstructions(input: List<String>): MutableMap<Int, Long> {
+    var bitmask = listOf<String>()
+    val resultMap = mutableMapOf<Int, Long>()
+
+    for (instruction in input) {
+        extractMask(instruction)?.let {
+            bitmask = it
+        }
+
+        extractMemory(instruction)?.let { (address, value) ->
+            val maskApplied = applyMask(bitmask, value)
+
+            resultMap[address] = maskApplied
+        }
+    }
+
+    return resultMap
+}
+
 fun applyMask(bitmask: List<String>, value: List<String>): Long {
     val valueSameSizeAsMask = value.toMutableList()
         .apply {
