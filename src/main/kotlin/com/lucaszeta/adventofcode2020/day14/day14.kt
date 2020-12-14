@@ -14,9 +14,9 @@ fun main() {
     println("Sum of all values left in memory: $sumOfValuesInMemory")
 }
 
-fun processInstructions(input: List<String>): MutableMap<Int, Long> {
+fun processInstructions(input: List<String>): MutableMap<Long, Long> {
     var bitmask = listOf<String>()
-    val resultMap = mutableMapOf<Int, Long>()
+    val resultMap = mutableMapOf<Long, Long>()
 
     for (instruction in input) {
         extractMask(instruction)?.let {
@@ -26,7 +26,7 @@ fun processInstructions(input: List<String>): MutableMap<Int, Long> {
         extractMemory(instruction)?.let { (address, value) ->
             val maskApplied = applyMask(bitmask, value)
 
-            resultMap[address] = maskApplied
+            resultMap[address.toLong()] = maskApplied
         }
     }
 

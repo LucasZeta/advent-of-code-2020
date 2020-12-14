@@ -67,8 +67,8 @@ class Day14KtTest {
             "mem[8] = 0"
         )
         val expectedOutput = mapOf(
-            7 to 101L,
-            8 to 64L
+            7L to 101L,
+            8L to 64L
         )
 
         assertEquals(expectedOutput, processInstructions(input))
