@@ -24,4 +24,23 @@ class Day14KtTest {
 
         assertNull(extractMask(input))
     }
+
+    @Test
+    fun `Should extract memory from input`() {
+        val input = "mem[7] = 101"
+        val expectedOutput = 7 to listOf("1", "1", "0", "0", "1", "0", "1")
+
+        assertEquals(expectedOutput, extractMemory(input))
+    }
+
+    @Test
+    fun `Should not extract memory from invalid input`() {
+        listOf(
+            "mem[xx] = 101",
+            "invalidkey[7] = 101",
+            "mem[7] = invalidvalue"
+        ).forEach {
+            assertNull(extractMask(it))
+        }
+    }
 }
