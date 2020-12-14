@@ -34,13 +34,7 @@ fun processInstructions(input: List<String>): MutableMap<Int, Long> {
 }
 
 fun applyMask(bitmask: List<String>, value: List<String>): Long {
-    val valueSameSizeAsMask = value.toMutableList()
-        .apply {
-            while (size < bitmask.size) {
-                add(0, "0")
-            }
-        }
-        .toList()
+    val valueSameSizeAsMask = value.addLeadingZeros(bitmask.size)
 
     val binaryString = mutableListOf<String>()
         .apply {
@@ -71,6 +65,16 @@ fun extractMask(instruction: String): List<String>? {
     return maskResult?.let {
         it.groupValues[1].chunked(1)
     }
+}
+
+private fun List<String>.addLeadingZeros(maximumSize: Int): List<String> {
+    return toMutableList()
+        .apply {
+            while (size < maximumSize) {
+                add(0, "0")
+            }
+        }
+        .toList()
 }
 
 private fun List<String>.fromBinaryToLong(): Long {
