@@ -1,5 +1,7 @@
 package com.lucaszeta.adventofcode2020.day14
 
+import kotlin.math.pow
+
 fun extractMemory(instruction: String): Pair<Int, List<String>>? {
     val memoryResult = "mem\\[([0-9]*)] = ([0-9]*)".toRegex().matchEntire(instruction)
 
@@ -18,4 +20,12 @@ fun extractMask(instruction: String): List<String>? {
     return maskResult?.let {
         it.groupValues[1].chunked(1)
     }
+}
+
+private fun List<String>.fromBinaryToLong(): Long {
+    return map { it.toLong() }
+        .reversed()
+        .reduceIndexed { index, acc, bit ->
+            acc + bit * 2.0.pow(index).toLong()
+        }
 }
