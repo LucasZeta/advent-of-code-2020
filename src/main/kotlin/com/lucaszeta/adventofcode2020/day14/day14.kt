@@ -8,10 +8,15 @@ fun main() {
         .split("\n")
         .filter { it.isNotEmpty() }
 
-    val resultMap = processInstructions(input)
-    val sumOfValuesInMemory = resultMap.map { it.value }.reduce(Long::plus)
+    listOf(
+        ::processInstructions to "old decoder",
+        ::processInstructionsV2 to "v2 decoder"
+    ).forEach { (method, label) ->
+        val resultMap = method.invoke(input)
+        val sumOfValuesInMemory = resultMap.map { it.value }.reduce(Long::plus)
 
-    println("Sum of all values left in memory: $sumOfValuesInMemory")
+        println("Sum of all values left ($label): $sumOfValuesInMemory")
+    }
 }
 
 fun processInstructions(input: List<String>): MutableMap<Long, Long> {
