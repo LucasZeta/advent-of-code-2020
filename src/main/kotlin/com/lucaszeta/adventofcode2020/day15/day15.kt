@@ -1,5 +1,19 @@
 package com.lucaszeta.adventofcode2020.day15
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
+fun main() {
+    val numbers = getResourceAsText("/day15/starting-numbers.txt")
+        .split("\n")
+        .first { it.isNotEmpty() }
+        .split(",")
+        .map { it.toInt() }
+
+    val numberIn2020thIndex = findNthNumber(numbers, 2020)
+
+    println("2020th number spoken: $numberIn2020thIndex")
+}
+
 fun findNthNumber(numbers: List<Int>, listSize: Int): Int {
     val mutableList = numbers.toMutableList()
 
