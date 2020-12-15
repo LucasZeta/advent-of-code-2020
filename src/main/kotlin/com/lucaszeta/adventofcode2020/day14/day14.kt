@@ -116,14 +116,15 @@ fun fetchAddressList(bitmask: List<String>, originAddress: Int): List<Long> {
     val possibilities = 2.0.pow(indicesToReplace.size).toInt()
 
     for (number in 0 until possibilities) {
-        val bits = Integer.toBinaryString(number).chunked(1).addLeadingZeros(indicesToReplace.size)
-        val temp = maskApplied
+        val bits = Integer.toBinaryString(number)
+            .chunked(1)
+            .addLeadingZeros(indicesToReplace.size)
 
         bits.forEachIndexed { index, char ->
-            temp[indicesToReplace[index]] = char
+            maskApplied[indicesToReplace[index]] = char
         }
 
-        addresses.add(temp.toList().fromBinaryToLong())
+        addresses.add(maskApplied.toList().fromBinaryToLong())
     }
 
     return addresses
