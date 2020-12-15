@@ -97,21 +97,7 @@ fun fetchAddressList(bitmask: List<String>, originAddress: Int): List<Long> {
         .chunked(1)
         .addLeadingZeros(bitmask.size)
 
-    val indicesToReplace = mutableListOf<Int>()
-    val maskApplied = mutableListOf<String>()
-
-    bitmask.zip(binaryAddress).forEachIndexed { index, (mask, address) ->
-        val newBit = when (mask) {
-            "0" -> address
-            "1" -> mask
-            else -> {
-                indicesToReplace.add(index)
-                mask
-            }
-        }
-
-        maskApplied.add(newBit)
-    }
+    val (maskApplied, indicesToReplace) = applyMaskV2(bitmask, binaryAddress)
 
     val possibilities = 2.0.pow(indicesToReplace.size).toInt()
 
@@ -128,6 +114,29 @@ fun fetchAddressList(bitmask: List<String>, originAddress: Int): List<Long> {
     }
 
     return addresses
+}
+
+private fun applyMaskV2(
+    bitmask: List<String>,
+    binaryAddress: List<String>
+): Pair<MutableList<String>, List<Int>> {
+    val indicesToReplace = mutableListOf<Int>()
+    val maskApplied = mutableListOf<String>()
+
+    bitmask.zip(binaryAddress).forEachIndexed { index, (mask, address) ->
+        val newBit = when (mask) {
+            "0" -> address
+            "1" -> mask
+            else -> {
+                indicesToReplace.add(index)
+                mask
+            }
+        }
+
+        maskApplied.add(newBit)
+    }
+
+    return maskApplied to indicesToReplace.toList()
 }
 
 private fun List<String>.addLeadingZeros(maximumSize: Int): List<String> {
