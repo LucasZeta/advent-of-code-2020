@@ -33,6 +33,25 @@ fun processInstructions(input: List<String>): MutableMap<Long, Long> {
     return resultMap
 }
 
+fun processInstructionsV2(input: List<String>): MutableMap<Long, Long> {
+    var bitmask = listOf<String>()
+    val resultMap = mutableMapOf<Long, Long>()
+
+    for (instruction in input) {
+        extractMask(instruction)?.let {
+            bitmask = it
+        }
+
+        extractMemory(instruction)?.let { (address, value) ->
+            fetchAddressList(bitmask, address).forEach {
+                resultMap[it] = value.fromBinaryToLong()
+            }
+        }
+    }
+
+    return resultMap
+}
+
 fun applyMask(bitmask: List<String>, value: List<String>): Long {
     val valueSameSizeAsMask = value.addLeadingZeros(bitmask.size)
 

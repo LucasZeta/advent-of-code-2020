@@ -87,4 +87,28 @@ class Day14KtTest {
 
         assertEquals(expectedOutput, fetchAddressList(bitmask, address))
     }
+
+    @Test
+    fun `Should process all instructions with V2 decoder`() {
+        val input = listOf(
+            "mask = 000000000000000000000000000000X1001X",
+            "mem[42] = 100",
+            "mask = 00000000000000000000000000000000X0XX",
+            "mem[26] = 1"
+        )
+        val expectedOutput = mapOf(
+            26L to 1L,
+            27L to 1L,
+            58L to 100L,
+            59L to 100L,
+            16L to 1L,
+            17L to 1L,
+            18L to 1L,
+            19L to 1L,
+            24L to 1L,
+            25L to 1L
+        )
+
+        assertEquals(expectedOutput, processInstructionsV2(input))
+    }
 }
