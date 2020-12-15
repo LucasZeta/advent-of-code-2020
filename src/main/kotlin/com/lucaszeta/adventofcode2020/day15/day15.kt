@@ -1,5 +1,16 @@
 package com.lucaszeta.adventofcode2020.day15
 
+fun findNthNumber(numbers: List<Int>, listSize: Int): Int {
+    val mutableList = numbers.toMutableList()
+
+    while (mutableList.size < listSize) {
+        val nextNumber = nextNumber(mutableList)
+        mutableList.add(nextNumber)
+    }
+
+    return mutableList.last()
+}
+
 fun nextNumber(numbers: List<Int>): Int {
     val mostRecentNumber = numbers.last()
 

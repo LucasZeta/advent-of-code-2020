@@ -18,4 +18,21 @@ class Day15KtTest {
 
         assertEquals(3, nextNumber(input))
     }
+
+    @Test
+    fun `Should iterate until nth number is found`() {
+        listOf(
+            listOf(1, 3, 2) to 1,
+            listOf(2, 1, 3) to 10,
+            listOf(1, 2, 3) to 27,
+            listOf(2, 3, 1) to 78,
+            listOf(3, 2, 1) to 438,
+            listOf(3, 1, 2) to 1836
+        ).forEach { (input, expectedOutput) ->
+            assertEquals(
+                expectedOutput,
+                findNthNumber(input.toMutableList(), 2020)
+            )
+        }
+    }
 }
