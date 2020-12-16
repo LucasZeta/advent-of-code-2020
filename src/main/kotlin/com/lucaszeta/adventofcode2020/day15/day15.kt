@@ -15,28 +15,29 @@ fun main() {
 }
 
 fun findNthNumber(numbers: List<Int>, listSize: Int): Int {
-    val mutableList = numbers.toMutableList()
-
-    while (mutableList.size < listSize) {
-        val nextNumber = nextNumber(mutableList)
-        mutableList.add(nextNumber)
+    val mutableMap = mutableMapOf<Int, MutableList<Int>>()
+    numbers.forEachIndexed { index, i ->
+        mutableMap[i] = mutableListOf(index + 1)
     }
 
-    return mutableList.last()
-}
+    var currentNumber = numbers.last()
 
-fun nextNumber(numbers: List<Int>): Int {
-    val mostRecentNumber = numbers.last()
+    for (index in (numbers.size + 1)..listSize) {
+        if (mutableMap.containsKey(currentNumber) &&
+                mutableMap.getValue(currentNumber).size > 1) {
+            val indexes = mutableMap.getValue(currentNumber)
 
-    return if (numbers.count { it == mostRecentNumber } == 1) {
-        0
-    } else {
-        val lastIndex = numbers.lastIndexOf(mostRecentNumber)
-        val indexBefore = numbers
-            .toMutableList()
-            .apply { removeAt(lastIndex) }
-            .lastIndexOf(mostRecentNumber)
+            currentNumber = indexes[indexes.size - 1] - indexes[indexes.size - 2]
+        } else {
+            currentNumber = 0
+        }
 
-        (lastIndex + 1) - (indexBefore + 1)
+        if (mutableMap.containsKey(currentNumber)) {
+            mutableMap[currentNumber]?.add(index)
+        } else {
+            mutableMap[currentNumber] = mutableListOf(index)
+        }
     }
+
+    return currentNumber
 }
