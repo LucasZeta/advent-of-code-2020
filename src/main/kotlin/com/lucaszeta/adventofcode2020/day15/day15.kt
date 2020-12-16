@@ -10,8 +10,10 @@ fun main() {
         .map { it.toInt() }
 
     val numberIn2020thIndex = findNthNumber(numbers, 2020)
-
     println("2020th number spoken: $numberIn2020thIndex")
+
+    val numberIn30000000thIndex = findNthNumber(numbers, 30000000)
+    println("30000000th number spoken: $numberIn30000000thIndex")
 }
 
 fun findNthNumber(numbers: List<Int>, listSize: Int): Int {
