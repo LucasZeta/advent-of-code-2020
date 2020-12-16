@@ -7,6 +7,20 @@ fun extractYourTicket(input: String): List<Int> {
     return lines[index + 1].split(",").map { it.toInt() }
 }
 
+fun extractNearbyTickets(input: String): List<List<Int>> {
+    val lines = input.split("\n")
+    val index = lines.indexOf("nearby tickets:")
+    val nearbyTickets = mutableListOf<List<Int>>()
+
+    for (i in (index + 1) until lines.size) {
+        if (lines[i].isNotEmpty()) {
+            nearbyTickets.add(lines[i].split(",").map { it.toInt() })
+        }
+    }
+
+    return nearbyTickets.toList()
+}
+
 fun extractTicketFields(input: String): Map<String, List<IntRange>> {
     val ticketFieldResult = "([a-z ]*): (\\d+)-(\\d+) or (\\d+)-(\\d+)"
         .toRegex()
