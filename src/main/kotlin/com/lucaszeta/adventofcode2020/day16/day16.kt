@@ -1,5 +1,12 @@
 package com.lucaszeta.adventofcode2020.day16
 
+fun extractYourTicket(input: String): List<Int> {
+    val lines = input.split("\n")
+    val index = lines.indexOf("your ticket:")
+
+    return lines[index + 1].split(",").map { it.toInt() }
+}
+
 fun extractTicketFields(input: String): Map<String, List<IntRange>> {
     val ticketFieldResult = "([a-z ]*): (\\d+)-(\\d+) or (\\d+)-(\\d+)"
         .toRegex()
