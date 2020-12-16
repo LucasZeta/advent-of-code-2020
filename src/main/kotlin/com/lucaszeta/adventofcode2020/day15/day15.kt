@@ -26,7 +26,8 @@ fun findNthNumber(numbers: List<Int>, listSize: Int): Int {
 
     for (index in (numbers.size + 1)..listSize) {
         if (mutableMap.containsKey(currentNumber) &&
-                mutableMap.getValue(currentNumber).size > 1) {
+            mutableMap.getValue(currentNumber).size > 1
+        ) {
 
             if (mutableMap.getValue(currentNumber).size > 2) {
                 mutableMap.getValue(currentNumber).removeAt(0)
