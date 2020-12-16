@@ -1,5 +1,19 @@
 package com.lucaszeta.adventofcode2020.day16
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
+fun main() {
+    val input = getResourceAsText("/day16/ticket-notes.txt")
+
+    val ticketFields = extractTicketFields(input)
+    val myTicket = extractYourTicket(input)
+    val nearbyTickets = extractNearbyTickets(input)
+
+    val invalidValues = findInvalidFields(nearbyTickets, ticketFields)
+
+    println("Ticket scanning error rate: ${invalidValues.reduce(Int::plus)}")
+}
+
 fun findInvalidFields(
     nearbyTickets: List<List<Int>>,
     ticketFields: Map<String, List<IntRange>>
