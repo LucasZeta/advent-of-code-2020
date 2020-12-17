@@ -33,6 +33,23 @@ fun findInvalidFields(
     return invalidValues.toList()
 }
 
+fun filterValidTickets(
+    nearbyTickets: List<List<Int>>,
+    ticketFields: Map<String, List<IntRange>>
+) = nearbyTickets.filter { nearbyTicket ->
+    for (value in nearbyTicket) {
+        val valid = ticketFields.any {
+            value in it.value.first() || value in it.value.last()
+        }
+
+        if (!valid) {
+            return@filter false
+        }
+    }
+
+    return@filter true
+}
+
 fun extractYourTicket(input: String): List<Int> {
     val lines = input.split("\n")
     val index = lines.indexOf("your ticket:")
