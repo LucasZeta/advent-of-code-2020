@@ -47,24 +47,26 @@ private fun findPossibleIndexesForFields(
     ticketFields: Map<String, List<IntRange>>
 ): MutableMap<String, MutableSet<Int>> {
     val possibilities = mutableMapOf<String, MutableSet<Int>>()
-    val breadth = nearbyTickets.first().size
 
     for (ticketField in ticketFields) {
-        var possibleIndexes = (0 until breadth).toSet()
+        val possibleIndexes = nearbyTickets
+            .map { nearbyTicket ->
+                val matchingIndexes = mutableSetOf<Int>()
 
-        for (nearbyTicket in nearbyTickets) {
-            val matchingIndexes = mutableSetOf<Int>()
-
-            nearbyTicket.forEachIndexed { index, value ->
-                if (value in ticketField.value.first() || value in ticketField.value.last()) {
-                    matchingIndexes.add(index)
+                nearbyTicket.forEachIndexed { index, value ->
+                    if (value in ticketField.value.first() || value in ticketField.value.last()) {
+                        matchingIndexes.add(index)
+                    }
                 }
+
+                return@map matchingIndexes
+            }
+            .filterNot { it.isEmpty() }
+            .reduce { accumulator, currentIndexes ->
+                accumulator.intersect(currentIndexes).toMutableSet()
             }
 
-            possibleIndexes = possibleIndexes.intersect(matchingIndexes)
-        }
-
-        possibilities[ticketField.key] = possibleIndexes.toMutableSet()
+        possibilities[ticketField.key] = possibleIndexes
     }
 
     return possibilities
