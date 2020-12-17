@@ -6,12 +6,22 @@ fun main() {
     val input = getResourceAsText("/day16/ticket-notes.txt")
 
     val ticketFields = extractTicketFields(input)
-    val myTicket = extractYourTicket(input)
     val nearbyTickets = extractNearbyTickets(input)
 
     val invalidValues = findInvalidFields(nearbyTickets, ticketFields)
 
     println("Ticket scanning error rate: ${invalidValues.reduce(Int::plus)}")
+
+    val myTicket = extractYourTicket(input)
+    val validTickets = filterValidTickets(nearbyTickets, ticketFields)
+    val fieldsIndex = identifyFieldIndex(validTickets, ticketFields)
+
+    val result = fieldsIndex
+        .filterKeys { it.startsWith("departure") }
+        .map { myTicket[it.value].toLong() }
+        .reduce(Long::times)
+
+    println("Product of departure fields: $result")
 }
 
 fun identifyFieldIndex(
