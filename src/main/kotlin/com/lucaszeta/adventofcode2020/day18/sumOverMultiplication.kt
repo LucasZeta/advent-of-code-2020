@@ -25,6 +25,17 @@ fun evaluateAdvancedMathExpression(expression: String): Long {
     val operatorPrecedence = listOf(
         "\\((\\d+) \\+ (\\d+)\\)".toRegex() to sum,
         "(\\d+) \\+ (\\d+)".toRegex() to sum,
+        "\\((\\d+) \\* (\\d+)( [^()]+)\\)".toRegex() to { matchResult ->
+            val (_, operand1, operand2, restOfExpression) = matchResult.groupValues
+
+            val result = operand1.toLong() * operand2.toLong()
+
+            if (restOfExpression.isNotEmpty()) {
+                "($result$restOfExpression)"
+            } else {
+                "$result"
+            }
+        },
         "\\((\\d+) \\* (\\d+)\\)".toRegex() to multiplication,
         "(\\d+) \\* (\\d+)".toRegex() to multiplication
     )

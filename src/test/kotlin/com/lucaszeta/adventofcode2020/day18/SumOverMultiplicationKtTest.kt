@@ -11,6 +11,11 @@ class SumOverMultiplicationKtTest {
     }
 
     @Test
+    fun `Should not multiply while there's still a sum to be made`() {
+        assertEquals(12L, evaluateAdvancedMathExpression("3 * 3 + (1 * 1 * 1)"))
+    }
+
+    @Test
     fun `Should evaluate sample data based on Advanced Math rules`() {
         listOf(
             "2 * 3 + (4 * 5)" to 46L,
