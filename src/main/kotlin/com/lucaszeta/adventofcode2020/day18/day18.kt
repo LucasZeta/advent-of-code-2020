@@ -43,6 +43,49 @@ fun evaluateExpression(expression: String): Long {
     return line.toLong()
 }
 
+fun evaluateAdvancedMathExpression(expression: String): Long {
+    var line = "($expression)"
+
+    val sumAndReturnString: (MatchResult) -> CharSequence = {
+        val (_, operand1, operand2) = it.groupValues
+        val result = operand1.toLong() + operand2.toLong()
+
+        "$result"
+    }
+
+    val multiplyAndReturnString: (MatchResult) -> CharSequence = {
+        val (_, operand1, operand2) = it.groupValues
+        val result = operand1.toLong() * operand2.toLong()
+
+        "$result"
+    }
+
+    val operatorPrecedence = listOf(
+        "\\((\\d+) \\+ (\\d+)\\)".toRegex() to sumAndReturnString,
+        "(\\d+) \\+ (\\d+)".toRegex() to sumAndReturnString,
+        "\\((\\d+) \\* (\\d+)\\)".toRegex() to multiplyAndReturnString,
+        "(\\d+) \\* (\\d+)".toRegex() to multiplyAndReturnString
+    )
+
+    var didAnyOperation: Boolean
+
+    do {
+        didAnyOperation = false
+
+        for (precedence in operatorPrecedence) {
+            val (pattern, operation) = precedence
+
+            if (pattern.containsMatchIn(line)) {
+                line = pattern.replace(line, operation)
+                didAnyOperation = true
+                break
+            }
+        }
+    } while (didAnyOperation)
+
+    return line.toLong()
+}
+
 private fun calculateMatchResult(matchResult: MatchResult): Long {
     val (_, operand1, operatorKey, operand2) = matchResult.groupValues
 
