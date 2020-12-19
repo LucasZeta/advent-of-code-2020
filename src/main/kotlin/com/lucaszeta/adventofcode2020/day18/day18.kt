@@ -20,8 +20,10 @@ fun evaluateExpression(expression: String): Long {
     val closedEvaluationPattern = "\\((\\d+) ([+*]) (\\d+)\\)".toRegex()
     val openEvaluationPattern = "\\((\\d+) ([+*]) (\\d+)".toRegex()
 
-    while (closedEvaluationPattern.containsMatchIn(line) ||
-        (openEvaluationPattern.containsMatchIn(line))) {
+    while (
+        closedEvaluationPattern.containsMatchIn(line) ||
+        openEvaluationPattern.containsMatchIn(line)
+    ) {
 
         while (closedEvaluationPattern.containsMatchIn(line)) {
             line = closedEvaluationPattern.replace(line) {
