@@ -46,25 +46,30 @@ fun evaluateExpression(expression: String): Long {
 fun evaluateAdvancedMathExpression(expression: String): Long {
     var line = "($expression)"
 
-    val sumAndReturnString: (MatchResult) -> CharSequence = {
-        val (_, operand1, operand2) = it.groupValues
-        val result = operand1.toLong() + operand2.toLong()
+    val doOperationAndReturnString: (
+        MatchResult,
+        (Long, Long) -> Long
+    ) -> CharSequence = { matchResult, operation ->
+        val (_, operand1, operand2) = matchResult.groupValues
+
+        val result = operation(operand1.toLong(), operand2.toLong())
 
         "$result"
     }
 
-    val multiplyAndReturnString: (MatchResult) -> CharSequence = {
-        val (_, operand1, operand2) = it.groupValues
-        val result = operand1.toLong() * operand2.toLong()
+    val sum: (MatchResult) -> CharSequence = {
+        doOperationAndReturnString(it, Long::plus)
+    }
 
-        "$result"
+    val multiplication: (MatchResult) -> CharSequence = {
+        doOperationAndReturnString(it, Long::times)
     }
 
     val operatorPrecedence = listOf(
-        "\\((\\d+) \\+ (\\d+)\\)".toRegex() to sumAndReturnString,
-        "(\\d+) \\+ (\\d+)".toRegex() to sumAndReturnString,
-        "\\((\\d+) \\* (\\d+)\\)".toRegex() to multiplyAndReturnString,
-        "(\\d+) \\* (\\d+)".toRegex() to multiplyAndReturnString
+        "\\((\\d+) \\+ (\\d+)\\)".toRegex() to sum,
+        "(\\d+) \\+ (\\d+)".toRegex() to sum,
+        "\\((\\d+) \\* (\\d+)\\)".toRegex() to multiplication,
+        "(\\d+) \\* (\\d+)".toRegex() to multiplication
     )
 
     var didAnyOperation: Boolean
