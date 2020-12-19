@@ -1,6 +1,6 @@
 package com.lucaszeta.adventofcode2020.day18
 
-fun evaluateExpression(expression: String): Int {
+fun evaluateExpression(expression: String): Long {
     var line = "($expression)"
 
     val closedEvaluationPattern = "\\((\\d+) ([+*]) (\\d+)\\)".toRegex()
@@ -24,16 +24,16 @@ fun evaluateExpression(expression: String): Int {
         }
     }
 
-    return line.toInt()
+    return line.toLong()
 }
 
-private fun calculateMatchResult(matchResult: MatchResult): Int {
+private fun calculateMatchResult(matchResult: MatchResult): Long {
     val (_, operand1, operatorKey, operand2) = matchResult.groupValues
 
-    val operation: (Int, Int) -> Int = if (operatorKey == "+") Int::plus else Int::times
+    val operation: (Long, Long) -> Long = if (operatorKey == "+") Long::plus else Long::times
 
     return operation.invoke(
-        operand1.toInt(),
-        operand2.toInt()
+        operand1.toLong(),
+        operand2.toLong()
     )
 }
