@@ -1,44 +1,39 @@
 package com.lucaszeta.adventofcode2020.day18
 
 fun evaluateExpression(expression: String): Int {
-    var operand1 = 0
-    var operand2 = 0
-    var operator: ((Int, Int) -> Int)? = null
+    var line = "($expression)"
 
-    val numbersPattern = "(\\d+)".toRegex()
+    val closedEvaluationPattern = "\\((\\d+) ([+*]) (\\d+)\\)".toRegex()
+    val openEvaluationPattern = "\\((\\d+) ([+*]) (\\d+)".toRegex()
 
-    expression.chunked(1).forEachIndexed { index, instruction ->
-        var newDigit = 0
+    while (closedEvaluationPattern.containsMatchIn(line) ||
+        (openEvaluationPattern.containsMatchIn(line))) {
 
-        when (instruction) {
-            "+" -> operator = Int::plus
-            "*" -> operator = Int::times
-            "(" -> newDigit = evaluateExpression(expression.drop(index + 1))
-            ")" -> return operand1
-            else -> {
-                if (numbersPattern.matches(instruction)) {
-                    newDigit = instruction.toInt()
-                }
+        while (closedEvaluationPattern.containsMatchIn(line)) {
+            line = closedEvaluationPattern.replace(line) {
+                val innerResult = calculateMatchResult(it)
+
+                return@replace "$innerResult"
             }
         }
 
-        if (newDigit > 0) {
-            if (operand1 == 0) {
-                operand1 = instruction.toInt()
-            } else {
-                operand2 = instruction.toInt()
-            }
-        }
+        line = openEvaluationPattern.replace(line) {
+            val innerResult = calculateMatchResult(it)
 
-        if (operand1 > 0 && operator != null && operand2 > 0) {
-            operator?.let {
-                operand1 = it.invoke(operand1, operand2)
-            }
-
-            operator = null
-            operand2 = 0
+            return@replace "($innerResult"
         }
     }
 
-    return operand1
+    return line.toInt()
+}
+
+private fun calculateMatchResult(matchResult: MatchResult): Int {
+    val (_, operand1, operatorKey, operand2) = matchResult.groupValues
+
+    val operation: (Int, Int) -> Int = if (operatorKey == "+") Int::plus else Int::times
+
+    return operation.invoke(
+        operand1.toInt(),
+        operand2.toInt()
+    )
 }

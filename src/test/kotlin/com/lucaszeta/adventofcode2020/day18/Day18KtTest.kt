@@ -7,6 +7,11 @@ class Day18KtTest {
 
     @Test
     fun `Should evaluate expression from left to right`() {
-        assertEquals(71, evaluateExpression("1+2*3+4*5+6"))
+        assertEquals(71, evaluateExpression("1 + 2 * 3 + 4 * 5 + 6"))
+    }
+
+    @Test
+    fun `Should evaluate expression considering parenthesis`() {
+        assertEquals(51, evaluateExpression("1 + (2 * 3) + (4 * (5 + 6))"))
     }
 }
