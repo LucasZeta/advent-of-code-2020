@@ -6,6 +6,16 @@ import org.junit.jupiter.api.Test
 class Day15KtTest {
 
     @Test
+    fun `Should have 0 as next number when last number is unique on the list`() {
+        assertEquals(0, findNthNumber(mutableListOf(1, 3, 2), 4))
+    }
+
+    @Test
+    fun `Should have sum of indices when last number is previously known`() {
+        assertEquals(4 - 2, findNthNumber(mutableListOf(1, 3, 2, 3), 5))
+    }
+
+    @Test
     fun `Should iterate until nth number is found`() {
         listOf(
             listOf(1, 3, 2) to 1,

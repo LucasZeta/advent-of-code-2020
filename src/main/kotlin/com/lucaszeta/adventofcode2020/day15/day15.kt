@@ -19,7 +19,11 @@ fun main() {
 fun findNthNumber(numbers: List<Int>, listSize: Int): Int {
     val mutableMap = mutableMapOf<Int, MutableList<Int>>()
     numbers.forEachIndexed { index, i ->
-        mutableMap[i] = mutableListOf(index + 1)
+        if (mutableMap.containsKey(i)) {
+            mutableMap[i]?.add(index + 1)
+        } else {
+            mutableMap[i] = mutableListOf(index + 1)
+        }
     }
 
     var currentNumber = numbers.last()
