@@ -7,11 +7,17 @@ fun main() {
         .split("\n")
         .filter { it.isNotEmpty() }
 
-    val sum = expressions
+    val fromLeftToRightResult = expressions
         .map(::evaluateExpression)
         .reduce(Long::plus)
 
-    println("Sum of resulting values: $sum")
+    println("Sum of resulting values considering left > right: $fromLeftToRightResult")
+
+    val sumOverMultiplicationResult = expressions
+        .map(::evaluateAdvancedMathExpression)
+        .reduce(Long::plus)
+
+    println("Sum of resulting values considering + > *: $sumOverMultiplicationResult")
 }
 
 fun evaluateExpression(expression: String): Long {
