@@ -38,4 +38,17 @@ class Day20KtTest {
 
         assertEquals(expectedOutput, findSafeIngredients(foodList, riskyIngredients))
     }
+
+    @Test
+    fun `Should determine which risky ingredients are the dangerous ones`() {
+        val riskyIngredients =  mapOf(
+            "dairy" to mutableSetOf("mxmxvkd"),
+            "fish" to mutableSetOf("mxmxvkd", "sqjhc"),
+            "soy" to mutableSetOf("sqjhc", "fvjkl")
+        )
+
+        val expectedOutput = listOf("mxmxvkd", "sqjhc", "fvjkl")
+
+        assertEquals(expectedOutput, findDangerousIngredients(riskyIngredients))
+    }
 }

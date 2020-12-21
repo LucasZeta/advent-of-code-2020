@@ -16,6 +16,30 @@ fun main() {
     println("Safe ingredients count: ${safeIngredients.size}")
 }
 
+fun findDangerousIngredients(riskyIngredients: Map<String, MutableSet<String>>): List<String> {
+    val ingredients = riskyIngredients.toMutableMap()
+    val dangerousList = mutableMapOf<String, String>()
+
+    while (dangerousList.size < ingredients.keys.size) {
+        ingredients
+            .filter { it.value.size == 1 }
+            .forEach { (allergen, ingredient) ->
+                val dangerousIngredient = ingredient.first()
+
+                dangerousList[allergen] = dangerousIngredient
+
+                ingredients.forEach {
+                    it.value.remove(dangerousIngredient)
+                }
+            }
+    }
+
+    return dangerousList
+        .toList()
+        .sortedBy { it.first }
+        .map { it.second }
+}
+
 fun findRiskyIngredients(foodList: List<Food>): Map<String, MutableSet<String>> {
     val riskyIngredients = mutableMapOf<String, MutableSet<String>>()
 
