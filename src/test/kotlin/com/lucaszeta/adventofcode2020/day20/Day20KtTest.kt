@@ -41,7 +41,7 @@ class Day20KtTest {
 
     @Test
     fun `Should determine which risky ingredients are the dangerous ones`() {
-        val riskyIngredients =  mapOf(
+        val riskyIngredients = mapOf(
             "dairy" to mutableSetOf("mxmxvkd"),
             "fish" to mutableSetOf("mxmxvkd", "sqjhc"),
             "soy" to mutableSetOf("sqjhc", "fvjkl")

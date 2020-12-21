@@ -9,11 +9,19 @@ fun main() {
         .map(::Food)
 
     val riskyIngredients = findRiskyIngredients(foodList)
-    val riskyIngredientsName = riskyIngredients.flatMap { it.value }.toSet()
 
+    val riskyIngredientsName = riskyIngredients.flatMap { it.value }.toSet()
     val safeIngredients = findSafeIngredients(foodList, riskyIngredientsName)
 
     println("Safe ingredients count: ${safeIngredients.size}")
+
+    val dangerousIngredients = findDangerousIngredients(riskyIngredients)
+
+    println(
+        "Canonical dangerous ingredient list: %s".format(
+            dangerousIngredients.joinToString(",")
+        )
+    )
 }
 
 fun findDangerousIngredients(riskyIngredients: Map<String, MutableSet<String>>): List<String> {
