@@ -7,7 +7,7 @@ class Food(input: String) {
 
     init {
         val (ingredientList, allergenList) = input.split(SEPARATOR)
-        
+
         ingredients = INGREDIENTS_PATTERN
             .findAll(ingredientList)
             .map { it.groupValues[1] }
