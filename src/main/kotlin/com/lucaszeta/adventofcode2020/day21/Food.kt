@@ -8,16 +8,14 @@ class Food(input: String) {
     init {
         val (ingredientList, allergenList) = input.split(SEPARATOR)
 
-        ingredients = INGREDIENTS_PATTERN
-            .findAll(ingredientList)
-            .map { it.groupValues[1] }
-            .toList()
-
-        allergens = ALLERGENS_PATTERN
-            .findAll(allergenList)
-            .map { it.groupValues[1] }
-            .toList()
+        ingredients = fetchContentsFromString(INGREDIENTS_PATTERN, ingredientList)
+        allergens = fetchContentsFromString(ALLERGENS_PATTERN, allergenList)
     }
+
+    private fun fetchContentsFromString(pattern: Regex, text: String) = pattern
+        .findAll(text)
+        .map { it.groupValues[1] }
+        .toList()
 
     companion object {
         val INGREDIENTS_PATTERN = "([a-z]+)".toRegex()
