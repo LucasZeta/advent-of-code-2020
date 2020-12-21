@@ -9,12 +9,14 @@ fun main() {
         .map(::Food)
 
     val riskyIngredients = findRiskyIngredients(foodList)
-    val safeIngredients = findSafeIngredients(foodList, riskyIngredients)
+    val riskyIngredientsName = riskyIngredients.flatMap { it.value }.toSet()
+
+    val safeIngredients = findSafeIngredients(foodList, riskyIngredientsName)
 
     println("Safe ingredients count: ${safeIngredients.size}")
 }
 
-fun findRiskyIngredients(foodList: List<Food>): Set<String> {
+fun findRiskyIngredients(foodList: List<Food>): Map<String, MutableSet<String>> {
     val riskyIngredients = mutableMapOf<String, MutableSet<String>>()
 
     for (food in foodList) {
@@ -31,7 +33,7 @@ fun findRiskyIngredients(foodList: List<Food>): Set<String> {
         }
     }
 
-    return riskyIngredients.flatMap { it.value }.toSet()
+    return riskyIngredients.toMap()
 }
 
 fun findSafeIngredients(

@@ -14,7 +14,11 @@ class Day20KtTest {
             "sqjhc mxmxvkd sbzzf (contains fish)"
         ).map(::Food)
 
-        val expectedOutput = setOf("mxmxvkd", "sqjhc", "fvjkl")
+        val expectedOutput = mapOf(
+            "dairy" to setOf("mxmxvkd"),
+            "fish" to setOf("mxmxvkd", "sqjhc"),
+            "soy" to setOf("sqjhc", "fvjkl")
+        )
 
         assertEquals(expectedOutput, findRiskyIngredients(input))
     }
