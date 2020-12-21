@@ -1,4 +1,4 @@
-package com.lucaszeta.adventofcode2020.day20
+package com.lucaszeta.adventofcode2020.day21
 
 class Food(input: String) {
 

@@ -1,9 +1,9 @@
-package com.lucaszeta.adventofcode2020.day20
+package com.lucaszeta.adventofcode2020.day21
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class Day20KtTest {
+class Day21KtTest {
 
     @Test
     fun `Should find ingredients that appear in allergen list`() {
