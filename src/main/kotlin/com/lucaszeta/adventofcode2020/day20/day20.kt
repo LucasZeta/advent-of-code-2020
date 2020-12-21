@@ -19,3 +19,10 @@ fun findRiskyIngredients(foodList: List<Food>): Set<String> {
 
     return riskyIngredients.flatMap { it.value }.toSet()
 }
+
+fun findSafeIngredients(
+    foodList: List<Food>,
+    riskyIngredients: Set<String>
+) = foodList
+    .flatMap { it.ingredients }
+    .filterNot { riskyIngredients.contains(it) }

@@ -18,4 +18,20 @@ class Day20KtTest {
 
         assertEquals(expectedOutput, findRiskyIngredients(input))
     }
+
+    @Test
+    fun `Should find ingredients that are not in the risky list`() {
+        val foodList = listOf(
+            "mxmxvkd kfcds sqjhc nhms (contains dairy, fish)",
+            "trh fvjkl sbzzf mxmxvkd (contains dairy)",
+            "sqjhc fvjkl (contains soy)",
+            "sqjhc mxmxvkd sbzzf (contains fish)"
+        ).map(::Food)
+
+        val riskyIngredients = setOf("mxmxvkd", "sqjhc", "fvjkl")
+
+        val expectedOutput = listOf("kfcds", "nhms", "trh", "sbzzf", "sbzzf")
+
+        assertEquals(expectedOutput, findSafeIngredients(foodList, riskyIngredients))
+    }
 }
