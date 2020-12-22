@@ -9,8 +9,15 @@ fun main() {
 
     val winnerDeck = playCombat(decks[0], decks[1])
 
+    println("Combat")
     println("Winner deck: $winnerDeck")
     println("Score: ${calculateScore(winnerDeck)}")
+
+    val (_, recursiveWinnerDeck) = playRecursiveCombat(decks[0], decks[1])
+
+    println("Recursive Combat")
+    println("Winner deck: $recursiveWinnerDeck")
+    println("Score: ${calculateScore(recursiveWinnerDeck)}")
 }
 
 fun calculateScore(winnerDeck: List<Int>): Int {
