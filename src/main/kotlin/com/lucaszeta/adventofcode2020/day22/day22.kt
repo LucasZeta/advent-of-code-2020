@@ -30,7 +30,11 @@ fun calculateScore(winnerDeck: List<Int>): Int {
         }
 }
 
-fun parseDeck(input: String) = input
-    .split("\n")
-    .filter { "(\\d+)".toRegex().matches(it) }
-    .map { it.toInt() }
+fun parseDeck(input: String): List<Int> {
+    val onlyNumbers = "(\\d+)".toRegex()
+
+    return input
+        .split("\n")
+        .filter { onlyNumbers.matches(it) }
+        .map { it.toInt() }
+}
