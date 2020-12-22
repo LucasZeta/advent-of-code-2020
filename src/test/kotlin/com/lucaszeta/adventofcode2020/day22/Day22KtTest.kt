@@ -26,7 +26,7 @@ class Day22KtTest {
     }
 
     @Test
-    fun `Should add both cards to deck with the higher one`() {
+    fun `Should add cards to the deck with the higher round card`() {
         val deck1 = mutableListOf(9, 2, 6, 3, 1)
         val deck2 = mutableListOf(5, 8, 4, 7, 10)
 
@@ -34,5 +34,15 @@ class Day22KtTest {
 
         assertEquals(listOf(2, 6, 3, 1, 9, 5), deck1)
         assertEquals(listOf(8, 4, 7, 10), deck2)
+    }
+
+    @Test
+    fun `Should play rounds until one deck has all cards`() {
+        val deck1 = listOf(9, 2, 6, 3, 1)
+        val deck2 = listOf(5, 8, 4, 7, 10)
+
+        val winnerDeck = playCombat(deck1, deck2)
+
+        assertEquals(listOf(3, 2, 10, 6, 8, 5, 9, 4, 7, 1), winnerDeck)
     }
 }
