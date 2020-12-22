@@ -3,7 +3,7 @@ package com.lucaszeta.adventofcode2020.day21
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
 
 fun main() {
-    val foodList = getResourceAsText("/day20/food-list.txt")
+    val foodList = getResourceAsText("/day21/food-list.txt")
         .split("\n")
         .filter { it.isNotEmpty() }
         .map(::Food)
