@@ -45,4 +45,11 @@ class Day22KtTest {
 
         assertEquals(listOf(3, 2, 10, 6, 8, 5, 9, 4, 7, 1), winnerDeck)
     }
+
+    @Test
+    fun `Should calculate deck's score`() {
+        val winnerDeck = listOf(3, 2, 10, 6, 8, 5, 9, 4, 7, 1)
+
+        assertEquals(306, calculateScore(winnerDeck))
+    }
 }

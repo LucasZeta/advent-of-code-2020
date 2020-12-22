@@ -1,5 +1,15 @@
 package com.lucaszeta.adventofcode2020.day22
 
+fun calculateScore(winnerDeck: List<Int>): Int {
+    var multiplier = 2
+
+    return winnerDeck
+        .reversed()
+        .reduce { acc, card ->
+            acc + card * multiplier++
+        }
+}
+
 fun playCombat(deck1: List<Int>, deck2: List<Int>): List<Int> {
     val player1Deck = deck1.toMutableList()
     val player2Deck = deck2.toMutableList()
