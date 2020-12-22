@@ -24,4 +24,15 @@ class Day22KtTest {
             assertEquals(expectedOutput, parseDeck(input))
         }
     }
+
+    @Test
+    fun `Should add both cards to deck with the higher one`() {
+        val deck1 = mutableListOf(9, 2, 6, 3, 1)
+        val deck2 = mutableListOf(5, 8, 4, 7, 10)
+
+        playCombatRound(deck1, deck2)
+
+        assertEquals(listOf(2, 6, 3, 1, 9, 5), deck1)
+        assertEquals(listOf(8, 4, 7, 10), deck2)
+    }
 }
