@@ -6,8 +6,20 @@ fun playRecursiveCombat(
 ): Pair<Boolean, List<Int>> {
     val player1Deck = deck1.toMutableList()
     val player2Deck = deck2.toMutableList()
+    val dealtHands = mutableSetOf<String>()
 
     while (player1Deck.isNotEmpty() && player2Deck.isNotEmpty()) {
+        val currentHand = "%s|%s".format(
+            player1Deck.joinToString(","),
+            player2Deck.joinToString(",")
+        )
+
+        if (dealtHands.contains(currentHand)) {
+            return true to player1Deck
+        } else {
+            dealtHands.add(currentHand)
+        }
+
         val player1Won = playRecursiveCombatRound(player1Deck, player2Deck)
 
         if (player1Won) {
@@ -39,7 +51,7 @@ fun playRecursiveCombatRound(
     if (player1Card <= player1Deck.size - 1 && player2Card <= player2Deck.size - 1) {
         val (player1Won, _) = playRecursiveCombat(
             player1Deck.slice(1..(player1Card)),
-            player2Deck.slice(1..(player2Card)),
+            player2Deck.slice(1..(player2Card))
         )
 
         return player1Won
