@@ -17,4 +17,13 @@ class ImageTile(input: String) {
             grid.add(it.toList())
         }
     }
+
+    fun findCorners(): List<List<Char>> {
+        val upperCorner = grid.first()
+        val lowerCorner = grid.last()
+        val leftCorner = grid.map { it.first() }
+        val rightCorner = grid.map { it.last() }
+
+        return listOf(upperCorner, rightCorner, lowerCorner, leftCorner)
+    }
 }
