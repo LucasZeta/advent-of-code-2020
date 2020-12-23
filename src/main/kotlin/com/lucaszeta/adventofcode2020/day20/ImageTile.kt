@@ -24,6 +24,15 @@ class ImageTile(input: String) {
         val leftCorner = grid.map { it.first() }
         val rightCorner = grid.map { it.last() }
 
-        return listOf(upperCorner, rightCorner, lowerCorner, leftCorner)
+        return listOf(
+            upperCorner,
+            upperCorner.reversed(),
+            rightCorner,
+            rightCorner.reversed(),
+            lowerCorner,
+            lowerCorner.reversed(),
+            leftCorner,
+            leftCorner.reversed()
+        )
     }
 }
