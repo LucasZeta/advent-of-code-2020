@@ -53,12 +53,20 @@ class ImageTileTest {
             "###...#.#.\n" +
             "..###..###"
 
+        val expectedCorners = listOf(
+            listOf('.', '.', '#', '#', '.', '#', '.', '.', '#', '.'),
+            listOf('.', '#', '#', '#', '#', '#', '.', '.', '#', '.'),
+            listOf('.', '.', '.', '#', '.', '#', '#', '.', '.', '#'),
+            listOf('.', '.', '#', '#', '#', '.', '.', '#', '#', '#')
+        )
+
         val corners = ImageTile(input).findCorners()
 
-        assertEquals(4, corners.size)
-        assertTrue(corners.contains(listOf('.', '.', '#', '#', '.', '#', '.', '.', '#', '.')))
-        assertTrue(corners.contains(listOf('.', '#', '#', '#', '#', '#', '.', '.', '#', '.')))
-        assertTrue(corners.contains(listOf('.', '.', '.', '#', '.', '#', '#', '.', '.', '#')))
-        assertTrue(corners.contains(listOf('.', '.', '#', '#', '#', '.', '.', '#', '#', '#')))
+        assertEquals(8, corners.size)
+
+        expectedCorners.forEach {
+            assertTrue(corners.contains(it))
+            assertTrue(corners.contains(it.reversed()))
+        }
     }
 }
