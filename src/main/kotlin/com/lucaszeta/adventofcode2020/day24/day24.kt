@@ -1,7 +1,20 @@
 package com.lucaszeta.adventofcode2020.day24
 
+import com.lucaszeta.adventofcode2020.ext.getResourceAsText
+
 const val BLACK = '#'
 const val WHITE = '.'
+
+fun main() {
+    val directionsList = getResourceAsText("/day24/directions-list.txt")
+        .split("\n")
+        .filter { it.isNotEmpty() }
+        .map(::parseToDirections)
+
+    val flippedTiles = flipTiles(directionsList)
+
+    println("Number of tiles flipped to black: ${flippedTiles.count { it.value == BLACK }}")
+}
 
 fun flipTiles(
     directionsList: List<List<Direction>>
