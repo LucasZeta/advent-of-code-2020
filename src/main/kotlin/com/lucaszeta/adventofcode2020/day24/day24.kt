@@ -1,5 +1,22 @@
 package com.lucaszeta.adventofcode2020.day24
 
+const val BLACK = '#'
+const val WHITE = '.'
+
+fun flipTiles(
+    directionsList: List<List<Direction>>
+): Map<Pair<Double, Double>, Char> {
+    val tiles = mutableMapOf<Pair<Double, Double>, Char>()
+
+    for (directions in directionsList) {
+        val destination = navigateToTile(directions)
+
+        tiles[destination] = if (tiles.containsKey(destination)) WHITE else BLACK
+    }
+
+    return tiles.toMap()
+}
+
 fun navigateToTile(directions: List<Direction>): Pair<Double, Double> {
     var coordinateX = 0.0
     var coordinateY = 0.0

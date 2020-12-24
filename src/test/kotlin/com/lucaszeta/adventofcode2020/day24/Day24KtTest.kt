@@ -56,4 +56,36 @@ class Day24KtTest {
             assertEquals(expectedDestination, navigateToTile(directions))
         }
     }
+
+    @Test
+    fun `Should go to tile and flip it`() {
+        val directions = listOf(
+            "sesenwnenenewseeswwswswwnenewsewsw",
+            "neeenesenwnwwswnenewnwwsewnenwseswesw",
+            "seswneswswsenwwnwse",
+            "nwnwneseeswswnenewneswwnewseswneseene",
+            "swweswneswnenwsewnwneneseenw",
+            "eesenwseswswnenwswnwnwsewwnwsene",
+            "sewnenenenesenwsewnenwwwse",
+            "wenwwweseeeweswwwnwwe",
+            "wsweesenenewnwwnwsenewsenwwsesesenwne",
+            "neeswseenwwswnwswswnw",
+            "nenwswwsewswnenenewsenwsenwnesesenew",
+            "enewnwewneswsewnwswenweswnenwsenwsw",
+            "sweneswneswneneenwnewenewwneswswnese",
+            "swwesenesewenwneswnwwneseswwne",
+            "enesenwswwswneneswsenwnewswseenwsese",
+            "wnwnesenesenenwwnenwsewesewsesesew",
+            "nenewswnwewswnenesenwnesewesw",
+            "eneswnwswnwsenenwnwnwwseeswneewsenese",
+            "neswnwewnwnwseenwseesewsenwsweewe",
+            "wseweeenwnesenwwwswnew"
+        ).map(::parseToDirections)
+
+        val flippedTiles = flipTiles(directions)
+
+        assertEquals(15, flippedTiles.size)
+        assertEquals(5, flippedTiles.count { it.value == WHITE })
+        assertEquals(10, flippedTiles.count { it.value == BLACK })
+    }
 }
