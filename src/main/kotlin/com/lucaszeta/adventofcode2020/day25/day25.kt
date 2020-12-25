@@ -3,6 +3,7 @@ package com.lucaszeta.adventofcode2020.day25
 import com.lucaszeta.adventofcode2020.ext.getResourceAsText
 
 const val SUBJECT_NUMBER = 7
+const val TRANSFORMATION_REMAINDER = 20201227
 
 fun main() {
     val (cardPublicKey, doorPublicKey) = getResourceAsText("/day25/public-keys.txt")
@@ -27,7 +28,7 @@ fun generateEncryptionKey(
     var accumulator = 1L
 
     repeat(loopSize) {
-        accumulator = (accumulator * subjectNumber).rem(20201227)
+        accumulator = (accumulator * subjectNumber).rem(TRANSFORMATION_REMAINDER)
     }
 
     return accumulator
@@ -38,7 +39,7 @@ fun findLoopSize(publicKey: Int, subjectNumber: Int): Int {
     var accumulator = 1
 
     do {
-        accumulator = (accumulator * subjectNumber).rem(20201227)
+        accumulator = (accumulator * subjectNumber).rem(TRANSFORMATION_REMAINDER)
         loopSize++
     } while (accumulator != publicKey)
 
